@@ -1,0 +1,999 @@
+{
+  "meta": {
+    "title": "France, London & Singapore 2026",
+    "travellers": "Chris & Julie",
+    "year": 2026,
+    "currency": "AUD",
+    "startDate": "2026-09-21",
+    "endDate": "2026-10-25",
+    "bookingRef": "EYFY23"
+  },
+  "cities": {
+    "nice": {
+      "name": "Nice",
+      "x": 242,
+      "y": 307,
+      "temp": "22 / 15",
+      "accent": "#2E7E9E",
+      "accent2": "#4FA8C4",
+      "kind": "coast"
+    },
+    "avignon": {
+      "name": "Avignon",
+      "x": 182,
+      "y": 298,
+      "temp": "22 / 8",
+      "accent": "#B07A3C",
+      "accent2": "#CDA05E",
+      "kind": "hills"
+    },
+    "lyon": {
+      "name": "Lyon",
+      "x": 183,
+      "y": 238,
+      "temp": "18 / 10",
+      "accent": "#9E3B32",
+      "accent2": "#C2685A",
+      "kind": "city"
+    },
+    "dijon": {
+      "name": "Dijon",
+      "x": 188,
+      "y": 186,
+      "temp": "16 / 8",
+      "accent": "#7A3B52",
+      "accent2": "#A05E78",
+      "kind": "hills"
+    },
+    "strasbourg": {
+      "name": "Strasbourg",
+      "x": 254,
+      "y": 144,
+      "temp": "18 / 9",
+      "accent": "#B5532E",
+      "accent2": "#D17C53",
+      "kind": "spire"
+    },
+    "reims": {
+      "name": "Reims",
+      "x": 163,
+      "y": 121,
+      "temp": "18 / 11",
+      "accent": "#9A7E38",
+      "accent2": "#C2A455",
+      "kind": "spire"
+    },
+    "paris": {
+      "name": "Paris",
+      "x": 122,
+      "y": 135,
+      "temp": "16 / 10",
+      "accent": "#3E5068",
+      "accent2": "#5E7390",
+      "kind": "tower"
+    },
+    "london": {
+      "name": "London",
+      "x": 61,
+      "y": 46,
+      "temp": "15 / 12",
+      "accent": "#3C6B52",
+      "accent2": "#5E9078",
+      "kind": "city"
+    },
+    "singapore": {
+      "name": "Singapore",
+      "x": 0,
+      "y": 0,
+      "temp": "32 / 26",
+      "accent": "#1C8A7E",
+      "accent2": "#3FB3A4",
+      "kind": "tropic"
+    }
+  },
+  "order": [
+    "nice",
+    "avignon",
+    "lyon",
+    "dijon",
+    "strasbourg",
+    "reims",
+    "paris",
+    "london"
+  ],
+  "tail": [
+    "singapore"
+  ],
+  "stays": {
+    "nice": {
+      "place": "Studio avec mezzanine — Jacqueline",
+      "type": "Airbnb",
+      "room": "Studio + mezzanine",
+      "inDay": 1,
+      "outDay": 7,
+      "nights": 6,
+      "ci": "Mon 21 Sep · on arrival",
+      "co": "11:00",
+      "bfast": false,
+      "paid": "part",
+      "host": "Jacqueline",
+      "hostPhoto": "images/jacqueline.jpg",
+      "phone": "+33 6 12 23 38 53",
+      "address": "7, Rue Saint-François de Paule, Nice 06300",
+      "conf": "HMTFCE93F3",
+      "photo": "images/nice-studio.jpg",
+      "link": "https://www.airbnb.com.au/rooms/13070434",
+      "cancelBy": "21 Sep",
+      "due": "$1,104.51 · 13 Sep",
+      "entry": "Jacqueline lives in the house and will wait up — she'll let you in whenever you land. No code needed.",
+      "note": "No CO alarm — consider a portable detector. 2 guests max, no pets."
+    },
+    "avignon": {
+      "place": "2-bedroom flat, Centre — Eric",
+      "type": "Airbnb",
+      "room": "2-bedroom apartment",
+      "inDay": 7,
+      "outDay": 10,
+      "nights": 3,
+      "ci": "16:00",
+      "co": "11:00",
+      "bfast": false,
+      "paid": "part",
+      "host": "Eric",
+      "hostPhoto": "images/eric.jpg",
+      "address": "24 Rue des Fourbisseurs, 84000 Avignon",
+      "photo": "images/avignon-flat.jpg",
+      "link": "https://www.airbnb.com.au/rooms/52603809",
+      "cancelBy": "28 Aug",
+      "due": "$300.71 · 13 Sep",
+      "entry": "Self check-in — Eric sends entry details before arrival.",
+      "note": "Must climb stairs (no lift). No CO alarm — consider a portable detector. 4 guests max, no pets.",
+      "facilities": [
+        "Air-con"
+      ]
+    },
+    "lyon": {
+      "place": "Cosy apartment, Old Town — Sophie & Nicolas",
+      "type": "Airbnb",
+      "room": "Entire home · 1 bed",
+      "inDay": 10,
+      "outDay": 14,
+      "nights": 4,
+      "ci": "15:00",
+      "co": "11:00",
+      "bfast": false,
+      "paid": "part",
+      "host": "Sophie & Nicolas",
+      "hostPhoto": "images/lyon-host.jpg",
+      "phone": "+33 7 82 08 10 11",
+      "address": "10 Rue de la Bombarde, Lyon 69005",
+      "conf": "HM2ZHMHF4A",
+      "photo": "images/lyon-apt.jpg",
+      "link": "https://www.airbnb.com.au/rooms/20899336",
+      "cancelBy": "31 Aug",
+      "entry": "Host greets you — reach out to Sophie & Nicolas for check-in details.",
+      "note": "4 guests max, no pets."
+    },
+    "dijon": {
+      "place": "Hôtel des Ducs",
+      "type": "Hotel",
+      "room": "Double Room",
+      "inDay": 14,
+      "outDay": 17,
+      "nights": 3,
+      "ci": "15:00",
+      "co": "11:00",
+      "bfast": false,
+      "paid": "part",
+      "host": null,
+      "phone": "+33 3 80 67 31 31",
+      "address": "5 rue Lamonnoye, Dijon Centre Ville 21000",
+      "conf": "5672196414",
+      "photo": "images/dijon-hotel.jpg",
+      "link": "https://www.booking.com/hotel/fr/des-ducs-dijon.html",
+      "cancelBy": "2 Oct",
+      "due": "€399.84 · 1 Oct",
+      "entry": "Reception check-in 15:00–23:00.",
+      "note": "Heads up: some rooms are offsite (200–300m) in a lift-less 15th-century house — confirm yours is in the main building. Breakfast €14pp/night (optional). City tax ≈€11 payable at the hotel. Parking 500m; no daily cleaning.",
+      "facilities": [
+        "Free WiFi"
+      ]
+    },
+    "strasbourg": {
+      "place": "Hôtel Tandem — Boutique Hôtel",
+      "type": "Hotel",
+      "room": "Standard Double Room",
+      "inDay": 17,
+      "outDay": 20,
+      "nights": 3,
+      "ci": "14:00",
+      "co": "11:00",
+      "bfast": true,
+      "paid": "part",
+      "host": null,
+      "phone": "+33 3 88 22 30 30",
+      "address": "2 place de la Gare, Strasbourg 67000",
+      "conf": "6399001364",
+      "photo": "images/strasbourg-tandem.jpg",
+      "link": "https://www.booking.com/hotel/fr/ha-tel-nid-de-cigognes.html",
+      "cancelBy": "5 Oct",
+      "due": "$1,053.23 · 4 Oct",
+      "entry": "Reception check-in 14:00–00:00; arrival window requested 14:00–15:00.",
+      "note": "City tax €17.16 (€2.86 pp/night) payable at the hotel. No parking on site. 2 guests max.",
+      "facilities": [
+        "Breakfast incl.",
+        "Air-con",
+        "Free WiFi"
+      ]
+    },
+    "reims": {
+      "place": "Apartment, Hypercentre — Esther",
+      "type": "Airbnb",
+      "room": "Entire apartment",
+      "inDay": 20,
+      "outDay": 22,
+      "nights": 2,
+      "ci": "16:00",
+      "co": "11:00",
+      "bfast": false,
+      "paid": "part",
+      "host": "Esther",
+      "hostPhoto": "images/esther.jpg",
+      "phone": "+33 6 76 33 15 88",
+      "address": "8 Rue du Général Sarrail, Reims 51100",
+      "conf": "HM3W4YNA2Q",
+      "photo": "images/reims-apt.jpg",
+      "link": "https://www.airbnb.com.au/rooms/1431342629737758834",
+      "cancelBy": "5 Oct",
+      "entry": "Self check-in via key safe — entry code and Wi-Fi details arrive 48h before check-in.",
+      "note": "4 guests max, no pets. Street parking nearby (paid Mon–Sat 9:00–12:00 & 14:00–19:00; free Sundays/holidays). Wi-Fi & appliance instructions posted inside the apartment.",
+      "facilities": [
+        "Kitchen",
+        "Free WiFi"
+      ]
+    },
+    "paris": {
+      "place": "Secluded Le Marais Escape — Christine",
+      "type": "Airbnb",
+      "room": "Entire flat",
+      "inDay": 22,
+      "outDay": 26,
+      "nights": 4,
+      "ci": "15:00",
+      "co": "11:00",
+      "bfast": false,
+      "paid": "part",
+      "host": "Christine",
+      "hostPhoto": "images/christine.jpg",
+      "phone": "+33 6 15 22 33 41",
+      "address": "5 Rue des Écouffes, Paris 75004",
+      "conf": "HMAW9REBJ3",
+      "photo": "images/paris-flat.jpg",
+      "link": "https://www.airbnb.com.au/rooms/13365586",
+      "cancelBy": "11 Oct",
+      "entry": "Self check-in via key safe. Building entrance code is in your Notes below; key-safe code & Wi-Fi arrive 24h before check-in. Nearest metro: Saint-Paul (Line 1), ~4 min walk.",
+      "note": "2 guests max, no pets, no smoking, no parties. Common courtyard not for guest use; please respect the building's quiet."
+    },
+    "london": {
+      "place": "The Clermont London, Charing Cross",
+      "type": "Hotel",
+      "room": "Deluxe King Room",
+      "inDay": 26,
+      "outDay": 31,
+      "nights": 5,
+      "ci": "15:00",
+      "co": "11:00",
+      "bfast": true,
+      "paid": "full",
+      "host": null,
+      "phone": "+44 20 7523 5052",
+      "address": "Strand, Charing Cross, London WC2N 5HX",
+      "conf": "603465140",
+      "photo": "images/london-clermont.jpg",
+      "link": "https://www.theclermont.co.uk/charing-cross/",
+      "entry": "Reception check-in from 3:00 pm.",
+      "note": "Includes daily buffet breakfast, afternoon tea for two and a welcome drink each at Platform 7, plus a welcome bottle of white wine in-room on arrival.",
+      "facilities": [
+        "Breakfast incl.",
+        "Bar"
+      ]
+    },
+    "singapore": {
+      "place": "The Westin Singapore",
+      "type": "Hotel",
+      "room": "Guest Room, 1 King · Club Lounge, high floor",
+      "inDay": 32,
+      "outDay": 35,
+      "nights": 3,
+      "ci": "—",
+      "co": "—",
+      "bfast": true,
+      "paid": "part",
+      "host": null,
+      "phone": "+65 6922 6888",
+      "address": "12 Marina View, Singapore",
+      "conf": "258462134",
+      "photo": "images/westin-singapore.jpg",
+      "link": "https://www.marriott.com/en-us/hotels/sinwi-the-westin-singapore/overview/",
+      "cancelBy": "9 Oct",
+      "note": "Club Lounge access. Daily breakfast for one guest only. Booking perk: 1GB free data roaming.",
+      "facilities": [
+        "Club lounge",
+        "Breakfast incl."
+      ]
+    }
+  },
+  "legs": [
+    {
+      "day": 7,
+      "from": "nice",
+      "to": "avignon",
+      "mode": "TGV",
+      "dep": "10:56",
+      "arr": "13:55",
+      "dur": "2h58"
+    },
+    {
+      "day": 10,
+      "from": "avignon",
+      "to": "lyon",
+      "mode": "TGV",
+      "dep": "13:50",
+      "arr": "14:53",
+      "dur": "1h05"
+    },
+    {
+      "day": 14,
+      "from": "lyon",
+      "to": "dijon",
+      "mode": "TER",
+      "dep": "11:38",
+      "arr": "13:26",
+      "dur": "1h48"
+    },
+    {
+      "day": 17,
+      "from": "dijon",
+      "to": "strasbourg",
+      "mode": "TGV",
+      "dep": "13:38",
+      "arr": "15:54",
+      "dur": "2h16"
+    },
+    {
+      "day": 20,
+      "from": "strasbourg",
+      "to": "reims",
+      "mode": "TGV",
+      "dep": "—",
+      "arr": "—",
+      "dur": "2h17"
+    },
+    {
+      "day": 22,
+      "from": "reims",
+      "to": "paris",
+      "mode": "TGV",
+      "dep": "—",
+      "arr": "—",
+      "dur": "46m"
+    },
+    {
+      "day": 26,
+      "from": "paris",
+      "to": "london",
+      "mode": "Eurostar",
+      "dep": "12:02",
+      "arr": "13:30",
+      "dur": "2h19"
+    }
+  ],
+  "flights": {
+    "1": {
+      "carrier": "Singapore Airlines",
+      "ref": "EYFY23",
+      "total": "25h 15m",
+      "bag": "30kg",
+      "legs": [
+        {
+          "f": "MEL",
+          "t": "SIN",
+          "dep": "05:55",
+          "arr": "11:45",
+          "dur": "7h 50m",
+          "flightNo": "SQ 248",
+          "aircraft": "A350-900",
+          "depTerm": "T2",
+          "seatA": "56K",
+          "seatB": "56J"
+        },
+        {
+          "stop": "SIN",
+          "layover": "50m"
+        },
+        {
+          "f": "SIN",
+          "t": "FRA",
+          "dep": "12:35",
+          "arr": "19:40",
+          "dur": "13h 05m",
+          "flightNo": "SQ 326",
+          "aircraft": "A380-800",
+          "depTerm": "T3",
+          "arrTerm": "T1",
+          "seatA": "42A",
+          "seatB": "42B"
+        },
+        {
+          "stop": "FRA",
+          "layover": "1h 55m"
+        },
+        {
+          "f": "FRA",
+          "t": "NCE",
+          "dep": "21:35",
+          "arr": "23:10",
+          "dur": "1h 35m",
+          "flightNo": "SQ 2072",
+          "aircraft": "A320neo",
+          "operated": "Lufthansa",
+          "depTerm": "T1",
+          "arrTerm": "T1",
+          "seatA": "10B",
+          "seatB": "10A"
+        }
+      ]
+    },
+    "31": {
+      "carrier": "Singapore Airlines",
+      "ref": "EYFY23",
+      "total": "13h 10m",
+      "bag": "30kg",
+      "legs": [
+        {
+          "f": "LHR",
+          "t": "SIN",
+          "dep": "20:35",
+          "arr": "16:45",
+          "dur": "13h 10m",
+          "flightNo": "SQ 319",
+          "aircraft": "A380-800",
+          "arrNext": true,
+          "depTerm": "T2",
+          "seatA": "42J",
+          "seatB": "42K"
+        }
+      ]
+    },
+    "35": {
+      "carrier": "Singapore Airlines",
+      "ref": "EYFY23",
+      "total": "7h 25m",
+      "bag": "30kg",
+      "legs": [
+        {
+          "f": "SIN",
+          "t": "MEL",
+          "dep": "11:00",
+          "arr": "21:25",
+          "dur": "7h 25m",
+          "flightNo": "SQ 217",
+          "aircraft": "A350-900",
+          "depTerm": "T3",
+          "arrTerm": "T2",
+          "seatA": "56K",
+          "seatB": "56J"
+        }
+      ]
+    }
+  },
+  "ideas": {
+    "nice": [
+      {
+        "t": "Castle Hill hike",
+        "clear": true,
+        "k": "sight",
+        "sub": "Old-town climb, big bay view"
+      },
+      {
+        "t": "Èze, Monaco & Menton",
+        "q": "Èze, France",
+        "via": "Vespa",
+        "time": "~40 min",
+        "k": "excursion"
+      },
+      {
+        "t": "Renoir Museum, Cagnes",
+        "indoor": true,
+        "k": "art"
+      },
+      {
+        "t": "Picasso Museum, Antibes",
+        "indoor": true,
+        "k": "art"
+      },
+      {
+        "t": "Saint-Paul-de-Vence",
+        "q": "Saint-Paul-de-Vence",
+        "via": "bus",
+        "time": "~40 min",
+        "clear": true,
+        "k": "sight",
+        "sub": "Hill village + Chapelle Saint-Pierre"
+      },
+      {
+        "t": "Cannes & Antibes",
+        "q": "Cannes, France",
+        "via": "train",
+        "time": "~30 min",
+        "k": "excursion"
+      }
+    ],
+    "avignon": [
+      {
+        "t": "Explore Avignon",
+        "k": "sight",
+        "sub": "Palais des Papes, the bridge"
+      },
+      {
+        "t": "Gordes & Roussillon",
+        "q": "Gordes, France",
+        "via": "scooter",
+        "clear": true,
+        "book": true,
+        "k": "excursion"
+      }
+    ],
+    "lyon": [
+      {
+        "t": "Explore Lyon",
+        "k": "sight",
+        "sub": "Vieux Lyon, the traboules"
+      },
+      {
+        "t": "Annecy",
+        "q": "Annecy, France",
+        "via": "train",
+        "time": "~2h",
+        "clear": true,
+        "k": "excursion",
+        "sub": "Lake town"
+      }
+    ],
+    "dijon": [
+      {
+        "t": "Explore Dijon",
+        "k": "sight",
+        "sub": "Owl trail, Palais des Ducs"
+      },
+      {
+        "t": "Cycle from Beaune",
+        "q": "Beaune, France",
+        "via": "bike",
+        "clear": true,
+        "book": true,
+        "k": "excursion",
+        "sub": "Burgundy vineyards"
+      }
+    ],
+    "strasbourg": [
+      {
+        "t": "Explore Strasbourg",
+        "k": "sight",
+        "sub": "Cathedral, La Petite France"
+      },
+      {
+        "t": "Colmar",
+        "q": "Colmar, France",
+        "via": "train",
+        "time": "~30 min",
+        "k": "excursion"
+      }
+    ],
+    "reims": [
+      {
+        "t": "Reims Cathedral",
+        "k": "sight",
+        "sub": "Coronation church of the French kings"
+      },
+      {
+        "t": "Wander the centre",
+        "k": "sight"
+      }
+    ],
+    "paris": [
+      {
+        "t": "Musée de l'Orangerie",
+        "indoor": true,
+        "k": "art",
+        "sub": "Monet's Water Lilies"
+      },
+      {
+        "t": "Notre-Dame",
+        "k": "sight"
+      },
+      {
+        "t": "Montmartre",
+        "clear": true,
+        "k": "sight",
+        "sub": "Sacré-Cœur"
+      }
+    ],
+    "london": [
+      {
+        "t": "Portobello Market, Notting Hill",
+        "clear": true,
+        "k": "sight",
+        "sub": "Best Saturdays · then Soho"
+      },
+      {
+        "t": "Tate Modern & Borough Market",
+        "k": "art"
+      },
+      {
+        "t": "British Museum",
+        "indoor": true,
+        "k": "art",
+        "sub": "+ Natural History Museum"
+      },
+      {
+        "t": "Les Misérables",
+        "book": true,
+        "k": "excursion",
+        "sub": "West End — maybe"
+      },
+      {
+        "t": "The Mousetrap",
+        "book": true,
+        "k": "excursion",
+        "sub": "Evening"
+      },
+      {
+        "t": "Shakespeare's Globe",
+        "clear": true,
+        "k": "sight"
+      }
+    ],
+    "singapore": [
+      {
+        "t": "By the pool",
+        "k": "sight"
+      },
+      {
+        "t": "Club lounge",
+        "k": "food",
+        "sub": "Included with the room"
+      }
+    ]
+  },
+  "days": [
+    {
+      "n": 1,
+      "date": "2026-09-21",
+      "dow": "Mon",
+      "dm": "21 Sep",
+      "base": "nice",
+      "travel": true,
+      "note": "Arrive late — 25h via Singapore & Frankfurt",
+      "anchors": [
+        {
+          "time": "23:10",
+          "label": "Land in Nice",
+          "sub": "Straight to Jacqueline's — room's yours from tonight"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "date": "2026-09-22",
+      "dow": "Tue",
+      "dm": "22 Sep",
+      "base": "nice",
+      "note": "Recovery day"
+    },
+    {
+      "n": 3,
+      "date": "2026-09-23",
+      "dow": "Wed",
+      "dm": "23 Sep",
+      "base": "nice",
+      "note": "Explore"
+    },
+    {
+      "n": 4,
+      "date": "2026-09-24",
+      "dow": "Thu",
+      "dm": "24 Sep",
+      "base": "nice",
+      "note": "Explore"
+    },
+    {
+      "n": 5,
+      "date": "2026-09-25",
+      "dow": "Fri",
+      "dm": "25 Sep",
+      "base": "nice",
+      "note": "Explore"
+    },
+    {
+      "n": 6,
+      "date": "2026-09-26",
+      "dow": "Sat",
+      "dm": "26 Sep",
+      "base": "nice",
+      "note": "Explore"
+    },
+    {
+      "n": 7,
+      "date": "2026-09-27",
+      "dow": "Sun",
+      "dm": "27 Sep",
+      "base": "avignon",
+      "travel": true,
+      "note": "Travel day → Avignon"
+    },
+    {
+      "n": 8,
+      "date": "2026-09-28",
+      "dow": "Mon",
+      "dm": "28 Sep",
+      "base": "avignon",
+      "note": "Explore"
+    },
+    {
+      "n": 9,
+      "date": "2026-09-29",
+      "dow": "Tue",
+      "dm": "29 Sep",
+      "base": "avignon",
+      "note": "Explore"
+    },
+    {
+      "n": 10,
+      "date": "2026-09-30",
+      "dow": "Wed",
+      "dm": "30 Sep",
+      "base": "lyon",
+      "travel": true,
+      "note": "Travel day → Lyon"
+    },
+    {
+      "n": 11,
+      "date": "2026-10-01",
+      "dow": "Thu",
+      "dm": "1 Oct",
+      "base": "lyon",
+      "note": "Explore"
+    },
+    {
+      "n": 12,
+      "date": "2026-10-02",
+      "dow": "Fri",
+      "dm": "2 Oct",
+      "base": "lyon",
+      "note": "Cooking class day",
+      "anchors": [
+        {
+          "time": "11:00",
+          "label": "Lyon cooking class",
+          "sub": "3.5 hrs · with tasting · English",
+          "provider": "BOMBANCE CLUB",
+          "phone": "+33 7 83 86 80 01",
+          "address": "11 Rue de la Vieille, 69001 Lyon",
+          "ref": "GYGFWWF8QWLG",
+          "pin": "mGcN5RY",
+          "cancelBy": "1 Oct, 11:00",
+          "due": "A$399.26 · 29 Sep"
+        }
+      ]
+    },
+    {
+      "n": 13,
+      "date": "2026-10-03",
+      "dow": "Sat",
+      "dm": "3 Oct",
+      "base": "lyon",
+      "note": "Explore"
+    },
+    {
+      "n": 14,
+      "date": "2026-10-04",
+      "dow": "Sun",
+      "dm": "4 Oct",
+      "base": "dijon",
+      "travel": true,
+      "note": "Travel day → Dijon"
+    },
+    {
+      "n": 15,
+      "date": "2026-10-05",
+      "dow": "Mon",
+      "dm": "5 Oct",
+      "base": "dijon",
+      "note": "Explore"
+    },
+    {
+      "n": 16,
+      "date": "2026-10-06",
+      "dow": "Tue",
+      "dm": "6 Oct",
+      "base": "dijon",
+      "note": "Explore"
+    },
+    {
+      "n": 17,
+      "date": "2026-10-07",
+      "dow": "Wed",
+      "dm": "7 Oct",
+      "base": "strasbourg",
+      "travel": true,
+      "note": "Travel day → Strasbourg"
+    },
+    {
+      "n": 18,
+      "date": "2026-10-08",
+      "dow": "Thu",
+      "dm": "8 Oct",
+      "base": "strasbourg",
+      "note": "Explore"
+    },
+    {
+      "n": 19,
+      "date": "2026-10-09",
+      "dow": "Fri",
+      "dm": "9 Oct",
+      "base": "strasbourg",
+      "note": "Explore"
+    },
+    {
+      "n": 20,
+      "date": "2026-10-10",
+      "dow": "Sat",
+      "dm": "10 Oct",
+      "base": "reims",
+      "travel": true,
+      "note": "Travel day → Reims"
+    },
+    {
+      "n": 21,
+      "date": "2026-10-11",
+      "dow": "Sun",
+      "dm": "11 Oct",
+      "base": "reims",
+      "note": "Champagne day",
+      "anchors": [
+        {
+          "time": "11:40",
+          "label": "Veuve Clicquot tasting",
+          "sub": "Cellar visit & tasting · 11:40–13:10 · arrive 15 min early with e-ticket",
+          "provider": "Veuve Clicquot",
+          "phone": "+33 3 26 89 53 90",
+          "address": "1 Rue Albert Thomas, 51100 Reims"
+        }
+      ]
+    },
+    {
+      "n": 22,
+      "date": "2026-10-12",
+      "dow": "Mon",
+      "dm": "12 Oct",
+      "base": "paris",
+      "travel": true,
+      "note": "Travel day → Paris (46 min)"
+    },
+    {
+      "n": 23,
+      "date": "2026-10-13",
+      "dow": "Tue",
+      "dm": "13 Oct",
+      "base": "paris",
+      "note": "Explore"
+    },
+    {
+      "n": 24,
+      "date": "2026-10-14",
+      "dow": "Wed",
+      "dm": "14 Oct",
+      "base": "paris",
+      "note": "Explore"
+    },
+    {
+      "n": 25,
+      "date": "2026-10-15",
+      "dow": "Thu",
+      "dm": "15 Oct",
+      "base": "paris",
+      "note": "Free day"
+    },
+    {
+      "n": 26,
+      "date": "2026-10-16",
+      "dow": "Fri",
+      "dm": "16 Oct",
+      "base": "london",
+      "travel": true,
+      "note": "Travel day → London"
+    },
+    {
+      "n": 27,
+      "date": "2026-10-17",
+      "dow": "Sat",
+      "dm": "17 Oct",
+      "base": "london",
+      "note": "Explore"
+    },
+    {
+      "n": 28,
+      "date": "2026-10-18",
+      "dow": "Sun",
+      "dm": "18 Oct",
+      "base": "london",
+      "note": "Explore"
+    },
+    {
+      "n": 29,
+      "date": "2026-10-19",
+      "dow": "Mon",
+      "dm": "19 Oct",
+      "base": "london",
+      "note": "Explore"
+    },
+    {
+      "n": 30,
+      "date": "2026-10-20",
+      "dow": "Tue",
+      "dm": "20 Oct",
+      "base": "london",
+      "note": "Explore"
+    },
+    {
+      "n": 31,
+      "date": "2026-10-21",
+      "dow": "Wed",
+      "dm": "21 Oct",
+      "base": "transit",
+      "travel": true,
+      "note": "Fly to Singapore"
+    },
+    {
+      "n": 32,
+      "date": "2026-10-22",
+      "dow": "Thu",
+      "dm": "22 Oct",
+      "base": "singapore",
+      "note": "Arrive & check in",
+      "anchors": [
+        {
+          "time": "16:45",
+          "label": "Land in Singapore",
+          "sub": "Check in to The Westin"
+        }
+      ]
+    },
+    {
+      "n": 33,
+      "date": "2026-10-23",
+      "dow": "Fri",
+      "dm": "23 Oct",
+      "base": "singapore",
+      "note": "Relax"
+    },
+    {
+      "n": 34,
+      "date": "2026-10-24",
+      "dow": "Sat",
+      "dm": "24 Oct",
+      "base": "singapore",
+      "note": "Relax"
+    },
+    {
+      "n": 35,
+      "date": "2026-10-25",
+      "dow": "Sun",
+      "dm": "25 Oct",
+      "base": "home",
+      "travel": true,
+      "note": "Fly home"
+    }
+  ]
+}
