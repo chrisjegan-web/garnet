@@ -406,7 +406,7 @@ function renderNow(){
   else { html+=postcard({a:base.accent,a2:base.accent2,kind:base.kind,temp:base.temp,name:base.name,sub:'<span class="pulse w"></span>'+(d.travel?"Arriving in "+base.name:"Based in "+base.name)}); }
 
   if(stay){
-    html+='<div class="card"><h3>Tonight</h3><div class="bed-name">'+stay.place+'</div><div class="bed-meta">'+stay.room+' · '+stay.type+(stay.bfast?' · breakfast':'')+'</div>'+
+    html+='<div class="card">'+stayPhoto(stay)+'<h3>Tonight</h3><div class="bed-name">'+stay.place+'</div><div class="bed-meta">'+stay.room+' · '+stay.type+(stay.bfast?' · breakfast':'')+'</div>'+
       '<div class="chiprow"><span class="chip">Check-out '+stay.co+'</span></div>'+
       (stay.entry?entryBox(stay.entry):'')+
       '<a class="maplink" href="'+mapUrl(stay.place+", "+base.name)+'" target="_blank" rel="noopener">&#9906; Open in Maps</a></div>';
