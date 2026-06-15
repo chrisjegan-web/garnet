@@ -399,18 +399,29 @@ function renderNow(){
   const transit=d.base==="transit";
   const base=transit?null:TRIP.cities[d.base];
   setTint(transit?'#3A4A62':base.accent);
-  const stay=stayForNight(d.n), leg=nextLeg(d.n), flt=TRIP.flights[d.n];
+  const stay=stayForNight(d.n);
+  const arriving = !!stay && d.n===stay.inDay;
+  const tmw=d.n+1, tLeg=TRIP.legs.find(function(l){return l.day===tmw;}), tFlt=TRIP.flights[tmw];
 
   let html='<div class="here-label">'+d.dow+' '+d.dm+' · Day '+d.n+' of 35</div>';
   if(transit){ html+=postcard({a:"#2A3A52",a2:"#455A78",kind:"plane",temp:null,name:"In transit",sub:'<span class="pulse w"></span>Travel day'}); }
   else {
     var dsub;
-    if(stay){ var pos=d.n-stay.inDay+1; dsub=(d.travel?'Arriving · ':'')+'Day '+pos+' of '+stay.nights; }
+    if(stay){ var pos=d.n-stay.inDay+1; dsub=(arriving?'Arriving · ':'')+'Day '+pos+' of '+stay.nights; }
     else { dsub=d.travel?"Arriving in "+base.name:"Based in "+base.name; }
+    if(tLeg) dsub+=' · Departing tomorrow by train';
+    else if(tFlt) dsub+=' · Departing tomorrow by plane';
     html+=postcard({a:base.accent,a2:base.accent2,kind:base.kind,temp:base.temp,name:base.name,sub:'<span class="pulse w"></span>'+dsub});
   }
 
-  if(stay && d.travel){
+  // travel info sits right under the heading, only on the eve of a departure
+  if(tLeg){ var ld=TRIP.days[tmw-1];
+    html+='<div class="board"><h3><span>Tomorrow\u2019s journey</span><span>'+tLeg.mode+'</span></h3><div class="leg"><div class="ends"><div class="city2">'+TRIP.cities[tLeg.from].name+'</div><div class="arrow">&darr;</div><div class="city2">'+TRIP.cities[tLeg.to].name+'</div></div><div class="when"><div class="time">'+(tLeg.dep!=="—"?tLeg.dep:tLeg.dur)+'</div><div class="date2">'+ld.dow.toUpperCase()+' '+ld.dm.toUpperCase()+'</div></div></div><div class="strip"><span>DEP <b>'+tLeg.dep+'</b></span><span>ARR <b>'+tLeg.arr+'</b></span><span>'+tLeg.dur+'</span></div></div>';
+  } else if(tFlt){ var ff=tFlt.legs.find(function(l){return !l.stop;}), lr=tFlt.legs.slice().reverse().find(function(l){return !l.stop;});
+    html+='<div class="board" style="cursor:pointer" onclick="show(\'flights\')"><h3><span>&#9992; Tomorrow\u2019s flight</span><span>'+tFlt.total+'</span></h3><div class="leg"><div class="ends"><div class="city2">'+AIRPORTS[ff.f]+'</div><div class="arrow">&darr;</div><div class="city2">'+AIRPORTS[lr.t]+'</div></div></div><div class="strip"><span>Tap for the full breakdown &rsaquo;</span></div></div>';
+  }
+
+  if(arriving){
     html+='<div class="card">'+stayPhoto(stay)+'<h3>Tonight</h3><div class="bed-name">'+stay.place+'</div><div class="bed-meta">'+stay.room+' · '+stay.type+(stay.bfast?' · breakfast':'')+'</div>'+
       '<div class="chiprow"><span class="chip">Check-out '+stay.co+'</span></div>'+
       (stay.entry?entryBox(stay.entry):'')+
@@ -421,13 +432,6 @@ function renderNow(){
   else if(!transit){ html+='<div class="nothing">Nothing booked — pick from the ideas below</div>'; }
   html+='</div>';
   if(!transit && TRIP.ideas[d.base] && !d.travel){ html+='<div class="card"><h3>Ideas around '+base.name+'</h3><div class="h3sub">Suggestions, not locks — decide on the day</div>'; TRIP.ideas[d.base].forEach(function(p){ html+=ideaRow(p,base.name); }); html+='</div>'; }
-  if(flt){
-    const ff=flt.legs.find(function(l){return !l.stop;}); const lr=flt.legs.slice().reverse().find(function(l){return !l.stop;});
-    html+='<div class="board" style="cursor:pointer" onclick="show(\'flights\')"><h3><span>&#9992; Flight today</span><span>'+flt.total+'</span></h3>'+
-      '<div class="leg"><div class="ends"><div class="city2">'+AIRPORTS[ff.f]+'</div><div class="arrow">&darr;</div><div class="city2">'+AIRPORTS[lr.t]+'</div></div></div>'+
-      '<div class="strip"><span>Tap for the full breakdown &rsaquo;</span></div></div>';
-  }
-  else if(leg){ const isNow=leg.day===d.n, ld=TRIP.days[leg.day-1]; html+='<div class="board"><h3><span>'+(isNow?'Departing today':'Next departure')+'</span><span>'+leg.mode+'</span></h3><div class="leg"><div class="ends"><div class="city2">'+TRIP.cities[leg.from].name+'</div><div class="arrow">&darr;</div><div class="city2">'+TRIP.cities[leg.to].name+'</div></div><div class="when"><div class="time">'+(leg.dep!=="—"?leg.dep:leg.dur)+'</div><div class="date2">'+ld.dow.toUpperCase()+' '+ld.dm.toUpperCase()+'</div></div></div><div class="strip"><span>DEP <b>'+leg.dep+'</b></span><span>ARR <b>'+leg.arr+'</b></span><span>'+leg.dur+'</span></div></div>'; }
   html+=journalCard(d);
   $("#now-body").innerHTML=html;
 }
