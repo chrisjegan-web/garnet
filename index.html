@@ -17,7 +17,7 @@
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:#0D1626;font-family:var(--sans);color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 12px;-webkit-font-smoothing:antialiased}
   .frame{width:390px;max-width:100%;height:780px;max-height:90vh;border-radius:30px;overflow:hidden;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 9px #060B14,0 0 0 10px #1d2738;display:flex;flex-direction:column;--hdr:color-mix(in srgb, var(--accent, var(--teal)) 62%, var(--ink));background:color-mix(in srgb, var(--accent, transparent) 6%, var(--paper));transition:background .45s ease}
-  .topstrip{height:30px;flex:0 0 30px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;font:600 12px/1 var(--mono);color:var(--ink-soft);letter-spacing:.5px}
+  .topstrip{height:34px;flex:0 0 34px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;font:600 14px/1 var(--mono);color:var(--ink-soft);letter-spacing:.5px}
   .topstrip .dots{display:flex;gap:4px}
   .topstrip .dots i{width:5px;height:5px;border-radius:50%;background:var(--ink-faint);display:block}
   .screen{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;background:color-mix(in srgb, var(--accent, transparent) 11%, var(--paper));transition:background .45s ease}
@@ -28,11 +28,11 @@
   @media (prefers-reduced-motion:reduce){.view{animation:none}}
 
   .eyebrow{font:600 11px/1 var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--hdr)}
-  .now-head{display:flex;align-items:baseline;justify-content:space-between;margin:14px 0 2px}
-  .daynav{display:flex;gap:6px}
-  .daynav button{width:30px;height:30px;border-radius:50%;border:1px solid var(--line-strong);background:transparent;color:var(--ink);font-size:15px;cursor:pointer;line-height:1}
+  .now-head{display:flex;align-items:center;justify-content:space-between;margin:14px 0 2px}
+  .daynav{display:flex;gap:8px}
+  .daynav button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line-strong);background:transparent;color:var(--ink);font-size:24px;cursor:pointer;line-height:1}
   .daynav button:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  .here-label{font:600 12px/1.4 var(--mono);letter-spacing:.5px;color:var(--ink-soft);margin-top:6px}
+  .here-label{font:600 14px/1.4 var(--mono);letter-spacing:.5px;color:var(--ink-soft);margin-top:6px}
 
   .postcard{position:relative;min-height:120px;border-radius:18px;overflow:hidden;margin-top:11px;display:flex;align-items:flex-end;padding:15px 16px;color:#fff;box-shadow:0 8px 22px rgba(22,38,63,.18)}
   .postcard svg.motif{position:absolute;inset:0;width:100%;height:100%}
@@ -403,9 +403,14 @@ function renderNow(){
 
   let html='<div class="here-label">'+d.dow+' '+d.dm+' · Day '+d.n+' of 35</div>';
   if(transit){ html+=postcard({a:"#2A3A52",a2:"#455A78",kind:"plane",temp:null,name:"In transit",sub:'<span class="pulse w"></span>Travel day'}); }
-  else { html+=postcard({a:base.accent,a2:base.accent2,kind:base.kind,temp:base.temp,name:base.name,sub:'<span class="pulse w"></span>'+(d.travel?"Arriving in "+base.name:"Based in "+base.name)}); }
+  else {
+    var dsub;
+    if(stay){ var pos=d.n-stay.inDay+1; dsub=(d.travel?'Arriving · ':'')+'Day '+pos+' of '+stay.nights; }
+    else { dsub=d.travel?"Arriving in "+base.name:"Based in "+base.name; }
+    html+=postcard({a:base.accent,a2:base.accent2,kind:base.kind,temp:base.temp,name:base.name,sub:'<span class="pulse w"></span>'+dsub});
+  }
 
-  if(stay){
+  if(stay && d.travel){
     html+='<div class="card">'+stayPhoto(stay)+'<h3>Tonight</h3><div class="bed-name">'+stay.place+'</div><div class="bed-meta">'+stay.room+' · '+stay.type+(stay.bfast?' · breakfast':'')+'</div>'+
       '<div class="chiprow"><span class="chip">Check-out '+stay.co+'</span></div>'+
       (stay.entry?entryBox(stay.entry):'')+
