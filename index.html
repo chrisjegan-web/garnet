@@ -172,7 +172,8 @@
   .tl .when2{font:500 12px/1.3 var(--mono);color:var(--ink-soft);margin-top:5px;letter-spacing:.3px}
   .tl .nights{font:400 12.5px/1.3 var(--sans);color:var(--ink-faint);margin-top:3px}
   .sharetrip{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:8px;background:var(--ink);color:var(--paper);border:0;border-radius:14px;padding:14px;font:600 12px/1 var(--mono);letter-spacing:.6px;cursor:pointer}
-  svg .land{fill:color-mix(in srgb, var(--teal) 9%, #fff);stroke:color-mix(in srgb, var(--teal) 24%, var(--line));stroke-width:1;stroke-linejoin:round}
+  svg .land{fill:color-mix(in srgb, var(--teal) 8%, #fff);stroke:color-mix(in srgb, var(--teal) 22%, var(--line));stroke-width:0.9;stroke-linejoin:round}
+  svg .land.france{fill:color-mix(in srgb, var(--teal) 13%, #fff);stroke:color-mix(in srgb, var(--teal) 33%, var(--line))}
   svg .seatag.sg{cursor:pointer;fill:var(--teal);font-style:normal;font-weight:600}
   .sgchip{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:10px;background:color-mix(in srgb, var(--teal) 10%, #fff);border:1px solid color-mix(in srgb, var(--teal) 30%, var(--line));border-radius:12px;padding:11px;font:600 11px/1 var(--mono);letter-spacing:.5px;color:var(--ink);cursor:pointer}
   .itinlist{margin-top:20px;display:flex;flex-direction:column;gap:9px}
@@ -267,7 +268,6 @@
     <section class="view" id="v-map">
       <div class="now-head"><span class="eyebrow">The whole trip</span></div>
       <div class="map-wrap"><svg id="map" viewBox="0 0 300 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Route map"></svg></div>
-      <button class="sgchip" onclick="openCity('singapore')">&#9992;&nbsp; Singapore stopover &rsaquo;</button>
       <div class="itinlist" id="itinlist"></div>
       <button class="sharetrip" onclick="shareTrip()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Share this trip</button>
     </section>
@@ -502,8 +502,8 @@ function renderMap(){
   const baseDay=TRIP.days[curDay-1];
   const hereKey=(baseDay.base==="transit"||baseDay.base==="home")?null:baseDay.base;
   const pts=o.map(function(k){return c[k].x+","+c[k].y;}).join(" ");
-  let svg='<path class="land" d="M112 128 L150 100 L205 104 L272 138 L268 198 L255 248 L260 320 L200 328 L150 320 L106 300 L86 262 L84 212 L74 192 L50 180 L78 165 L104 158 L100 140 Z"/>';
-  svg+='<ellipse class="land" cx="58" cy="44" rx="34" ry="26"/>';
+  let svg='<path class="land" d="M50.7 -138.8 L31.0 -109.8 L49.7 -113.4 L69.9 -113.3 L65.1 -91.4 L48.6 -67.4 L67.6 -65.7 L69.0 -62.9 L85.4 -31.2 L98.0 -26.9 L109.3 3.6 L114.5 14.2 L136.8 19.3 L134.6 36.5 L125.2 44.4 L132.5 58.2 L116.0 72.3 L91.4 72.0 L60.1 79.4 L51.6 74.1 L39.4 86.7 L22.4 83.7 L9.5 93.9 L-0.3 88.5 L26.7 60.4 L43.1 54.6 L43.0 54.6 L14.3 50.1 L9.1 39.4 L28.3 31.1 L18.2 16.7 L21.7 -0.9 L49.0 1.5 L49.1 1.5 L51.8 -14.1 L39.5 -30.6 L39.2 -31.0 L16.9 -35.7 L12.5 -42.9 L19.2 -54.9 L13.1 -62.3 L3.2 -49.6 L2.1 -75.5 L-7.1 -89.2 L-0.5 -116.9 L13.8 -138.7 L28.5 -136.5 L50.7 -138.8 Z"/>';
+  svg+='<path class="land france" d="M171.8 82.7 L184.7 95.3 L194.1 93.2 L210.2 105.4 L214.3 107.8 L219.6 107.2 L228.3 114.2 L254.7 119.2 L245.5 137.5 L243.1 156.6 L238.1 161.2 L229.7 158.8 L230.3 165.6 L216.8 180.6 L216.6 192.8 L225.4 188.6 L231.7 200.4 L230.9 207.9 L236.3 218.0 L229.9 226.2 L234.7 246.9 L244.6 250.3 L242.5 262.0 L225.9 277.1 L189.6 269.9 L162.9 278.6 L160.8 294.7 L139.5 298.2 L118.8 286.1 L112.1 291.9 L78.3 279.7 L70.9 269.2 L80.5 253.2 L84.0 199.7 L65.0 171.6 L51.4 158.0 L23.3 147.7 L21.5 128.1 L45.3 122.3 L76.2 129.2 L70.4 98.8 L87.7 110.3 L130.5 89.4 L136.0 67.4 L152.1 62.0 L154.7 71.5 L163.3 71.9 L171.8 82.7 Z M281.6 303.3 L275.5 324.0 L267.2 318.6 L262.9 300.5 L266.6 290.6 L278.5 280.3 L281.6 303.3 Z"/>';
   svg+='<polyline class="route" points="'+pts+'"/>';
   svg+='<line class="flightline" x1="'+(c.nice.x+6)+'" y1="'+(c.nice.y+8)+'" x2="280" y2="350"/><text class="seatag" x="252" y="345">&#9992; Melbourne</text>';
   svg+='<line class="flightline" x1="'+(c.london.x-6)+'" y1="'+(c.london.y-6)+'" x2="20" y2="18"/><text class="seatag sg" x="10" y="14" onclick="openCity(\'singapore\')">&#9992; Singapore &rsaquo;</text>';
