@@ -35,6 +35,8 @@
   .here-label{font:600 14px/1.4 var(--mono);letter-spacing:.5px;color:var(--ink-soft);margin-top:6px}
 
   .postcard{position:relative;min-height:120px;border-radius:18px;overflow:hidden;margin-top:11px;display:flex;align-items:flex-end;padding:15px 16px;color:#fff;box-shadow:0 8px 22px rgba(22,38,63,.18)}
+  .postcard.photo{min-height:178px}
+  .postcard.photo .pc-temp{background:rgba(0,0,0,.34)}
   .postcard svg.motif{position:absolute;inset:0;width:100%;height:100%}
   .pc-temp{position:absolute;top:12px;right:13px;font:600 11px/1 var(--mono);color:rgba(255,255,255,.95);letter-spacing:.3px;background:rgba(0,0,0,.15);padding:6px 9px;border-radius:13px;z-index:2}
   .pc-temp.live::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:#7CE0B0;margin-right:5px;vertical-align:middle}
@@ -45,6 +47,14 @@
   .pc-sub{font:500 12.5px/1.3 var(--sans);color:rgba(255,255,255,.96);margin-top:5px;text-shadow:0 1px 8px rgba(0,0,0,.28)}
   .pc-date{font:600 11.5px/1 var(--mono);letter-spacing:1px;color:rgba(255,255,255,.92);margin-bottom:9px;text-shadow:0 1px 8px rgba(0,0,0,.28)}
   .pc-depart{font:500 12px/1.3 var(--sans);color:rgba(255,255,255,.85);margin-top:3px;text-shadow:0 1px 8px rgba(0,0,0,.28)}
+  .locked{margin-top:10px;background:color-mix(in srgb, var(--accent,#2E7E9E) 11%, #fff);border:1px solid color-mix(in srgb, var(--accent,#2E7E9E) 30%, var(--line));border-radius:13px;padding:10px 13px;display:flex;flex-direction:column;gap:8px}
+  .lk-head{font:600 9.5px/1 var(--mono);letter-spacing:1.3px;text-transform:uppercase;color:color-mix(in srgb, var(--accent,#2E7E9E) 78%, #333)}
+  .lk-row{display:flex;align-items:center;gap:10px}
+  .lk-ic{width:16px;height:16px;flex:0 0 auto;fill:none;stroke:var(--accent,#2E7E9E);stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round}
+  .lk-t{flex:1 1 auto;font:600 13px/1.25 var(--sans);color:var(--ink)}
+  .lk-tm{font:700 12.5px/1 var(--mono);color:color-mix(in srgb, var(--accent,#2E7E9E) 82%, #333);letter-spacing:.3px;white-space:nowrap}
+  .locked.free{flex-direction:row;align-items:center;gap:9px;background:color-mix(in srgb, var(--accent,#2E7E9E) 6%, #fff);border-color:color-mix(in srgb, var(--accent,#2E7E9E) 20%, var(--line))}
+  .lk-empty{font:500 12.5px/1.35 var(--sans);color:var(--ink-soft)}
   .pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ochre);margin-right:7px;vertical-align:middle;animation:ping 2s infinite}
   .pulse.w{background:#fff}
   @keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,255,255,.5)}100%{box-shadow:0 0 0 9px rgba(255,255,255,0)}}
@@ -359,7 +369,26 @@ function fullDate(d){ if(!d) return '';
   var suf=(dd%10===1&&dd!==11)?'st':(dd%10===2&&dd!==12)?'nd':(dd%10===3&&dd!==13)?'rd':'th';
   return (W[d.dow]||d.dow||'')+' '+dd+suf+' '+(M[mon]||mon);
 }
-function postcard(o){ return '<div class="postcard" style="background:linear-gradient(135deg,'+o.a+','+o.a2+')">'+motif(o.kind)+(o.temp?'<div class="pc-temp">'+o.temp+'°</div>':'')+'<div class="pc-text">'+(o.date?'<div class="pc-date">'+o.date+'</div>':'')+'<div class="pc-name"'+(o.big?' style="font-size:'+o.big+'px"':'')+'>'+o.name+'</div><div class="pc-sub">'+o.sub+'</div></div></div>'; }
+function postcard(o){
+  var bg = o.hero
+    ? "background-image:linear-gradient(to top,rgba(0,0,0,.82),rgba(0,0,0,.46) 30%,rgba(0,0,0,.06) 62%,rgba(0,0,0,0)),url('"+o.hero+"');background-size:cover;background-position:center"
+    : "background:linear-gradient(135deg,"+o.a+","+o.a2+")";
+  return '<div class="postcard'+(o.hero?' photo':'')+'" style="'+bg+'">'+(o.hero?'':motif(o.kind))+(o.temp?'<div class="pc-temp">'+o.temp+'°</div>':'')+'<div class="pc-text">'+(o.date?'<div class="pc-date">'+o.date+'</div>':'')+'<div class="pc-name"'+(o.big?' style="font-size:'+o.big+'px"':'')+'>'+o.name+'</div><div class="pc-sub">'+o.sub+'</div></div></div>';
+}
+function lockIcon(k){
+  if(k==='plane') return '<svg viewBox="0 0 24 24" class="lk-ic"><path d="M21 16v-1.7l-7.5-4.5V4.8a1.5 1.5 0 0 0-3 0v5L3 14.3V16l7.5-2.2V18l-2 1.4V21l3.5-1 3.5 1v-1.6L13.5 18v-4.2z"/></svg>';
+  if(k==='train') return '<svg viewBox="0 0 24 24" class="lk-ic"><rect x="6" y="3" width="12" height="13" rx="3.5"/><path d="M6 10.5h12M9.5 20l-2 2M14.5 20l2 2"/><circle cx="9.4" cy="13" r="0.9"/><circle cx="14.6" cy="13" r="0.9"/></svg>';
+  return '<svg viewBox="0 0 24 24" class="lk-ic"><path d="M12 3.5l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.8 5.4-.8z"/></svg>';
+}
+function lockedToday(d){
+  var out=[];
+  var leg=TRIP.legs.find(function(l){return l.day===d.n;});
+  if(leg) out.push({k:'train',t:'Train to '+TRIP.cities[leg.to].name,tm:(leg.dep&&leg.dep!=='—')?leg.dep:''});
+  var f=TRIP.flights[d.n];
+  if(f && d.n!==1){ var fl=(f.legs||[]).find(function(l){return l.dep;}); var dest=d.n===35?'Melbourne':'Singapore'; out.push({k:'plane',t:'Fly to '+dest,tm:fl?fl.dep:''}); }
+  (d.anchors||[]).forEach(function(a){ out.push({k:'star',t:a.label.split(' · ')[0],tm:a.time||''}); });
+  return out;
+}
 function wIcon(c){ if(c==null) return ''; if(c===0) return '☀️'; if(c<=2) return '🌤️'; if(c===3) return '☁️'; if(c===45||c===48) return '🌫️'; if(c>=51&&c<=57) return '🌦️'; if(c>=61&&c<=67) return '🌧️'; if(c>=71&&c<=77) return '🌨️'; if(c>=80&&c<=82) return '🌦️'; if(c>=85&&c<=86) return '🌨️'; if(c>=95) return '⛈️'; return ''; }
 var WX={};
 async function getWeather(lat,lon,date){
@@ -467,7 +496,15 @@ function renderNow(){
       var departTxt = tLeg?'Departing tomorrow by train' : tFlt?'Departing tomorrow by plane' : dep?'Departing '+fullDate(dep) : '';
       dsub='Night '+pos+' of '+stay.nights+(departTxt?'<div class="pc-depart">'+departTxt+'</div>':''); }
     else { dsub=d.travel?"Arriving in "+base.name:"Based in "+base.name; }
-    html+=postcard({a:base.accent,a2:base.accent2,kind:base.kind,temp:base.temp,name:base.name,date:fullDate(d),sub:'<span class="pulse w"></span>'+dsub});
+    html+=postcard({a:base.accent,a2:base.accent2,kind:base.kind,temp:base.temp,name:base.name,date:fullDate(d),sub:'<span class="pulse w"></span>'+dsub,hero:base.hero});
+  }
+
+  var lk=lockedToday(d);
+  if(lk.length){ html+='<div class="locked"><div class="lk-head">Booked today</div>';
+    lk.forEach(function(i){ html+='<div class="lk-row">'+lockIcon(i.k)+'<span class="lk-t">'+i.t+'</span>'+(i.tm?'<span class="lk-tm">'+i.tm+'</span>':'')+'</div>'; });
+    html+='</div>';
+  } else {
+    html+='<div class="locked free"><svg viewBox="0 0 24 24" class="lk-ic"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg><span class="lk-empty">Nothing booked &mdash; a free day</span></div>';
   }
 
   // travel info sits right under the heading, only on the eve of a departure
@@ -485,7 +522,7 @@ function renderNow(){
   }
   html+='<div class="card"><h3>'+(d.note||"Today")+'</h3>';
   if(d.anchors && d.anchors.length){ d.anchors.forEach(function(a){ html+='<div class="anchor"><span class="time">'+(a.time||"·")+'</span><span class="body2">'+a.label+(a.sub?'<small>'+a.sub+'</small>':'')+'</span></div>'+anchorDetail(a); }); }
-  else if(!transit){ html+='<div class="nothing">Nothing booked — pick from the ideas below</div>'; }
+  else if(!transit){ html+='<div class="nothing">A free day — browse the ideas below</div>'; }
   html+='</div>';
   if(!transit && TRIP.ideas[d.base] && !d.travel){ html+='<div class="card"><h3>Ideas around '+base.name+'</h3><div class="h3sub">Suggestions, not locks — decide on the day</div>'; TRIP.ideas[d.base].forEach(function(p){ html+=ideaRow(p,base.name); }); html+='</div>'; }
   html+=journalCard(d);
@@ -550,7 +587,7 @@ function renderCity(key){
   setTint(c.accent);
   const di=TRIP.days[s.inDay-1], doo=TRIP.days[s.outDay-1];
   const legIn=TRIP.legs.find(function(l){return l.to===key;}), legOut=TRIP.legs.find(function(l){return l.from===key;});
-  let html=postcard({a:c.accent,a2:c.accent2,kind:c.kind,temp:c.temp,name:c.name,sub:di.dm+' – '+doo.dm+' · '+s.nights+' nights'});
+  let html=postcard({a:c.accent,a2:c.accent2,kind:c.kind,temp:c.temp,name:c.name,sub:di.dm+' – '+doo.dm+' · '+s.nights+' nights',hero:c.hero});
 
   html+='<div class="sec-h">Staying</div><div class="card" style="margin-top:6px">'+stayPhoto(s)+'<div class="bed-name">'+s.place+'</div><div class="bed-meta">'+s.room+' · '+s.type+'</div>'+
     '<div class="chiprow"><span class="chip">Check-in '+s.ci+'</span><span class="chip">Check-out '+s.co+'</span>'+(s.bfast?'<span class="chip">Breakfast</span>':'')+'</div>'+
