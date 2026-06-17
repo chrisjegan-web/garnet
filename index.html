@@ -15,12 +15,12 @@
     --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:#0D1626;font-family:var(--sans);color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 12px;-webkit-font-smoothing:antialiased}
+  body{background:#0D1626;font-family:var(--sans);color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 12px;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
   .frame{width:390px;max-width:100%;height:780px;max-height:90vh;border-radius:30px;overflow:hidden;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 9px #060B14,0 0 0 10px #1d2738;display:flex;flex-direction:column;--hdr:color-mix(in srgb, var(--accent, var(--teal)) 62%, var(--ink));background:color-mix(in srgb, var(--accent, transparent) 6%, var(--paper));transition:background .45s ease}
   .topstrip{height:34px;flex:0 0 34px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;font:600 14px/1 var(--mono);color:var(--ink-soft);letter-spacing:.5px}
   .topstrip .dots{display:flex;gap:4px}
   .topstrip .dots i{width:5px;height:5px;border-radius:50%;background:var(--ink-faint);display:block}
-  .screen{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;background:color-mix(in srgb, var(--accent, transparent) 11%, var(--paper));transition:background .45s ease}
+  .screen{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;background:color-mix(in srgb, var(--accent, transparent) 11%, var(--paper));transition:background .45s ease}
   .screen::-webkit-scrollbar{width:0}
   .view{display:none;padding:6px 22px 30px;animation:fade .35s ease both}
   .view.active{display:block}
@@ -238,6 +238,11 @@
   .jsaved{font:600 10px/1 var(--mono);color:var(--teal-deep);letter-spacing:.4px}
   .jsave{background:var(--ink);color:var(--paper);border:0;border-radius:11px;padding:10px 14px;font:600 11px/1 var(--mono);letter-spacing:.5px;cursor:pointer}
   .jentry{padding:11px 0;border-bottom:1px solid var(--line)}
+  .jhead{margin:2px 4px 14px}
+  .jhead-t{font:italic 400 30px/1 var(--serif);color:var(--hdr)}
+  .jhead-c{font:600 10px/1 var(--mono);letter-spacing:.6px;text-transform:uppercase;color:var(--ink-faint);margin-top:6px}
+  .jentry.tap{cursor:pointer}
+  .je-edit{font:600 9.5px/1 var(--mono);letter-spacing:.5px;text-transform:uppercase;color:var(--ink-faint);margin-top:7px}
   .jentry:last-child{border-bottom:0}
   .je-date{font:600 10px/1 var(--mono);color:var(--hdr);letter-spacing:.5px;margin-bottom:5px}
   .je-text{font:400 14px/1.55 var(--sans);color:var(--ink);white-space:pre-wrap}
@@ -304,6 +309,9 @@
       <button class="back" onclick="show(curView)">&lsaquo; &nbsp;Back</button>
       <div id="city-body"></div>
     </section>
+    <section class="view" id="v-journal">
+      <div id="journal-body"></div>
+    </section>
   </div>
   <nav class="tabs">
     <button id="t-now" class="on" onclick="show('now')">
@@ -312,6 +320,8 @@
       <svg viewBox="0 0 24 24"><path class="fillme" d="M21 15.5v-1.7l-8-4.8V3.5a1.5 1.5 0 0 0-3 0V9l-8 4.8v1.7l8-2.4V18l-2 1.4v1.3l3.5-1 3.5 1v-1.3L11 18v-5.9z"/></svg>FLIGHTS</button>
     <button id="t-trip" onclick="show('trip')">
       <svg viewBox="0 0 24 24"><path class="fillme" d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v16M15 6v16"/></svg>ITINERARY</button>
+    <button id="t-journal" onclick="show('journal')">
+      <svg viewBox="0 0 24 24"><rect class="fillme" x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v18M12 8h4M12 12h4"/></svg>JOURNAL</button>
   </nav>
   <div class="toast" id="toast"></div>
   <div class="modal" id="modal">
@@ -361,6 +371,24 @@ function journalCard(d){
 }
 function saveEntry(){ const d=TRIP.days[curDay-1], k=dayISO(d), el=$("#jtext"); const t=el?el.value:''; if(t&&t.trim()){ JOURNAL[k]=t; } else { delete JOURNAL[k]; } persistJournal(); const s=$("#jsaved"); if(s) s.textContent='Saved \u2713'; toast('Journal saved'); }
 function exportJournal(){ try{ const b=new Blob([JSON.stringify(JOURNAL,null,2)],{type:'application/json'}); const u=URL.createObjectURL(b); const a=document.createElement('a'); a.href=u; a.download='carnet-journal.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(u); }catch(e){ toast('Export not available here'); } }
+function gotoDay(n){ curDay=Math.min(35,Math.max(1,n)); show('now'); }
+function renderJournal(){
+  setTint('#7A5C84');
+  var written=TRIP.days.filter(function(x){return JOURNAL[dayISO(x)];});
+  let html='<div class="now-head"><span class="eyebrow" style="text-transform:none;letter-spacing:.3px">Carnet de voyage</span></div>';
+  html+='<div class="jhead"><div class="jhead-t">Journal</div><div class="jhead-c">'+written.length+' of '+TRIP.days.length+' days written</div></div>';
+  if(!written.length){
+    html+='<div class="card"><div class="bed-meta">Nothing written yet. Each night, jot a line on the Today page \u2014 your trip will gather here, in your own words.</div></div>';
+  } else {
+    html+='<div class="card jlist">';
+    written.forEach(function(x){ var c=(x.base&&TRIP.cities[x.base])?TRIP.cities[x.base].name:'';
+      html+='<div class="jentry tap" onclick="gotoDay('+x.n+')"><div class="je-date">'+fullDate(x)+(c?' \u00b7 '+c:'')+'</div><div class="je-text">'+escapeHtml(JOURNAL[dayISO(x)])+'</div><div class="je-edit">Open this day &rsaquo;</div></div>';
+    });
+    html+='</div>';
+    html+='<button class="jsave" style="width:100%;margin-top:14px" onclick="exportJournal()">Export journal</button>';
+  }
+  $("#journal-body").innerHTML=html;
+}
 const CAM='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="2.5"/><circle cx="12" cy="13.5" r="3.4"/><path d="M8.5 7l1.3-2h4.4l1.3 2"/></svg>';
 const KEY='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5L21 21M17 17l2-2M14 14l2-2"/></svg>';
 function photoStrip(){ return '<div class="photostrip"><div class="phototile">'+CAM+'Tag a photo</div><div class="phototile">'+CAM+'Tag a photo</div><div class="phototile">'+CAM+'Tag a photo</div></div>'; }
@@ -687,10 +715,11 @@ function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add('sh
 function show(which){
   if(!TRIP){ showLoader(); return; }
   document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
-  $("#t-now").classList.remove('on'); $("#t-flights").classList.remove('on'); $("#t-trip").classList.remove('on');
+  $("#t-now").classList.remove('on'); $("#t-flights").classList.remove('on'); $("#t-trip").classList.remove('on'); $("#t-journal").classList.remove('on');
   if(which==='now'){ $("#v-now").classList.add('active'); $("#t-now").classList.add('on'); renderNow(); }
   else if(which==='flights'){ $("#v-flights").classList.add('active'); $("#t-flights").classList.add('on'); renderFlights(); }
   else if(which==='trip'){ $("#v-map").classList.add('active'); $("#t-trip").classList.add('on'); renderMap(); }
+  else if(which==='journal'){ $("#v-journal").classList.add('active'); $("#t-journal").classList.add('on'); renderJournal(); }
   else if(which==='city'){ $("#v-city").classList.add('active'); $("#t-trip").classList.add('on'); }
   if(which!=='city') curView=which;
   $(".screen").scrollTop=0;
