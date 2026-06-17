@@ -530,179 +530,400 @@
   "ideas": {
     "nice": [
       {
-        "t": "Castle Hill hike",
-        "clear": true,
+        "t": "Matisse Museum & Cimiez",
+        "k": "art",
+        "sub": "In the olive-grove hills by the Roman ruins",
+        "indoor": true
+      },
+      {
+        "t": "Marc Chagall Museum",
+        "k": "art",
+        "sub": "The luminous Biblical Message cycle",
+        "indoor": true
+      },
+      {
+        "t": "Cours Saleya market & socca",
+        "k": "food",
+        "sub": "Flower & produce market, then chickpea socca"
+      },
+      {
+        "t": "Colline du Château",
         "k": "sight",
-        "sub": "Old-town climb, big bay view"
+        "sub": "Climb the old town for the whole sweep of the bay",
+        "clear": true
       },
       {
-        "t": "Èze, Monaco & Menton",
-        "q": "Èze, France",
-        "via": "Vespa",
-        "time": "~40 min",
-        "k": "excursion"
+        "t": "Promenade des Anglais by bike",
+        "k": "cycle",
+        "sub": "Vélo Bleu hire along the seafront",
+        "clear": true
       },
       {
-        "t": "Renoir Museum, Cagnes",
-        "indoor": true,
-        "k": "art"
+        "t": "Fondation Maeght & St-Paul-de-Vence",
+        "k": "art",
+        "sub": "Modern art in a sculpture garden, then the hill village",
+        "q": "Fondation Maeght, Saint-Paul-de-Vence",
+        "via": "bus/car",
+        "time": "~45 min"
       },
       {
-        "t": "Picasso Museum, Antibes",
-        "indoor": true,
-        "k": "art"
-      },
-      {
-        "t": "Saint-Paul-de-Vence",
-        "q": "Saint-Paul-de-Vence",
-        "via": "bus",
-        "time": "~40 min",
-        "clear": true,
-        "k": "sight",
-        "sub": "Hill village + Chapelle Saint-Pierre"
-      },
-      {
-        "t": "Cannes & Antibes",
-        "q": "Cannes, France",
-        "via": "train",
+        "t": "Èze village & exotic garden",
+        "k": "garden",
+        "sub": "Cliff-top village, cactus garden, sea far below",
+        "q": "Jardin Exotique d'Èze",
+        "via": "bus/train",
         "time": "~30 min",
-        "k": "excursion"
+        "clear": true
+      },
+      {
+        "t": "Villefranche-sur-Mer",
+        "k": "sight",
+        "sub": "The bay from your header photo",
+        "q": "Villefranche-sur-Mer",
+        "via": "train",
+        "time": "~10 min"
       }
     ],
     "avignon": [
       {
-        "t": "Explore Avignon",
+        "t": "Palais des Papes",
+        "k": "art",
+        "sub": "The vast Gothic palace of the popes",
+        "indoor": true
+      },
+      {
+        "t": "Pont Saint-Bénézet",
         "k": "sight",
-        "sub": "Palais des Papes, the bridge"
+        "sub": "The famous half-bridge over the Rhône"
+      },
+      {
+        "t": "Île de la Barthelasse by bike",
+        "k": "cycle",
+        "sub": "Flat river-island loop with palace views",
+        "clear": true
+      },
+      {
+        "t": "Les Halles d'Avignon",
+        "k": "food",
+        "sub": "Covered market behind the living-plant wall"
+      },
+      {
+        "t": "Villeneuve-lès-Avignon",
+        "k": "garden",
+        "sub": "Fort Saint-André & its abbey gardens across the river",
+        "q": "Abbaye Saint-André, Villeneuve-lès-Avignon"
+      },
+      {
+        "t": "Pont du Gard",
+        "k": "sight",
+        "sub": "The great Roman aqueduct",
+        "q": "Pont du Gard",
+        "via": "car/bus",
+        "time": "~40 min",
+        "clear": true
       },
       {
         "t": "Gordes & Roussillon",
+        "k": "excursion",
+        "sub": "Luberon hill villages & ochre cliffs",
         "q": "Gordes, France",
-        "via": "scooter",
-        "clear": true,
+        "via": "scooter/car",
         "book": true,
-        "k": "excursion"
+        "clear": true
       }
     ],
     "lyon": [
       {
-        "t": "Explore Lyon",
+        "t": "Vieux Lyon & the traboules",
+        "k": "walk",
+        "sub": "Renaissance quarter, hidden covered passageways"
+      },
+      {
+        "t": "Fourvière & Roman theatres",
         "k": "sight",
-        "sub": "Vieux Lyon, the traboules"
+        "sub": "Funicular up to the basilica & the city view",
+        "clear": true
+      },
+      {
+        "t": "Musée des Beaux-Arts",
+        "k": "art",
+        "sub": "A great collection in a former abbey with a cloister garden",
+        "indoor": true
+      },
+      {
+        "t": "Les Halles Paul Bocuse",
+        "k": "food",
+        "sub": "The legendary indoor food market"
+      },
+      {
+        "t": "A bouchon dinner",
+        "k": "food",
+        "sub": "Hearty Lyonnais cooking — quenelles, praline tart"
+      },
+      {
+        "t": "Parc de la Tête d'Or",
+        "k": "garden",
+        "sub": "Huge free park, botanical glasshouses & rose garden"
+      },
+      {
+        "t": "Musée des Confluences",
+        "k": "sight",
+        "sub": "Striking museum where the two rivers meet",
+        "indoor": true
       },
       {
         "t": "Annecy",
+        "k": "excursion",
+        "sub": "Canal-laced town on an alpine lake",
         "q": "Annecy, France",
         "via": "train",
         "time": "~2h",
-        "clear": true,
-        "k": "excursion",
-        "sub": "Lake town"
+        "clear": true
       }
     ],
     "dijon": [
       {
-        "t": "Explore Dijon",
-        "k": "sight",
-        "sub": "Owl trail, Palais des Ducs"
+        "t": "The owl trail",
+        "k": "walk",
+        "sub": "Follow the brass owls through the old town"
       },
       {
-        "t": "Cycle from Beaune",
-        "q": "Beaune, France",
-        "via": "bike",
-        "clear": true,
+        "t": "Musée des Beaux-Arts",
+        "k": "art",
+        "sub": "In the ducal palace — one of France's oldest, free",
+        "indoor": true
+      },
+      {
+        "t": "Les Halles de Dijon",
+        "k": "food",
+        "sub": "Eiffel's iron-framed market hall"
+      },
+      {
+        "t": "Mustard at Edmond Fallot / Maille",
+        "k": "food",
+        "sub": "Taste & buy the real thing"
+      },
+      {
+        "t": "Beaune & the Hospices",
+        "k": "sight",
+        "sub": "The dazzling tiled-roof Hôtel-Dieu",
+        "q": "Hospices de Beaune",
+        "via": "train",
+        "time": "~25 min"
+      },
+      {
+        "t": "Cycle the Route des Grands Crus",
+        "k": "cycle",
+        "sub": "Vineyard path from Beaune through the Côte de Nuits",
+        "q": "Voie des Vignes, Beaune",
         "book": true,
-        "k": "excursion",
-        "sub": "Burgundy vineyards"
+        "clear": true
       }
     ],
     "strasbourg": [
       {
-        "t": "Explore Strasbourg",
+        "t": "Cathedral & astronomical clock",
         "k": "sight",
-        "sub": "Cathedral, La Petite France"
+        "sub": "Climb the platform; the figures strike at midday",
+        "indoor": true
+      },
+      {
+        "t": "La Petite France",
+        "k": "walk",
+        "sub": "The canal quarter of timbered houses"
+      },
+      {
+        "t": "Parc de l'Orangerie",
+        "k": "garden",
+        "sub": "Strasbourg's loveliest park — and its storks"
+      },
+      {
+        "t": "Batorama canal cruise",
+        "k": "sight",
+        "sub": "Glide past the old town & the European quarter"
+      },
+      {
+        "t": "MAMCS modern art museum",
+        "k": "art",
+        "sub": "Modern & contemporary, on the water",
+        "indoor": true
+      },
+      {
+        "t": "A winstub supper",
+        "k": "food",
+        "sub": "Alsatian tavern — choucroute, tarte flambée"
       },
       {
         "t": "Colmar",
+        "k": "excursion",
+        "sub": "Storybook Alsace and its 'Little Venice'",
         "q": "Colmar, France",
         "via": "train",
-        "time": "~30 min",
-        "k": "excursion"
+        "time": "~30 min"
       }
     ],
     "reims": [
       {
         "t": "Reims Cathedral",
-        "k": "sight",
-        "sub": "Coronation church of the French kings"
+        "k": "art",
+        "sub": "Coronation church of the kings — and its Chagall windows"
       },
       {
-        "t": "Wander the centre",
-        "k": "sight"
+        "t": "Palais du Tau",
+        "k": "art",
+        "sub": "The cathedral's treasury & coronation hall",
+        "indoor": true
+      },
+      {
+        "t": "A champagne house tour",
+        "k": "food",
+        "sub": "Taittinger or Pommery cellars (Veuve's already booked)",
+        "book": true
+      },
+      {
+        "t": "Musée de la Reddition",
+        "k": "sight",
+        "sub": "The schoolroom where WWII ended in the west",
+        "indoor": true
+      },
+      {
+        "t": "Art-deco Reims walk",
+        "k": "walk",
+        "sub": "The Carnegie library & the rebuilt centre"
       }
     ],
     "paris": [
       {
-        "t": "Musée de l'Orangerie",
-        "indoor": true,
+        "t": "Musée d'Orsay",
         "k": "art",
-        "sub": "Monet's Water Lilies"
+        "sub": "The Impressionists, in a grand old railway station",
+        "indoor": true
       },
       {
-        "t": "Notre-Dame",
-        "k": "sight"
+        "t": "Musée de l'Orangerie",
+        "k": "art",
+        "sub": "Monet's Water Lilies, wrapping the room",
+        "indoor": true
       },
       {
-        "t": "Montmartre",
-        "clear": true,
-        "k": "sight",
-        "sub": "Sacré-Cœur"
+        "t": "Musée Rodin & garden",
+        "k": "art",
+        "sub": "Sculpture among the roses — The Thinker outdoors"
+      },
+      {
+        "t": "Giverny — Monet's garden",
+        "k": "garden",
+        "sub": "The water-lily garden itself (open until ~1 Nov)",
+        "q": "Monet's Garden, Giverny",
+        "via": "train+shuttle",
+        "time": "~1h",
+        "book": true,
+        "clear": true
+      },
+      {
+        "t": "Albert Kahn Japanese garden",
+        "k": "garden",
+        "sub": "A serene Japanese garden out at Boulogne",
+        "q": "Musée Albert-Kahn, Boulogne-Billancourt"
+      },
+      {
+        "t": "Jardin du Luxembourg",
+        "k": "garden",
+        "sub": "The quintessential Paris garden"
+      },
+      {
+        "t": "Le Marais on foot",
+        "k": "walk",
+        "sub": "Your own quarter — Place des Vosges & the galleries"
+      },
+      {
+        "t": "Sainte-Chapelle",
+        "k": "art",
+        "sub": "A jewel-box of stained glass",
+        "indoor": true,
+        "clear": true
       }
     ],
     "london": [
       {
-        "t": "Portobello Market, Notting Hill",
-        "clear": true,
-        "k": "sight",
-        "sub": "Best Saturdays · then Soho"
+        "t": "The National Gallery",
+        "k": "art",
+        "sub": "Trafalgar Square — and free",
+        "indoor": true
       },
       {
-        "t": "Tate Modern & Borough Market",
-        "k": "art"
+        "t": "Tate Modern & a Thames walk",
+        "k": "art",
+        "sub": "Then Borough Market for lunch"
       },
       {
         "t": "British Museum",
-        "indoor": true,
         "k": "art",
-        "sub": "+ Natural History Museum"
+        "sub": "The Rosetta Stone & half the world",
+        "indoor": true
       },
       {
-        "t": "Les Misérables",
-        "book": true,
+        "t": "Kew Gardens",
+        "k": "garden",
+        "sub": "Glasshouses, treetop walk & the Japanese Gateway",
+        "clear": true
+      },
+      {
+        "t": "V&A Museum",
+        "k": "art",
+        "sub": "Art & design, endlessly",
+        "indoor": true
+      },
+      {
+        "t": "A West End show",
         "k": "excursion",
-        "sub": "West End — maybe"
+        "sub": "Les Mis or The Mousetrap",
+        "book": true
       },
       {
-        "t": "The Mousetrap",
-        "book": true,
-        "k": "excursion",
-        "sub": "Evening"
+        "t": "Hampstead Heath & Kenwood",
+        "k": "walk",
+        "sub": "Wild parkland, a great house, the city view",
+        "clear": true
       },
       {
-        "t": "Shakespeare's Globe",
-        "clear": true,
-        "k": "sight"
+        "t": "Columbia Road Flower Market",
+        "k": "garden",
+        "sub": "Sunday mornings in the East End",
+        "clear": true
       }
     ],
     "singapore": [
       {
-        "t": "By the pool",
-        "k": "sight"
+        "t": "Gardens by the Bay",
+        "k": "garden",
+        "sub": "Supertrees, the Cloud Forest & Flower Dome"
       },
       {
-        "t": "Club lounge",
+        "t": "Botanic Gardens & Orchid Garden",
+        "k": "garden",
+        "sub": "UNESCO-listed; the National Orchid Garden within"
+      },
+      {
+        "t": "A hawker-centre feast",
         "k": "food",
-        "sub": "Included with the room"
+        "sub": "Maxwell or Lau Pa Sat — chicken rice, laksa, satay"
+      },
+      {
+        "t": "Marina Bay & the light show",
+        "k": "sight",
+        "sub": "Spectra over the water after dark"
+      },
+      {
+        "t": "National Gallery Singapore",
+        "k": "art",
+        "sub": "South-East Asian art in the old Supreme Court",
+        "indoor": true
+      },
+      {
+        "t": "Chinatown & a temple",
+        "k": "walk",
+        "sub": "The Buddha Tooth Relic Temple, then street food"
       }
     ]
   },
