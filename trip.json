@@ -18,7 +18,8 @@
       "lon": 7.2683,
       "accent": "#2E7E9E",
       "accent2": "#4FA8C4",
-      "kind": "coast"
+      "kind": "coast",
+      "hero": "images/nice-hero.webp"
     },
     "avignon": {
       "name": "Avignon",
@@ -29,7 +30,8 @@
       "lon": 4.8055,
       "accent": "#B07A3C",
       "accent2": "#CDA05E",
-      "kind": "hills"
+      "kind": "hills",
+      "hero": "images/avignon-hero.webp"
     },
     "lyon": {
       "name": "Lyon",
@@ -40,7 +42,8 @@
       "lon": 4.8357,
       "accent": "#9E3B32",
       "accent2": "#C2685A",
-      "kind": "city"
+      "kind": "city",
+      "hero": "images/lyon-hero.webp"
     },
     "dijon": {
       "name": "Dijon",
@@ -51,7 +54,8 @@
       "lon": 5.0415,
       "accent": "#7A3B52",
       "accent2": "#A05E78",
-      "kind": "hills"
+      "kind": "hills",
+      "hero": "images/dijon-hero.webp"
     },
     "strasbourg": {
       "name": "Strasbourg",
@@ -62,7 +66,8 @@
       "lon": 7.7521,
       "accent": "#B5532E",
       "accent2": "#D17C53",
-      "kind": "spire"
+      "kind": "spire",
+      "hero": "images/strasbourg-hero.webp"
     },
     "reims": {
       "name": "Reims",
@@ -73,7 +78,8 @@
       "lon": 4.0304,
       "accent": "#9A7E38",
       "accent2": "#C2A455",
-      "kind": "spire"
+      "kind": "spire",
+      "hero": "images/reims-hero.webp"
     },
     "paris": {
       "name": "Paris",
@@ -84,7 +90,8 @@
       "lon": 2.3581,
       "accent": "#3E5068",
       "accent2": "#5E7390",
-      "kind": "tower"
+      "kind": "tower",
+      "hero": "images/paris-hero.webp"
     },
     "london": {
       "name": "London",
@@ -95,7 +102,8 @@
       "lon": -0.1257,
       "accent": "#3C6B52",
       "accent2": "#5E9078",
-      "kind": "city"
+      "kind": "city",
+      "hero": "images/london-hero.webp"
     },
     "singapore": {
       "name": "Singapore",
@@ -106,7 +114,8 @@
       "lon": 103.8536,
       "accent": "#1C8A7E",
       "accent2": "#3FB3A4",
-      "kind": "tropic"
+      "kind": "tropic",
+      "hero": "images/singapore-hero.webp"
     }
   },
   "order": [
