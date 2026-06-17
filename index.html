@@ -37,6 +37,9 @@
   .postcard{position:relative;min-height:120px;border-radius:18px;overflow:hidden;margin-top:11px;display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch;padding:15px 16px;color:#fff;box-shadow:0 8px 22px rgba(22,38,63,.18)}
   .postcard.photo{min-height:188px}
   .postcard.photo .pc-temp{background:rgba(0,0,0,.34)}
+  .postcard.slim{min-height:96px;border-radius:15px}
+  .postcard.slim .pc-name{font-size:27px}
+  .postcard.slim .pc-sub{margin-top:3px}
   .postcard svg.motif{position:absolute;inset:0;width:100%;height:100%}
   .pc-temp{position:absolute;top:12px;right:13px;font:600 11px/1 var(--mono);color:rgba(255,255,255,.95);letter-spacing:.3px;background:rgba(0,0,0,.15);padding:6px 9px;border-radius:13px;z-index:2}
   .pc-temp.live::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:#7CE0B0;margin-right:5px;vertical-align:middle}
@@ -126,6 +129,17 @@
   .phototile{flex:1;aspect-ratio:1;border:1.5px dashed color-mix(in srgb, var(--accent, var(--ink-faint)) 40%, var(--line-strong));border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--ink-faint);font:600 9px/1.2 var(--mono);text-align:center;letter-spacing:.4px;background:color-mix(in srgb, var(--accent, transparent) 5%, transparent)}
   .phototile svg{opacity:.55}
 
+  .acc-link{display:flex;align-items:center;gap:8px;margin-top:11px;padding:12px 14px;background:var(--card);border:1px solid var(--line);border-radius:12px;cursor:pointer;font:500 13px/1.35 var(--sans);color:var(--ink-soft)}
+  .acc-link b{color:var(--ink);font-weight:600;font-style:normal}
+  .acc-go{margin-left:auto;color:var(--ink-faint);font-size:19px;line-height:1}
+  .legband{display:flex;align-items:center;gap:11px;margin:9px 4px;padding:10px 14px;background:color-mix(in srgb,var(--accent,#2E7E9E) 8%,var(--card));border:1px solid color-mix(in srgb,var(--accent,#2E7E9E) 26%,var(--line));border-radius:12px}
+  .lb-ic{width:20px;height:20px;flex:0 0 auto;fill:none;stroke:var(--accent,#2E7E9E);stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+  .lb-main{flex:1 1 auto;min-width:0}
+  .lb-mode{font:600 9.5px/1 var(--mono);letter-spacing:1px;text-transform:uppercase;color:color-mix(in srgb,var(--accent,#2E7E9E) 75%,#333);margin-bottom:3px}
+  .lb-route{font:500 13px/1.35 var(--sans);color:var(--ink)}
+  .lb-route b{font-weight:700;font-family:var(--mono);font-size:12.5px}
+  .lb-arr{color:var(--ink-faint);margin:0 3px}
+  .lb-tbc{color:var(--ink-soft);font-style:italic}
   .board{background:var(--ink);border-radius:16px;padding:16px 16px 15px;margin-top:16px;color:var(--paper)}
   .board h3{font:600 11px/1 var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:#7E93B5;margin-bottom:13px;display:flex;justify-content:space-between}
   .board .leg{display:flex;align-items:center;gap:12px}
@@ -370,7 +384,7 @@ function postcard(o){
   var bg = o.hero
     ? "background-image:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.58) 40%,rgba(0,0,0,.18) 72%,rgba(0,0,0,0)),url('"+o.hero+"');background-size:cover;background-position:center"
     : "background:linear-gradient(135deg,"+o.a+","+o.a2+")";
-  return '<div class="postcard'+(o.hero?' photo':'')+'" style="'+bg+'">'+(o.hero?'':motif(o.kind))+(o.temp?'<div class="pc-temp">'+o.temp+'°</div>':'')+'<div class="pc-text">'+(o.date?'<div class="pc-date">'+o.date+'</div>':'')+'<div class="pc-name"'+(o.big?' style="font-size:'+o.big+'px"':'')+'>'+o.name+'</div><div class="pc-sub">'+o.sub+'</div></div>'+(o.extra||'')+'</div>';
+  return '<div class="postcard'+(o.hero?' photo':'')+(o.slim?' slim':'')+'" style="'+bg+'">'+(o.hero?'':motif(o.kind))+(o.temp?'<div class="pc-temp">'+o.temp+'°</div>':'')+'<div class="pc-text">'+(o.date?'<div class="pc-date">'+o.date+'</div>':'')+'<div class="pc-name"'+(o.big?' style="font-size:'+o.big+'px"':'')+'>'+o.name+'</div><div class="pc-sub">'+o.sub+'</div></div>'+(o.extra||'')+'</div>';
 }
 function lockIcon(k){
   if(k==='plane') return '<svg viewBox="0 0 24 24" class="lk-ic"><path d="M21 16v-1.7l-7.5-4.5V4.8a1.5 1.5 0 0 0-3 0v5L3 14.3V16l7.5-2.2V18l-2 1.4V21l3.5-1 3.5 1v-1.6L13.5 18v-4.2z"/></svg>';
@@ -482,48 +496,58 @@ function renderNow(){
   const base=transit?null:TRIP.cities[d.base];
   setTint(transit?'#3A4A62':base.accent);
   const stay=stayForNight(d.n);
-  const arriving = !!stay && d.n===stay.inDay;
   const tmw=d.n+1, tLeg=TRIP.legs.find(function(l){return l.day===tmw;}), tFlt=TRIP.flights[tmw];
+  const todayLeg=TRIP.legs.find(function(l){return l.day===d.n;});
+  const DASH='\u2014';
+
+  function chips(items){ var h='<div class="pc-locked">';
+    if(items.length){ items.forEach(function(i){ h+='<span class="pc-lk">'+lockIcon(i.k)+i.t+(i.tm?'<span class="lk-tm">'+i.tm+'</span>':'')+'</span>'; }); }
+    else { h+='<span class="pc-lk free"><svg viewBox="0 0 24 24" class="lk-ic"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>Nothing booked</span>'; }
+    return h+'</div>'; }
+  function arrSub(){ var pos=d.n-stay.inDay+1, dep=TRIP.days[stay.outDay-1];
+    var departTxt = tLeg?'Departing tomorrow by train' : tFlt?'Departing tomorrow by plane' : dep?'Departing '+fullDate(dep) : '';
+    return 'Night '+pos+' of '+stay.nights+(departTxt?'<div class="pc-depart">'+departTxt+'</div>':''); }
 
   let html='<div class="here-label">Day '+d.n+' of 35</div>';
 
-  var lk=lockedToday(d), lkHTML='<div class="pc-locked">';
-  if(lk.length){ lk.forEach(function(i){ lkHTML+='<span class="pc-lk">'+lockIcon(i.k)+i.t+(i.tm?'<span class="lk-tm">'+i.tm+'</span>':'')+'</span>'; }); }
-  else { lkHTML+='<span class="pc-lk free"><svg viewBox="0 0 24 24" class="lk-ic"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>Nothing booked &middot; free day</span>'; }
-  lkHTML+='</div>';
-
-  if(transit){ html+=postcard({a:"#2A3A52",a2:"#455A78",kind:"plane",temp:null,name:"In transit",date:fullDate(d),sub:'<span class="pulse w"></span>Travel day',extra:lkHTML}); }
-  else {
-    var dsub;
-    if(stay){ var pos=d.n-stay.inDay+1, dep=TRIP.days[stay.outDay-1];
-      var departTxt = tLeg?'Departing tomorrow by train' : tFlt?'Departing tomorrow by plane' : dep?'Departing '+fullDate(dep) : '';
-      dsub='Night '+pos+' of '+stay.nights+(departTxt?'<div class="pc-depart">'+departTxt+'</div>':''); }
-    else { dsub=d.travel?"Arriving in "+base.name:"Based in "+base.name; }
-    html+=postcard({a:base.accent,a2:base.accent2,kind:base.kind,temp:base.temp,name:base.name,date:fullDate(d),sub:'<span class="pulse w"></span>'+dsub,hero:base.hero,extra:lkHTML});
+  if(todayLeg){
+    var fromC=TRIP.cities[todayLeg.from], fromStay=TRIP.stays[todayLeg.from];
+    html+=postcard({name:fromC.name,sub:'Checking out'+(fromStay&&fromStay.co&&fromStay.co!==DASH?' \u00b7 '+fromStay.co:''),hero:fromC.hero,a:fromC.accent,a2:fromC.accent2,kind:fromC.kind,slim:true});
+    html+=legBand(todayLeg);
+    var anchChips=(d.anchors||[]).map(function(a){return {k:'star',t:a.label.split(' \u00b7 ')[0],tm:a.time||''};});
+    html+=postcard({name:base.name,date:fullDate(d),temp:base.temp,sub:'<span class="pulse w"></span>'+arrSub(),hero:base.hero,a:base.accent,a2:base.accent2,kind:base.kind,extra:anchChips.length?chips(anchChips):''});
+  } else if(transit){
+    html+=postcard({a:"#2A3A52",a2:"#455A78",kind:"plane",temp:null,name:"In transit",date:fullDate(d),sub:'<span class="pulse w"></span>Travel day',extra:chips(lockedToday(d))});
+  } else {
+    var dsub = stay?arrSub():(d.travel?"Arriving in "+base.name:"Based in "+base.name);
+    html+=postcard({a:base.accent,a2:base.accent2,kind:base.kind,temp:base.temp,name:base.name,date:fullDate(d),sub:'<span class="pulse w"></span>'+dsub,hero:base.hero,extra:chips(lockedToday(d))});
   }
 
-  // travel info sits right under the heading, only on the eve of a departure
+  if(stay){ html+='<div class="acc-link" onclick="openCity(\''+stay.key+'\')">Accommodation: <b>'+stay.place+'</b><span class="acc-go">&rsaquo;</span></div>'; }
+
+  if(d.anchors && d.anchors.length){ html+='<div class="card">';
+    d.anchors.forEach(function(a){ html+='<div class="anchor"><span class="time">'+(a.time||"\u00b7")+'</span><span class="body2">'+a.label+(a.sub?'<small>'+a.sub+'</small>':'')+'</span></div>'+anchorDetail(a); });
+    html+='</div>'; }
+
   if(tLeg){ var ld=TRIP.days[tmw-1];
-    html+='<div class="board"><h3><span>Tomorrow\u2019s journey</span><span>'+tLeg.mode+'</span></h3><div class="leg"><div class="ends"><div class="city2">'+TRIP.cities[tLeg.from].name+'</div><div class="arrow">&darr;</div><div class="city2">'+TRIP.cities[tLeg.to].name+'</div></div><div class="when"><div class="time">'+(tLeg.dep!=="—"?tLeg.dep:tLeg.dur)+'</div><div class="date2">'+ld.dow.toUpperCase()+' '+ld.dm.toUpperCase()+'</div></div></div><div class="strip"><span>DEP <b>'+tLeg.dep+'</b></span><span>ARR <b>'+tLeg.arr+'</b></span><span>'+tLeg.dur+'</span></div></div>';
+    html+='<div class="board"><h3><span>Tomorrow\u2019s journey</span><span>'+tLeg.mode+'</span></h3><div class="leg"><div class="ends"><div class="city2">'+TRIP.cities[tLeg.from].name+'</div><div class="arrow">&darr;</div><div class="city2">'+TRIP.cities[tLeg.to].name+'</div></div><div class="when"><div class="time">'+(tLeg.dep!==DASH?tLeg.dep:tLeg.dur)+'</div><div class="date2">'+ld.dow.toUpperCase()+' '+ld.dm.toUpperCase()+'</div></div></div><div class="strip"><span>DEP <b>'+tLeg.dep+'</b></span><span>ARR <b>'+tLeg.arr+'</b></span><span>'+tLeg.dur+'</span></div></div>';
   } else if(tFlt){ var ff=tFlt.legs.find(function(l){return !l.stop;}), lr=tFlt.legs.slice().reverse().find(function(l){return !l.stop;});
     html+='<div class="board" style="cursor:pointer" onclick="show(\'flights\')"><h3><span>&#9992; Tomorrow\u2019s flight</span><span>'+tFlt.total+'</span></h3><div class="leg"><div class="ends"><div class="city2">'+AIRPORTS[ff.f]+'</div><div class="arrow">&darr;</div><div class="city2">'+AIRPORTS[lr.t]+'</div></div></div><div class="strip"><span>Tap for the full breakdown &rsaquo;</span></div></div>';
   }
 
-  if(arriving){
-    html+='<div class="card">'+stayPhoto(stay)+'<h3>Tonight</h3><div class="bed-name">'+stay.place+'</div><div class="bed-meta">'+stay.room+' · '+stay.type+(stay.bfast?' · breakfast':'')+'</div>'+
-      '<div class="chiprow"><span class="chip">Check-out '+stay.co+'</span></div>'+
-      (stay.entry?entryBox(stay.entry):'')+
-      '<a class="maplink" href="'+mapUrl(stay.place+", "+base.name)+'" target="_blank" rel="noopener">&#9906; Open in Maps</a></div>';
-  }
-  html+='<div class="card"><h3>'+(d.note||"Today")+'</h3>';
-  if(d.anchors && d.anchors.length){ d.anchors.forEach(function(a){ html+='<div class="anchor"><span class="time">'+(a.time||"·")+'</span><span class="body2">'+a.label+(a.sub?'<small>'+a.sub+'</small>':'')+'</span></div>'+anchorDetail(a); }); }
-  else if(!transit){ html+='<div class="nothing">A free day — browse the ideas below</div>'; }
-  html+='</div>';
-  if(!transit && TRIP.ideas[d.base] && !d.travel){ html+='<div class="card"><h3>Ideas around '+base.name+'</h3><div class="h3sub">Suggestions, not locks — decide on the day</div>'; TRIP.ideas[d.base].forEach(function(p){ html+=ideaRow(p,base.name); }); html+='</div>'; }
   html+=journalCard(d);
   html+='<div class="wx-credit">Weather by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></div>';
   $("#now-body").innerHTML=html;
   liveWeather(d);
+}
+function legBand(leg){
+  var booked = leg.dep && leg.dep!=='\u2014';
+  return '<div class="legband"><svg viewBox="0 0 24 24" class="lb-ic"><rect x="6" y="3" width="12" height="12.5" rx="3.5"/><path d="M6 10h12M9.4 19.5l-2 2M14.6 19.5l2 2"/><circle cx="9.4" cy="12.6" r="0.9"/><circle cx="14.6" cy="12.6" r="0.9"/></svg>'+
+    '<div class="lb-main"><div class="lb-mode">'+leg.mode+(leg.dur?' \u00b7 '+leg.dur:'')+'</div>'+
+    (booked
+      ? '<div class="lb-route"><b>'+leg.dep+'</b> '+TRIP.cities[leg.from].name+' <span class="lb-arr">&rarr;</span> <b>'+leg.arr+'</b> '+TRIP.cities[leg.to].name+'</div>'
+      : '<div class="lb-route lb-tbc">'+TRIP.cities[leg.from].name+' &rarr; '+TRIP.cities[leg.to].name+' \u00b7 times to be booked</div>')+
+    '</div></div>';
 }
 function stepDay(n){ curDay=Math.min(35,Math.max(1,curDay+n)); renderNow(); }
 
