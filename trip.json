@@ -153,7 +153,8 @@
       "cancelBy": "21 Sep",
       "due": "$1,104.51 · 13 Sep",
       "entry": "Jacqueline lives in the house and will wait up — she'll let you in whenever you land. No code needed.",
-      "note": "No CO alarm — consider a portable detector. 2 guests max, no pets."
+      "note": "No CO alarm — consider a portable detector. 2 guests max, no pets.",
+      "coffee": true
     },
     "avignon": {
       "place": "2-bedroom flat, Centre — Eric",
@@ -177,7 +178,9 @@
       "note": "Must climb stairs (no lift). No CO alarm — consider a portable detector. 4 guests max, no pets.",
       "facilities": [
         "Air-con"
-      ]
+      ],
+      "wash": true,
+      "coffee": true
     },
     "lyon": {
       "place": "Cosy apartment, Old Town — Sophie & Nicolas",
@@ -199,7 +202,9 @@
       "link": "https://www.airbnb.com.au/rooms/20899336",
       "cancelBy": "31 Aug",
       "entry": "Host greets you — reach out to Sophie & Nicolas for check-in details.",
-      "note": "4 guests max, no pets."
+      "note": "4 guests max, no pets.",
+      "wash": true,
+      "coffee": true
     },
     "dijon": {
       "place": "Hôtel des Ducs",
@@ -224,7 +229,8 @@
       "note": "Heads up: some rooms are offsite (200–300m) in a lift-less 15th-century house — confirm yours is in the main building. Breakfast €14pp/night (optional). City tax ≈€11 payable at the hotel. Parking 500m; no daily cleaning.",
       "facilities": [
         "Free WiFi"
-      ]
+      ],
+      "coffee": true
     },
     "strasbourg": {
       "place": "Hôtel Tandem — Boutique Hôtel",
@@ -251,7 +257,8 @@
         "Breakfast incl.",
         "Air-con",
         "Free WiFi"
-      ]
+      ],
+      "coffee": true
     },
     "reims": {
       "place": "Apartment, Hypercentre — Esther",
@@ -277,7 +284,9 @@
       "facilities": [
         "Kitchen",
         "Free WiFi"
-      ]
+      ],
+      "wash": true,
+      "coffee": true
     },
     "paris": {
       "place": "Secluded Le Marais Escape — Christine",
@@ -299,7 +308,9 @@
       "link": "https://www.airbnb.com.au/rooms/13365586",
       "cancelBy": "11 Oct",
       "entry": "Self check-in via key safe. Building entrance code is in your Notes below; key-safe code & Wi-Fi arrive 24h before check-in. Nearest metro: Saint-Paul (Line 1), ~4 min walk.",
-      "note": "2 guests max, no pets, no smoking, no parties. Common courtyard not for guest use; please respect the building's quiet."
+      "note": "2 guests max, no pets, no smoking, no parties. Common courtyard not for guest use; please respect the building's quiet.",
+      "wash": true,
+      "coffee": true
     },
     "london": {
       "place": "The Clermont London, Charing Cross",
@@ -323,7 +334,8 @@
       "facilities": [
         "Breakfast incl.",
         "Bar"
-      ]
+      ],
+      "coffee": true
     },
     "singapore": {
       "place": "The Westin Singapore",
@@ -347,7 +359,8 @@
       "facilities": [
         "Club lounge",
         "Breakfast incl."
-      ]
+      ],
+      "coffee": true
     }
   },
   "legs": [
