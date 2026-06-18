@@ -251,8 +251,13 @@
   .ic-at{font:600 10px var(--mono);color:var(--teal);margin-right:6px;letter-spacing:.3px}
   .ic-travel{font-style:italic;color:var(--ink-faint)}
   .ic-stay{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:11px;padding:11px 12px;background:color-mix(in srgb, var(--teal) 7%, transparent);border-radius:10px;cursor:pointer;font:500 12.5px/1.3 var(--sans);color:var(--ink)}
+  .ic-stay-h{display:inline-flex;align-items:center;gap:8px;font:600 12.5px/1.2 var(--sans);color:var(--ink)}
+  .ic-stay-h .bedi{flex:0 0 auto;color:var(--teal)}
   .ic-more{font:600 9.5px/1 var(--mono);letter-spacing:.4px;text-transform:uppercase;color:var(--ink-faint);white-space:nowrap}
-  .ic-ideas-h{font:600 10px/1 var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--hdr);margin:17px 0 5px}
+  .ic-ideas-h{display:flex;align-items:center;gap:8px;font:600 10px/1 var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--hdr);margin:15px 0 4px;padding:7px 0;cursor:pointer}
+  .ic-ideas-h .ii-n{font-weight:500;letter-spacing:.3px;text-transform:none;color:var(--ink-faint)}
+  .ic-ideas-h .ii-chev{margin-left:auto;font:400 18px/1 var(--sans);color:var(--ink-faint);transition:transform .2s ease}
+  .ic-ideas-h.open .ii-chev{transform:rotate(90deg)}
   .icity.home .ic-head{cursor:default}
 
   .flighthdr{display:flex;justify-content:space-between;align-items:baseline;margin-top:22px}
@@ -445,6 +450,7 @@ function renderJournal(){
 const CAM='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="2.5"/><circle cx="12" cy="13.5" r="3.4"/><path d="M8.5 7l1.3-2h4.4l1.3 2"/></svg>';
 const PIN='<svg class="pini" viewBox="0 0 24 24"><path d="M12 21s6-5.7 6-10a6 6 0 0 0-12 0c0 4.3 6 10 6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>';
 const KEY='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5L21 21M17 17l2-2M14 14l2-2"/></svg>';
+const BED='<svg class="bedi" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>';
 function photoStrip(){ return '<div class="photostrip"><div class="phototile">'+CAM+'Tag a photo</div><div class="phototile">'+CAM+'Tag a photo</div><div class="phototile">'+CAM+'Tag a photo</div></div>'; }
 
 function motif(kind){
@@ -677,6 +683,8 @@ function renderMap(){
   renderItin(hereKey);
 }
 function toggleCity(key){ itinOpen = (itinOpen===key?null:key); renderItin(); }
+let ideasOpen=null;
+function toggleIdeas(key){ ideasOpen = (ideasOpen===key?null:key); renderItin(); }
 function dayRow(dd){
   var anch='';
   if(dd.anchors && dd.anchors.length){ dd.anchors.forEach(function(a){ anch+='<div class="ic-anch"><span class="ic-at">'+(a.time||'·')+'</span>'+a.label+'</div>'; }); }
@@ -697,8 +705,13 @@ function renderItin(hereKey){
     if(open){
       html+='<div class="ic-body">';
       for(var n=s.inDay;n<s.outDay;n++){ html+=dayRow(TRIP.days[n-1]); }
-      html+='<div class="ic-stay" onclick="openCity(\''+k+'\')"><span>'+s.place+'</span><span class="ic-more">Full details &rsaquo;</span></div>';
-      if(TRIP.ideas[k] && TRIP.ideas[k].length){ html+='<div class="ic-ideas-h">Ideas around '+c[k].name+'</div>'; TRIP.ideas[k].forEach(function(p,idx){ html+=itinIdeaRow(k,p,idx,s); }); }
+      html+='<div class="ic-stay" onclick="openCity(\''+k+'\')"><span class="ic-stay-h">'+BED+'Accommodation</span><span class="ic-more">Full details &rsaquo;</span></div>';
+      if(TRIP.ideas[k] && TRIP.ideas[k].length){
+        var io=ideasOpen===k, np=0;
+        TRIP.ideas[k].forEach(function(p){ if(pinnedDays(k,p).length) np++; });
+        html+='<div class="ic-ideas-h'+(io?' open':'')+'" onclick="toggleIdeas(\''+k+'\')">Ideas around '+c[k].name+' <span class="ii-n">'+TRIP.ideas[k].length+(np?' \u00b7 '+np+' pinned':'')+'</span><span class="ii-chev">&#8250;</span></div>';
+        if(io){ html+='<div class="ic-ideas-body">'; TRIP.ideas[k].forEach(function(p,idx){ html+=itinIdeaRow(k,p,idx,s); }); html+='</div>'; }
+      }
       html+='</div>';
     }
     html+='</div>';
