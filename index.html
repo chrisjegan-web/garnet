@@ -41,14 +41,15 @@
   .postcard.slim .pc-name{font-size:27px}
   .postcard.slim .pc-sub{margin-top:3px}
   .postcard svg.motif{position:absolute;inset:0;width:100%;height:100%}
-  .pc-temp{position:absolute;top:12px;right:13px;font:600 11px/1 var(--mono);color:rgba(255,255,255,.95);letter-spacing:.3px;background:rgba(0,0,0,.15);padding:6px 9px;border-radius:13px;z-index:2}
+  .pc-temp{position:absolute;top:12px;right:13px;font:700 13px/1 var(--mono);color:rgba(255,255,255,.96);letter-spacing:.3px;background:rgba(0,0,0,.18);padding:7px 11px;border-radius:13px;z-index:3}
   .pc-temp.live::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:#7CE0B0;margin-right:5px;vertical-align:middle}
   .wx-credit{text-align:center;font:500 10.5px/1.4 var(--mono);color:var(--ink-faint);letter-spacing:.4px;margin:16px 0 2px}
   .wx-credit a{color:inherit;text-decoration:underline}
   .pc-text{position:relative;z-index:2}
   .pc-name{font:italic 400 44px/0.95 var(--serif);text-shadow:0 1px 14px rgba(0,0,0,.3);letter-spacing:-.5px}
   .pc-sub{font:500 12.5px/1.3 var(--sans);color:rgba(255,255,255,.96);margin-top:5px;text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 8px rgba(0,0,0,.45)}
-  .pc-date{font:700 17px/1.1 var(--mono);letter-spacing:1px;color:#fff;margin-bottom:10px;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 7px rgba(0,0,0,.75)}
+  .pc-date{font:700 17px/1.15 var(--mono);letter-spacing:1px;color:#fff;margin-bottom:10px;text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 7px rgba(0,0,0,.75)}
+  .postcard.has-temp .pc-date{padding-right:104px}
   .pc-depart{font:500 12px/1.3 var(--sans);color:rgba(255,255,255,.85);margin-top:3px;text-shadow:0 1px 8px rgba(0,0,0,.28)}
   .pc-locked{position:relative;z-index:2;margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
   .pc-lk{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.22);border-radius:9px;padding:5px 9px;font:600 11.5px/1.1 var(--sans);color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.45)}
@@ -117,6 +118,35 @@
   .idea .mk2.art{border-style:solid;border-color:var(--ochre)}
   .idea .mk2.food{border-style:solid;border-color:var(--teal)}
   .idea .mk2.garden{border-style:solid;border-color:#5C8A4E}
+  .idea2{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)}
+  .idea2:last-child{border-bottom:0}
+  .idea2 .mk2{flex:0 0 auto;width:9px;height:9px;border-radius:50%;border:1.5px dashed color-mix(in srgb, var(--accent, var(--ink-faint)) 45%, var(--ink-faint));margin-top:4px;background:transparent}
+  .idea2 .mk2.art{border-style:solid;border-color:var(--ochre)}
+  .idea2 .mk2.food{border-style:solid;border-color:var(--teal)}
+  .idea2 .mk2.garden{border-style:solid;border-color:#5C8A4E}
+  .idea2 .it{flex:1 1 auto;min-width:0}
+  .iname{font:500 14.5px/1.3 var(--sans);color:inherit;text-decoration:none;display:inline-block}
+  .iname .arrow{color:var(--ink-faint);font-size:11px;margin-left:5px}
+  .pini{width:12px;height:12px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round;vertical-align:-2px;margin-right:3px}
+  .pinadd{margin-top:8px;display:inline-flex;align-items:center;gap:1px;font:600 10.5px/1 var(--mono);letter-spacing:.3px;color:var(--hdr);background:none;border:1px dashed color-mix(in srgb,var(--accent,var(--teal)) 40%,var(--line));border-radius:9px;padding:6px 9px;cursor:pointer}
+  .pinned{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px;align-items:center}
+  .pinchip{display:inline-flex;align-items:center;font:600 10.5px/1 var(--mono);letter-spacing:.3px;color:var(--hdr);background:color-mix(in srgb,var(--accent,var(--teal)) 13%,#fff);border:1px solid color-mix(in srgb,var(--accent,var(--teal)) 30%,var(--line));border-radius:9px;padding:5px 8px;cursor:pointer}
+  .pinchip .px{margin-left:6px;font-size:13px;color:var(--ink-faint)}
+  .pinned .pinadd{margin-top:0}
+  .picker{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+  .picker .pk-l{font:600 10px/1 var(--mono);letter-spacing:.5px;text-transform:uppercase;color:var(--ink-faint);margin-right:2px}
+  .pdaybtn{font:600 11px/1 var(--mono);color:#fff;background:var(--hdr);border:0;border-radius:8px;padding:7px 9px;cursor:pointer}
+  .pcancel{font:600 10px/1 var(--mono);color:var(--ink-faint);background:none;border:0;cursor:pointer;text-transform:uppercase;letter-spacing:.4px}
+  .planned{border:1px dashed color-mix(in srgb,var(--accent,var(--teal)) 38%,var(--line))}
+  .pl-h{display:flex;align-items:center;font:600 10px/1 var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--hdr);margin-bottom:4px}
+  .pl-row{display:flex;gap:11px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+  .pl-row:last-child{border-bottom:0}
+  .pl-row .mk2{flex:0 0 auto;width:9px;height:9px;border-radius:50%;border:1.5px dashed var(--ink-faint);margin-top:4px}
+  .pl-row .mk2.art{border-style:solid;border-color:var(--ochre)}
+  .pl-row .mk2.food{border-style:solid;border-color:var(--teal)}
+  .pl-row .mk2.garden{border-style:solid;border-color:#5C8A4E}
+  .pl-row .it{flex:1 1 auto;min-width:0}
+  .pl-x{flex:0 0 auto;font-size:19px;line-height:1;color:var(--ink-faint);background:none;border:0;cursor:pointer;padding:0 2px}
   .idea .it{flex:1 1 auto}
   .idea .name{font:500 14.5px/1.3 var(--sans)}
   .idea .name .arrow{color:var(--ink-faint);font-size:11px;margin-left:5px}
@@ -353,6 +383,28 @@ function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,
 const JKEY='carnet-journal-2026';
 function loadJournal(){ try{ return JSON.parse(localStorage.getItem(JKEY)||'{}'); }catch(e){ return (typeof window!=="undefined"&&window.__jmem)||{}; } }
 function persistJournal(){ try{ localStorage.setItem(JKEY, JSON.stringify(JOURNAL)); }catch(e){ if(typeof window!=="undefined") window.__jmem=JOURNAL; } }
+const PKEY='carnet-plan-2026';
+let PLAN = loadPlan();
+let pinPicker = null;
+function loadPlan(){ try{ return JSON.parse(localStorage.getItem(PKEY)||'{}'); }catch(e){ return (typeof window!=="undefined"&&window.__pmem)||{}; } }
+function persistPlan(){ try{ localStorage.setItem(PKEY, JSON.stringify(PLAN)); }catch(e){ if(typeof window!=="undefined") window.__pmem=PLAN; } }
+function slug(s){ return String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+function ideaId(cityKey,p){ return cityKey+'|'+slug(p.t); }
+function dayByISO(iso){ return TRIP.days.find(function(x){return dayISO(x)===iso;}); }
+function pinnedDays(cityKey,p){ var id=ideaId(cityKey,p), out=[]; for(var iso in PLAN){ if((PLAN[iso]||[]).indexOf(id)>=0){ var d=dayByISO(iso); if(d) out.push(d); } } out.sort(function(a,b){return a.n-b.n;}); return out; }
+function plannedForDay(d){ var ids=PLAN[dayISO(d)]||[]; return ids.map(function(id){ var sp=id.split('|'), city=sp[0], sl=sp[1]; var idea=(TRIP.ideas[city]||[]).find(function(p){return slug(p.t)===sl;}); return {id:id,city:city,idea:idea}; }).filter(function(x){return x.idea;}); }
+function pinIdea(cityKey,idx,dayN){ var p=TRIP.ideas[cityKey][idx], d=TRIP.days[dayN-1], iso=dayISO(d), id=ideaId(cityKey,p); PLAN[iso]=PLAN[iso]||[]; if(PLAN[iso].indexOf(id)<0) PLAN[iso].push(id); persistPlan(); pinPicker=null; afterPinChange(); toast('Pinned to '+d.dow+' '+d.dm.split(' ')[0]); }
+function unpinIdea(iso,id){ if(PLAN[iso]){ PLAN[iso]=PLAN[iso].filter(function(x){return x!==id;}); if(!PLAN[iso].length) delete PLAN[iso]; } persistPlan(); afterPinChange(); }
+function openPicker(token){ pinPicker = (pinPicker===token? null : token); afterPinChange(); }
+function afterPinChange(){ if(curView==='now') renderNow(); else if(curView==='trip') renderItin(); }
+function itinIdeaRow(cityKey,p,idx,stay){
+  var q=p.q||(p.t+", "+TRIP.cities[cityKey].name), id=ideaId(cityKey,p), pins=pinnedDays(cityKey,p), picking=(pinPicker===id);
+  var ctrl='';
+  if(pins.length){ ctrl+='<div class="pinned">'+pins.map(function(d){return '<span class="pinchip" onclick="unpinIdea(\''+dayISO(d)+'\',\''+id+'\')">'+PIN+d.dow+' '+d.dm.split(' ')[0]+'<span class="px">&times;</span></span>';}).join('')+'<button class="pinadd" onclick="openPicker(\''+id+'\')">+ day</button></div>'; }
+  else if(picking){ ctrl+='<div class="picker"><span class="pk-l">Pin to</span>'; for(var n=stay.inDay;n<stay.outDay;n++){ var d=TRIP.days[n-1]; ctrl+='<button class="pdaybtn" onclick="pinIdea(\''+cityKey+'\','+idx+','+n+')">'+d.dow+' '+d.dm.split(' ')[0]+'</button>'; } ctrl+='<button class="pcancel" onclick="openPicker(\''+id+'\')">cancel</button></div>'; }
+  else { ctrl+='<button class="pinadd lone" onclick="openPicker(\''+id+'\')">'+PIN+'Pin to a day</button>'; }
+  return '<div class="idea2"><span class="mk2 '+(p.k||'')+'"></span><div class="it"><a class="iname" href="'+mapUrl(q)+'" target="_blank" rel="noopener">'+p.t+'<span class="arrow">&#8599;</span></a>'+(p.sub?'<span class="sub2">'+p.sub+'</span>':'')+ideaTags(p)+ctrl+'</div></div>';
+}
 const MKEY='carnet-memo-2026';
 let MEMO = loadMemo();
 function loadMemo(){ try{ return JSON.parse(localStorage.getItem(MKEY)||'{}'); }catch(e){ return (typeof window!=="undefined"&&window.__mmem)||{}; } }
@@ -391,6 +443,7 @@ function renderJournal(){
   $("#journal-body").innerHTML=html;
 }
 const CAM='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="2.5"/><circle cx="12" cy="13.5" r="3.4"/><path d="M8.5 7l1.3-2h4.4l1.3 2"/></svg>';
+const PIN='<svg class="pini" viewBox="0 0 24 24"><path d="M12 21s6-5.7 6-10a6 6 0 0 0-12 0c0 4.3 6 10 6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>';
 const KEY='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5L21 21M17 17l2-2M14 14l2-2"/></svg>';
 function photoStrip(){ return '<div class="photostrip"><div class="phototile">'+CAM+'Tag a photo</div><div class="phototile">'+CAM+'Tag a photo</div><div class="phototile">'+CAM+'Tag a photo</div></div>'; }
 
@@ -408,16 +461,14 @@ function motif(kind){
 }
 function fullDate(d){ if(!d) return '';
   var W={Mon:'Monday',Tue:'Tuesday',Wed:'Wednesday',Thu:'Thursday',Fri:'Friday',Sat:'Saturday',Sun:'Sunday'};
-  var M={Jan:'January',Feb:'February',Mar:'March',Apr:'April',May:'May',Jun:'June',Jul:'July',Aug:'August',Sep:'September',Oct:'October',Nov:'November',Dec:'December'};
   var p=(d.dm||'').split(' '), dd=parseInt(p[0],10)||0, mon=p[1]||'';
-  var suf=(dd%10===1&&dd!==11)?'st':(dd%10===2&&dd!==12)?'nd':(dd%10===3&&dd!==13)?'rd':'th';
-  return (W[d.dow]||d.dow||'')+' '+dd+suf+' '+(M[mon]||mon);
+  return (W[d.dow]||d.dow||'')+' '+dd+' '+mon;
 }
 function postcard(o){
   var bg = o.hero
     ? "background-image:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.58) 40%,rgba(0,0,0,.18) 72%,rgba(0,0,0,0)),url('"+o.hero+"');background-size:cover;background-position:center"
     : "background:linear-gradient(135deg,"+o.a+","+o.a2+")";
-  return '<div class="postcard'+(o.hero?' photo':'')+(o.slim?' slim':'')+'" style="'+bg+'">'+(o.hero?'':motif(o.kind))+(o.temp?'<div class="pc-temp">'+o.temp+'°</div>':'')+'<div class="pc-text">'+(o.date?'<div class="pc-date">'+o.date+'</div>':'')+'<div class="pc-name"'+(o.big?' style="font-size:'+o.big+'px"':'')+'>'+o.name+'</div><div class="pc-sub">'+o.sub+'</div></div>'+(o.extra||'')+'</div>';
+  return '<div class="postcard'+(o.hero?' photo':'')+(o.slim?' slim':'')+(o.temp?' has-temp':'')+'" style="'+bg+'">'+(o.hero?'':motif(o.kind))+(o.temp?'<div class="pc-temp">'+o.temp+'°</div>':'')+'<div class="pc-text">'+(o.date?'<div class="pc-date">'+o.date+'</div>':'')+'<div class="pc-name"'+(o.big?' style="font-size:'+o.big+'px"':'')+'>'+o.name+'</div><div class="pc-sub">'+o.sub+'</div></div>'+(o.extra||'')+'</div>';
 }
 function lockIcon(k){
   if(k==='plane') return '<svg viewBox="0 0 24 24" class="lk-ic"><path d="M21 16v-1.7l-7.5-4.5V4.8a1.5 1.5 0 0 0-3 0v5L3 14.3V16l7.5-2.2V18l-2 1.4V21l3.5-1 3.5 1v-1.6L13.5 18v-4.2z"/></svg>';
@@ -563,6 +614,11 @@ function renderNow(){
     detailed.forEach(function(a){ html+='<div class="anchor"><span class="time">'+(a.time||"\u00b7")+'</span><span class="body2">'+a.label+(a.sub?'<small>'+a.sub+'</small>':'')+'</span></div>'+anchorDetail(a); });
     html+='</div>'; }
 
+  var planned=plannedForDay(d);
+  if(planned.length){ html+='<div class="card planned"><div class="pl-h">'+PIN+'Planned</div>';
+    planned.forEach(function(it){ var q=it.idea.q||(it.idea.t+", "+TRIP.cities[it.city].name); html+='<div class="pl-row"><span class="mk2 '+(it.idea.k||'')+'"></span><div class="it"><a class="iname" href="'+mapUrl(q)+'" target="_blank" rel="noopener">'+it.idea.t+'<span class="arrow">&#8599;</span></a>'+(it.idea.sub?'<span class="sub2">'+it.idea.sub+'</span>':'')+'</div><button class="pl-x" onclick="unpinIdea(\''+dayISO(d)+'\',\''+it.id+'\')" aria-label="Remove">&times;</button></div>'; });
+    html+='</div>'; }
+
   if(tLeg){ var ld=TRIP.days[tmw-1];
     html+='<div class="board"><h3><span>Tomorrow\u2019s journey</span><span>'+tLeg.mode+'</span></h3><div class="leg"><div class="ends"><div class="city2">'+TRIP.cities[tLeg.from].name+'</div><div class="arrow">&darr;</div><div class="city2">'+TRIP.cities[tLeg.to].name+'</div></div><div class="when"><div class="time">'+(tLeg.dep!==DASH?tLeg.dep:tLeg.dur)+'</div><div class="date2">'+ld.dow.toUpperCase()+' '+ld.dm.toUpperCase()+'</div></div></div><div class="strip"><span>DEP <b>'+tLeg.dep+'</b></span><span>ARR <b>'+tLeg.arr+'</b></span><span>'+tLeg.dur+'</span></div></div>';
   } else if(tFlt){ var ff=tFlt.legs.find(function(l){return !l.stop;}), lr=tFlt.legs.slice().reverse().find(function(l){return !l.stop;});
@@ -642,7 +698,7 @@ function renderItin(hereKey){
       html+='<div class="ic-body">';
       for(var n=s.inDay;n<s.outDay;n++){ html+=dayRow(TRIP.days[n-1]); }
       html+='<div class="ic-stay" onclick="openCity(\''+k+'\')"><span>'+s.place+'</span><span class="ic-more">Full details &rsaquo;</span></div>';
-      if(TRIP.ideas[k] && TRIP.ideas[k].length){ html+='<div class="ic-ideas-h">Ideas around '+c[k].name+'</div>'; TRIP.ideas[k].forEach(function(p){ html+=ideaRow(p,c[k].name); }); }
+      if(TRIP.ideas[k] && TRIP.ideas[k].length){ html+='<div class="ic-ideas-h">Ideas around '+c[k].name+'</div>'; TRIP.ideas[k].forEach(function(p,idx){ html+=itinIdeaRow(k,p,idx,s); }); }
       html+='</div>';
     }
     html+='</div>';
