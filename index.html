@@ -32,7 +32,10 @@
   .daynav{display:flex;gap:8px}
   .daynav button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line-strong);background:transparent;color:var(--ink);font-size:24px;cursor:pointer;line-height:1}
   .daynav button:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  .here-label{font:600 14px/1.4 var(--mono);letter-spacing:.5px;color:var(--ink-soft);margin-top:6px}
+  .here-label{display:flex;align-items:center;gap:11px;font:600 14px/1.4 var(--mono);letter-spacing:.5px;color:var(--ink-soft);margin-top:6px}
+  .today-flag{font:700 12.5px/1 var(--mono);letter-spacing:2px;text-transform:uppercase;color:#fff;background:var(--ochre);padding:7px 12px;border-radius:8px}
+  .ic-today{font:700 9px/1 var(--mono);letter-spacing:1px;text-transform:uppercase;color:#fff;background:var(--ochre);padding:4px 7px;border-radius:6px;margin-left:9px;vertical-align:2px}
+  .ic-day.is-today{background:color-mix(in srgb,var(--ochre) 7%,transparent)}
 
   .postcard{position:relative;min-height:120px;border-radius:18px;overflow:hidden;margin-top:11px;display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch;padding:15px 16px;color:#fff;box-shadow:0 8px 22px rgba(22,38,63,.18)}
   .postcard.photo{min-height:188px}
@@ -381,6 +384,7 @@ function mapUrl(q){ return "https://www.google.com/maps/search/?api=1&query="+en
 function dirUrl(dest){ return "https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(dest); }
 function setTint(v){ const f=document.querySelector('.frame'); if(v) f.style.setProperty('--accent',v); else f.style.removeProperty('--accent'); }
 function stayForNight(dayN){ const all=TRIP.order.concat(TRIP.tail); for(let i=0;i<all.length;i++){ const s=TRIP.stays[all[i]]; if(dayN>=s.inDay && dayN<s.outDay) return Object.assign({key:all[i]},s); } return null; }
+function todayN(){ if(!TRIP||!TRIP.days) return null; var t=new Date(); t.setHours(0,0,0,0); var tt=t.getTime(); for(var i=0;i<TRIP.days.length;i++){ var d=TRIP.days[i]; if(d.date && new Date(d.date+'T00:00:00').getTime()===tt) return d.n; } return null; }
 function nextLeg(dayN){ return TRIP.legs.find(function(l){return l.day>=dayN;}) || null; }
 function dayISO(d){ const base=Date.UTC(2026,8,21); return new Date(base+(d.n-1)*86400000).toISOString().slice(0,10); }
 function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
@@ -571,7 +575,7 @@ function renderFlights(){
 
 function renderHome(d){
   setTint('#E08A3A');
-  let html='<div class="here-label">Day 35 of 35</div>';
+  let html='<div class="here-label">Day 35 of 35'+(todayN()===d.n?'<span class="today-flag">Today</span>':'')+'</div>';
   html+='<div class="postcard" style="min-height:160px;background:linear-gradient(135deg,#F2AD3E,#E2683C 52%,#1C8A7E)">'+motif('home')+'<div class="pc-text"><div class="pc-date">'+fullDate(d)+'</div><div class="pc-name" style="font-size:46px">You\u2019re home</div><div class="pc-sub">Touched down in Melbourne, 21:25. What a trip.</div></div></div>';
   html+='<div class="card"><h3>The trip in numbers</h3><div class="homestats"><div class="hstat"><div class="hn">35</div><div class="hl">days away</div></div><div class="hstat"><div class="hn">9</div><div class="hl">stops</div></div><div class="hstat"><div class="hn">7</div><div class="hl">train journeys</div></div><div class="hstat"><div class="hn">3</div><div class="hl">countries</div></div></div></div>';
   var jent=TRIP.days.filter(function(x){return JOURNAL[dayISO(x)];}).map(function(x){return '<div class="jentry"><div class="je-date">'+x.dow+' '+x.dm+'</div><div class="je-text">'+escapeHtml(JOURNAL[dayISO(x)])+'</div></div>';});
@@ -600,7 +604,7 @@ function renderNow(){
     var departTxt = tLeg?'Departing tomorrow by train' : tFlt?'Departing tomorrow by plane' : dep?'Departing '+fullDate(dep) : '';
     return 'Night '+pos+' of '+stay.nights+(departTxt?'<div class="pc-depart">'+departTxt+'</div>':''); }
 
-  let html='<div class="here-label">Day '+d.n+' of 35</div>';
+  let html='<div class="here-label">Day '+d.n+' of 35'+(todayN()===d.n?'<span class="today-flag">Today</span>':'')+'</div>';
 
   if(todayLeg){
     var fromC=TRIP.cities[todayLeg.from], fromStay=TRIP.stays[todayLeg.from];
@@ -693,7 +697,8 @@ function dayRow(dd){
   else if(dd.travel){ anch='<div class="ic-anch ic-travel">Travel day</div>'; }
   var pl=plannedForDay(dd), plh='';
   if(pl.length){ var iso=dayISO(dd); plh='<div class="ic-pins">'+pl.map(function(x){ return '<div class="ic-pin">'+PIN+'<span class="ic-pin-t">'+x.idea.t+'</span><button class="ic-pin-x" onclick="event.stopPropagation();unpinIdea(\''+iso+'\',\''+x.id+'\')">&times;</button></div>'; }).join('')+'</div>'; }
-  return '<div class="ic-day"><span class="ic-dn">Day '+dd.n+'</span><span class="ic-dd"><span class="ic-date">'+dd.dow+' '+dd.dm+'</span>'+anch+plh+'</span></div>';
+  var isToday=(todayN()===dd.n), tflag=isToday?'<span class="ic-today">Today</span>':'';
+  return '<div class="ic-day'+(isToday?' is-today':'')+'"><span class="ic-dn">Day '+dd.n+'</span><span class="ic-dd"><span class="ic-date">'+dd.dow+' '+dd.dm+tflag+'</span>'+anch+plh+'</span></div>';
 }
 function renderItin(hereKey){
   if(hereKey===undefined){ const bd=TRIP.days[curDay-1]; hereKey=(bd.base==="transit"||bd.base==="home")?null:bd.base; }
