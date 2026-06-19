@@ -531,6 +531,7 @@
     "nice": [
       {
         "t": "Matisse Museum & Cimiez",
+        "q": "Musée Matisse, Nice",
         "k": "art",
         "sub": "In the olive-grove hills by the Roman ruins",
         "indoor": true
@@ -543,6 +544,7 @@
       },
       {
         "t": "Cours Saleya market & socca",
+        "q": "Cours Saleya, Nice",
         "k": "food",
         "sub": "Flower & produce market, then chickpea socca"
       },
@@ -554,6 +556,7 @@
       },
       {
         "t": "Promenade des Anglais by bike",
+        "q": "Promenade des Anglais, Nice",
         "k": "cycle",
         "sub": "Vélo Bleu hire along the seafront",
         "clear": true
@@ -582,6 +585,24 @@
         "q": "Villefranche-sur-Mer",
         "via": "train",
         "time": "~10 min"
+      },
+      {
+        "t": "Monaco & Menton",
+        "k": "excursion",
+        "sub": "Day trip east — Monte-Carlo, then Menton's gardens & lemon-washed old town",
+        "q": "Monaco",
+        "via": "train",
+        "time": "~25–35 min",
+        "clear": true
+      },
+      {
+        "t": "Antibes & Cannes",
+        "k": "excursion",
+        "sub": "Day trip west — Picasso at Antibes, the Croisette & Le Suquet at Cannes",
+        "q": "Antibes, France",
+        "via": "train",
+        "time": "~25–30 min",
+        "clear": true
       }
     ],
     "avignon": [
@@ -598,6 +619,7 @@
       },
       {
         "t": "Île de la Barthelasse by bike",
+        "q": "Île de la Barthelasse, Avignon",
         "k": "cycle",
         "sub": "Flat river-island loop with palace views",
         "clear": true
@@ -635,11 +657,13 @@
     "lyon": [
       {
         "t": "Vieux Lyon & the traboules",
+        "q": "Vieux Lyon",
         "k": "walk",
         "sub": "Renaissance quarter, hidden covered passageways"
       },
       {
         "t": "Fourvière & Roman theatres",
+        "q": "Fourvière, Lyon",
         "k": "sight",
         "sub": "Funicular up to the basilica & the city view",
         "clear": true
@@ -657,6 +681,7 @@
       },
       {
         "t": "A bouchon dinner",
+        "q": "Bouchon, Vieux Lyon",
         "k": "food",
         "sub": "Hearty Lyonnais cooking — quenelles, praline tart"
       },
@@ -684,6 +709,7 @@
     "dijon": [
       {
         "t": "The owl trail",
+        "q": "Église Notre-Dame de Dijon",
         "k": "walk",
         "sub": "Follow the brass owls through the old town"
       },
@@ -700,6 +726,7 @@
       },
       {
         "t": "Mustard at Edmond Fallot / Maille",
+        "q": "Boutique Maille, Dijon",
         "k": "food",
         "sub": "Taste & buy the real thing"
       },
@@ -723,6 +750,7 @@
     "strasbourg": [
       {
         "t": "Cathedral & astronomical clock",
+        "q": "Cathédrale Notre-Dame, Strasbourg",
         "k": "sight",
         "sub": "Climb the platform; the figures strike at midday",
         "indoor": true
@@ -739,17 +767,20 @@
       },
       {
         "t": "Batorama canal cruise",
+        "q": "Batorama, Strasbourg",
         "k": "sight",
         "sub": "Glide past the old town & the European quarter"
       },
       {
         "t": "MAMCS modern art museum",
+        "q": "Musée d'Art moderne et contemporain, Strasbourg",
         "k": "art",
         "sub": "Modern & contemporary, on the water",
         "indoor": true
       },
       {
         "t": "A winstub supper",
+        "q": "Winstub, Strasbourg",
         "k": "food",
         "sub": "Alsatian tavern — choucroute, tarte flambée"
       },
@@ -776,6 +807,7 @@
       },
       {
         "t": "A champagne house tour",
+        "q": "Champagne houses, Reims",
         "k": "food",
         "sub": "Taittinger or Pommery cellars (Veuve's already booked)",
         "book": true
@@ -788,6 +820,7 @@
       },
       {
         "t": "Art-deco Reims walk",
+        "q": "Place Drouet-d'Erlon, Reims",
         "k": "walk",
         "sub": "The Carnegie library & the rebuilt centre"
       }
@@ -807,6 +840,7 @@
       },
       {
         "t": "Musée Rodin & garden",
+        "q": "Musée Rodin, Paris",
         "k": "art",
         "sub": "Sculpture among the roses — The Thinker outdoors"
       },
@@ -833,6 +867,7 @@
       },
       {
         "t": "Le Marais on foot",
+        "q": "Le Marais, Paris",
         "k": "walk",
         "sub": "Your own quarter — Place des Vosges & the galleries"
       },
@@ -853,6 +888,7 @@
       },
       {
         "t": "Tate Modern & a Thames walk",
+        "q": "Tate Modern, London",
         "k": "art",
         "sub": "Then Borough Market for lunch"
       },
@@ -876,12 +912,14 @@
       },
       {
         "t": "A West End show",
+        "q": "Shaftesbury Avenue, London",
         "k": "excursion",
         "sub": "Les Mis or The Mousetrap",
         "book": true
       },
       {
         "t": "Hampstead Heath & Kenwood",
+        "q": "Hampstead Heath, London",
         "k": "walk",
         "sub": "Wild parkland, a great house, the city view",
         "clear": true
@@ -901,16 +939,19 @@
       },
       {
         "t": "Botanic Gardens & Orchid Garden",
+        "q": "Singapore Botanic Gardens",
         "k": "garden",
         "sub": "UNESCO-listed; the National Orchid Garden within"
       },
       {
         "t": "A hawker-centre feast",
+        "q": "Lau Pa Sat, Singapore",
         "k": "food",
         "sub": "Maxwell or Lau Pa Sat — chicken rice, laksa, satay"
       },
       {
         "t": "Marina Bay & the light show",
+        "q": "Marina Bay Sands, Singapore",
         "k": "sight",
         "sub": "Spectra over the water after dark"
       },
@@ -922,6 +963,7 @@
       },
       {
         "t": "Chinatown & a temple",
+        "q": "Chinatown, Singapore",
         "k": "walk",
         "sub": "The Buddha Tooth Relic Temple, then street food"
       }
