@@ -587,12 +587,30 @@
         "time": "~10 min"
       },
       {
-        "t": "Monaco & Menton",
+        "t": "Monaco — Le Rocher",
         "k": "excursion",
-        "sub": "Day trip east — Monte-Carlo, then Menton's gardens & lemon-washed old town",
-        "q": "Monaco",
+        "sub": "The old town on the rock: palace, cathedral & the Oceanographic Museum",
+        "q": "Monaco-Ville",
         "via": "train",
-        "time": "~25–35 min",
+        "time": "~25 min",
+        "clear": true
+      },
+      {
+        "t": "Monte-Carlo",
+        "k": "excursion",
+        "sub": "Casino Square glamour — Belle Époque grandeur & the harbour",
+        "q": "Casino de Monte-Carlo",
+        "via": "train",
+        "time": "~25 min",
+        "clear": true
+      },
+      {
+        "t": "Menton",
+        "k": "excursion",
+        "sub": "Gardens & a lemon-washed old town at the Italian border",
+        "q": "Menton, France",
+        "via": "train",
+        "time": "~35 min",
         "clear": true
       },
       {
