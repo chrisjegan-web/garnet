@@ -59,6 +59,8 @@
   .pc-lk .lk-ic{width:13px;height:13px;flex:0 0 auto;fill:none;stroke:#fff;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
   .pc-lk .lk-tm{font:700 11px/1 var(--mono);letter-spacing:.3px;margin-left:1px}
   .pc-lk.free{background:rgba(0,0,0,.3);font-weight:500}
+  .pc-lk.plan{background:rgba(0,0,0,.32);border-color:rgba(255,255,255,.36);font-weight:500}
+  .pc-lk.plan .pini{width:12px;height:12px;flex:0 0 auto;margin:0;fill:none;stroke:#fff;stroke-width:1.7;vertical-align:0}
   .pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ochre);margin-right:7px;vertical-align:middle;animation:ping 2s infinite}
   .pulse.w{background:#fff}
   @keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,255,255,.5)}100%{box-shadow:0 0 0 9px rgba(255,255,255,0)}}
@@ -150,7 +152,7 @@
   .idea .it{flex:1 1 auto}
   .idea .name{font:500 14.5px/1.3 var(--sans)}
   .idea .name .arrow{color:var(--ink-faint);font-size:11px;margin-left:5px}
-  .idea2 .sub2,.idea .sub2{display:block;font:400 13px/1.45 var(--sans);color:var(--ink-faint);margin-top:2px}
+  .idea2 .sub2,.idea .sub2,.pl-row .sub2{display:block;font:400 13px/1.45 var(--sans);color:var(--ink-faint);margin-top:2px}
   .tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
   .pill{font:600 11px/1 var(--mono);padding:5px 8px;border-radius:11px;background:rgba(22,38,63,.06);color:var(--ink-soft);letter-spacing:.3px}
   .pill.sun{background:rgba(194,119,43,.13);color:var(--ochre)}
@@ -596,9 +598,11 @@ function renderNow(){
   const todayLeg=TRIP.legs.find(function(l){return l.day===d.n;});
   const DASH='\u2014';
 
-  function chips(items){ var h='<div class="pc-locked">';
+  function ideaShort(t){ return t.split(' & ')[0].split(' \u2014 ')[0].trim(); }
+  function chips(items){ var planned=plannedForDay(d); var h='<div class="pc-locked">';
     if(items.length){ items.forEach(function(i){ h+='<span class="pc-lk">'+lockIcon(i.k)+i.t+(i.tm?'<span class="lk-tm">'+i.tm+'</span>':'')+'</span>'; }); }
-    else { h+='<span class="pc-lk free"><svg viewBox="0 0 24 24" class="lk-ic"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>Nothing booked</span>'; }
+    planned.forEach(function(pl){ h+='<span class="pc-lk plan">'+PIN+ideaShort(pl.idea.t)+'</span>'; });
+    if(!items.length && !planned.length){ h+='<span class="pc-lk free"><svg viewBox="0 0 24 24" class="lk-ic"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>Nothing booked</span>'; }
     return h+'</div>'; }
   function arrSub(){ var pos=d.n-stay.inDay+1, dep=TRIP.days[stay.outDay-1];
     var departTxt = tLeg?'Departing tomorrow by train' : tFlt?'Departing tomorrow by plane' : dep?'Departing '+fullDate(dep) : '';
@@ -611,7 +615,7 @@ function renderNow(){
     html+=postcard({name:fromC.name,sub:'Checking out'+(fromStay&&fromStay.co&&fromStay.co!==DASH?' \u00b7 '+fromStay.co:''),hero:fromC.hero,a:fromC.accent,a2:fromC.accent2,kind:fromC.kind,slim:true});
     html+=legBand(todayLeg);
     var anchChips=(d.anchors||[]).map(function(a){return {k:'star',t:a.label.split(' \u00b7 ')[0],tm:a.time||''};});
-    html+=postcard({name:base.name,date:fullDate(d),temp:base.temp,sub:'<span class="pulse w"></span>'+arrSub(),hero:base.hero,a:base.accent,a2:base.accent2,kind:base.kind,extra:anchChips.length?chips(anchChips):''});
+    html+=postcard({name:base.name,date:fullDate(d),temp:base.temp,sub:'<span class="pulse w"></span>'+arrSub(),hero:base.hero,a:base.accent,a2:base.accent2,kind:base.kind,extra:(anchChips.length||plannedForDay(d).length)?chips(anchChips):''});
   } else if(transit){
     html+=postcard({a:"#2A3A52",a2:"#455A78",kind:"plane",temp:null,name:"In transit",date:fullDate(d),sub:'<span class="pulse w"></span>Travel day',extra:chips(lockedToday(d))});
   } else {

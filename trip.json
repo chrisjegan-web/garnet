@@ -614,12 +614,21 @@
         "clear": true
       },
       {
-        "t": "Antibes & Cannes",
+        "t": "Antibes",
         "k": "excursion",
-        "sub": "Day trip west — Picasso at Antibes, the Croisette & Le Suquet at Cannes",
+        "sub": "Picasso Museum, the old town & Cap d'Antibes",
         "q": "Antibes, France",
         "via": "train",
-        "time": "~25–30 min",
+        "time": "~25 min",
+        "clear": true
+      },
+      {
+        "t": "Cannes",
+        "k": "excursion",
+        "sub": "La Croisette & Le Suquet old town",
+        "q": "Cannes, France",
+        "via": "train",
+        "time": "~30 min",
         "clear": true
       }
     ],
