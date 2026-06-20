@@ -772,12 +772,18 @@ let shareText='';
 function tripShareText(){
   const m=TRIP.meta||{}; const d0=TRIP.days[0], dn=TRIP.days[TRIP.days.length-1];
   let L=[]; L.push(m.title||"Our trip"); if(m.travellers) L.push(m.travellers); L.push(d0.dm+" – "+dn.dm+(m.year?" "+m.year:"")); L.push("");
-  TRIP.order.concat(TRIP.tail).forEach(function(k){ const s=TRIP.stays[k], di=TRIP.days[s.inDay-1], doo=TRIP.days[s.outDay-1]; L.push(TRIP.cities[k].name+" · "+di.dm+"–"+doo.dm+" ("+s.nights+" nights)"); L.push("  "+s.place); });
-  return L.join("\n");
+  TRIP.order.concat(TRIP.tail).forEach(function(k){ const s=TRIP.stays[k], di=TRIP.days[s.inDay-1], doo=TRIP.days[s.outDay-1];
+    L.push(TRIP.cities[k].name+" · "+di.dm+"–"+doo.dm+" ("+s.nights+" nights)");
+    L.push("  "+s.place);
+    if(s.address && s.address!=="\u2014"){ L.push("  "+s.address); L.push("  "+mapUrl(s.address)); }
+    L.push("");
+  });
+  return L.join("\n").trim();
 }
 function stopShareText(key){
   const s=TRIP.stays[key], c=TRIP.cities[key], di=TRIP.days[s.inDay-1], doo=TRIP.days[s.outDay-1];
   let L=[c.name+" · "+di.dm+"–"+doo.dm+" ("+s.nights+" nights)","Staying: "+s.place];
+  if(s.address && s.address!=="\u2014"){ L.push(s.address); L.push(mapUrl(s.address)); }
   const ids=(TRIP.ideas[key]||[]).map(function(p){return p.t;}); if(ids.length) L.push("Ideas: "+ids.join(", "));
   return L.join("\n");
 }
