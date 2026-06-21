@@ -890,6 +890,7 @@ async function boot(){
   if(local){ TRIP=local; start(); return; }
   showLoader();
 }
+if('serviceWorker' in navigator){ try{ navigator.serviceWorker.register('sw.js'); }catch(e){} }
 boot();
 </script>
 </body>
