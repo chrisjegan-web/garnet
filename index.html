@@ -166,9 +166,18 @@
   .pill.sun{background:rgba(194,119,43,.13);color:var(--ochre)}
   .pill.book{background:color-mix(in srgb, var(--accent, var(--teal)) 16%, #fff);color:var(--hdr)}
 
-  .photostrip{display:flex;gap:8px;margin-top:4px}
-  .phototile{flex:1;aspect-ratio:1;border:1.5px dashed color-mix(in srgb, var(--accent, var(--ink-faint)) 40%, var(--line-strong));border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--ink-faint);font:600 9px/1.2 var(--mono);text-align:center;letter-spacing:.4px;background:color-mix(in srgb, var(--accent, transparent) 5%, transparent)}
-  .phototile svg{opacity:.55}
+  .photos{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .pthumb{position:relative;width:72px;height:72px;border-radius:11px;overflow:hidden;background:color-mix(in srgb,var(--accent,var(--teal)) 10%,#fff);flex:0 0 auto}
+  .pthumb img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in}
+  .pthumb-x{position:absolute;top:3px;right:3px;width:20px;height:20px;border:0;border-radius:50%;background:rgba(22,38,63,.6);color:#fff;font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+  .paddbtn{width:72px;height:72px;border-radius:11px;border:0;background:color-mix(in srgb,var(--accent,var(--teal)) 12%,#fff);color:var(--hdr);font:600 10px/1.25 var(--mono);letter-spacing:.3px;cursor:pointer;flex:0 0 auto;text-align:center;padding:6px}
+  .je-photos{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+  .je-photos .pthumb{width:56px;height:56px}
+  .relive{display:flex;gap:9px;margin-top:6px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .relive .pthumb{width:108px;height:108px}
+  .relive-empty{font:400 13px/1.5 var(--sans);color:var(--ink-faint);margin-top:4px}
+  .lightbox{position:fixed;inset:0;z-index:9999;background:rgba(8,12,20,.92);display:flex;align-items:center;justify-content:center;padding:18px;cursor:zoom-out}
+  .lightbox img{max-width:100%;max-height:100%;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
 
   .acc-link{display:flex;flex-direction:column;margin-top:11px;padding:13px 15px;background:color-mix(in srgb,var(--forest) 8%,#fff);border:1px solid color-mix(in srgb,var(--forest) 26%,var(--line));border-left:4px solid var(--forest);border-radius:12px;cursor:pointer}
   .acc-row{display:flex;align-items:center;gap:8px;font:500 13px/1.35 var(--sans);color:var(--ink-soft)}
@@ -442,33 +451,56 @@ function journalCard(d){
   const k=dayISO(d), val=(JOURNAL[k]||'');
   return '<div class="card jcard"><h3>Tonight\u2019s journal</h3><div class="h3sub">'+d.dow+' '+d.dm+' — a line or a page, whatever the day deserves</div>'+
     '<textarea id="jtext" class="jtext" placeholder="How was today? What did you see, eat, love?">'+escapeHtml(val)+'</textarea>'+
-    '<div class="jrow"><span class="jsaved" id="jsaved">'+(val?'Saved \u2713':'')+'</span><button class="jsave" onclick="saveEntry()">Save entry</button></div></div>';
+    '<div class="jrow"><span class="jsaved" id="jsaved">'+(val?'Saved \u2713':'')+'</span><button class="jsave" onclick="saveEntry()">Save entry</button></div>'+
+    '<div class="photos" id="dayphotos"></div></div>';
 }
 function saveEntry(){ const d=TRIP.days[curDay-1], k=dayISO(d), el=$("#jtext"); const t=el?el.value:''; if(t&&t.trim()){ JOURNAL[k]=t; } else { delete JOURNAL[k]; } persistJournal(); const s=$("#jsaved"); if(s) s.textContent='Saved \u2713'; toast('Journal saved'); }
 function exportJournal(){ try{ const b=new Blob([JSON.stringify(JOURNAL,null,2)],{type:'application/json'}); const u=URL.createObjectURL(b); const a=document.createElement('a'); a.href=u; a.download='carnet-journal.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(u); }catch(e){ toast('Export not available here'); } }
 function gotoDay(n){ curDay=Math.min(35,Math.max(1,n)); show('now'); }
 function renderJournal(){
   setTint('#7A5C84');
-  var written=TRIP.days.filter(function(x){return JOURNAL[dayISO(x)];});
+  allPhotos().then(paintJournal);
+}
+function paintJournal(ph){
+  var photoDays={}; (ph||[]).forEach(function(p){ photoDays[p.key]=true; });
+  var days=TRIP.days.filter(function(x){ var k=dayISO(x); return JOURNAL[k] || photoDays[k]; });
   let html='<div class="now-head"><span class="eyebrow" style="text-transform:none;letter-spacing:.3px">Carnet de voyage</span></div>';
-  html+='<div class="jhead"><div class="jhead-t">Journal</div><div class="jhead-c">'+written.length+' of '+TRIP.days.length+' days written</div></div>';
-  if(!written.length){
-    html+='<div class="card"><div class="bed-meta">Nothing written yet. Each night, jot a line on the Today page \u2014 your trip will gather here, in your own words.</div></div>';
+  html+='<div class="jhead"><div class="jhead-t">Journal</div><div class="jhead-c">'+days.length+' of '+TRIP.days.length+' days captured</div></div>';
+  if(!days.length){
+    html+='<div class="card"><div class="bed-meta">Nothing yet. Each night, jot a line or add a photo or two on the Today page \u2014 your trip will gather here.</div></div>';
   } else {
     html+='<div class="card jlist">';
-    written.forEach(function(x){ var c=(x.base&&TRIP.cities[x.base])?TRIP.cities[x.base].name:'';
-      html+='<div class="jentry tap" onclick="gotoDay('+x.n+')"><div class="je-date">'+fullDate(x)+(c?' \u00b7 '+c:'')+'</div><div class="je-text">'+escapeHtml(JOURNAL[dayISO(x)])+'</div><div class="je-edit">Open this day &rsaquo;</div></div>';
+    days.forEach(function(x){ var k=dayISO(x); var c=(x.base&&TRIP.cities[x.base])?TRIP.cities[x.base].name:'';
+      html+='<div class="jentry tap" onclick="gotoDay('+x.n+')"><div class="je-date">'+fullDate(x)+(c?' \u00b7 '+c:'')+'</div>'+(JOURNAL[k]?'<div class="je-text">'+escapeHtml(JOURNAL[k])+'</div>':'')+'<div class="je-photos" id="jep_'+x.n+'" onclick="event.stopPropagation()"></div><div class="je-edit">Open this day &rsaquo;</div></div>';
     });
     html+='</div>';
     html+='<button class="jsave" style="width:100%;margin-top:14px" onclick="exportJournal()">Export journal</button>';
   }
   $("#journal-body").innerHTML=html;
+  days.forEach(function(x){ fillEntryPhotos(x.n, dayISO(x)); });
 }
 const CAM='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="2.5"/><circle cx="12" cy="13.5" r="3.4"/><path d="M8.5 7l1.3-2h4.4l1.3 2"/></svg>';
 const PIN='<svg class="pini" viewBox="0 0 24 24"><path d="M12 21s6-5.7 6-10a6 6 0 0 0-12 0c0 4.3 6 10 6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>';
 const KEY='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5L21 21M17 17l2-2M14 14l2-2"/></svg>';
 const BED='<svg class="bedi" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>';
-function photoStrip(){ return '<div class="photostrip"><div class="phototile">'+CAM+'Tag a photo</div><div class="phototile">'+CAM+'Tag a photo</div><div class="phototile">'+CAM+'Tag a photo</div></div>'; }
+/* ---- Photos ("Relive it"): per-day, on-device, downscaled into IndexedDB ---- */
+const PDB='carnet-photos-2026', MAXPH=3, MAXEDGE=1280, JPEGQ=0.72; let _pdb=null, _lbmap={};
+function photoDB(){ return new Promise(function(res){ if(typeof indexedDB==='undefined'||!indexedDB){res(null);return;} if(_pdb){res(_pdb);return;} try{ var r=indexedDB.open(PDB,1); r.onupgradeneeded=function(e){ var db=e.target.result; if(!db.objectStoreNames.contains('photos')) db.createObjectStore('photos',{keyPath:'key'}); }; r.onsuccess=function(e){ _pdb=e.target.result; res(_pdb); }; r.onerror=function(){ res(null); }; }catch(e){ res(null); } }); }
+function getDayPhotos(key){ return photoDB().then(function(db){ if(!db) return []; return new Promise(function(res){ try{ var rq=db.transaction('photos','readonly').objectStore('photos').get(key); rq.onsuccess=function(){ res(rq.result?(rq.result.items||[]):[]); }; rq.onerror=function(){ res([]); }; }catch(e){ res([]); } }); }).catch(function(){ return []; }); }
+function putDayPhotos(key,items){ return photoDB().then(function(db){ if(!db) return false; return new Promise(function(res){ try{ var rq=db.transaction('photos','readwrite').objectStore('photos').put({key:key,items:items}); rq.onsuccess=function(){ res(true); }; rq.onerror=function(){ res(false); }; }catch(e){ res(false); } }); }).catch(function(){ return false; }); }
+function allPhotos(){ return photoDB().then(function(db){ if(!db) return []; return new Promise(function(res){ var out=[]; try{ var cur=db.transaction('photos','readonly').objectStore('photos').openCursor(); cur.onsuccess=function(e){ var c=e.target.result; if(c){ (c.value.items||[]).forEach(function(it){ out.push({key:c.value.key,id:it.id,src:it.src}); }); c.continue(); } else { out.sort(function(a,b){ return a.key<b.key?-1:(a.key>b.key?1:0); }); res(out); } }; cur.onerror=function(){ res(out); }; }catch(e){ res(out); } }); }).catch(function(){ return []; }); }
+function pickPhotos(key){ try{ var inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.multiple=true; inp.onchange=function(){ importPhotos(key, inp.files); }; inp.click(); }catch(e){} }
+function importPhotos(key, fileList){ var files=Array.prototype.slice.call(fileList||[]); if(!files.length) return; getDayPhotos(key).then(function(items){ var room=MAXPH-items.length; if(room<=0){ toast('Up to '+MAXPH+' photos a day'); return; } var todo=files.slice(0,room), chain=Promise.resolve(); todo.forEach(function(f){ chain=chain.then(function(){ return downscale(f).then(function(src){ if(src) items.push({id:'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),src:src}); }); }); }); chain.then(function(){ return putDayPhotos(key,items); }).then(function(){ refreshPhotos(key); toast(files.length>room?('Added '+room+' \u00b7 max '+MAXPH+' a day'):'Photo added'); }).catch(function(){ toast('Could not add photo'); }); }); }
+function downscale(file){ return new Promise(function(res){ try{ var fr=new FileReader(); fr.onload=function(){ var img=new Image(); img.onload=function(){ try{ var w=img.width,h=img.height,s=Math.min(1,MAXEDGE/Math.max(w,h)); w=Math.max(1,Math.round(w*s)); h=Math.max(1,Math.round(h*s)); var cv=document.createElement('canvas'); cv.width=w; cv.height=h; cv.getContext('2d').drawImage(img,0,0,w,h); res(cv.toDataURL('image/jpeg',JPEGQ)); }catch(e){ res(null); } }; img.onerror=function(){ res(null); }; img.src=fr.result; }; fr.onerror=function(){ res(null); }; fr.readAsDataURL(file); }catch(e){ res(null); } }); }
+function regLb(items){ items.forEach(function(it){ _lbmap[it.id]=it.src; }); }
+function thumbsHtml(items, key, editable){ var h=''; items.forEach(function(it){ h+='<div class="pthumb"><img src="'+it.src+'" alt="" loading="lazy" onclick="lightbox(\''+it.id+'\')"/>'+(editable?'<button class="pthumb-x" onclick="removePhoto(\''+key+'\',\''+it.id+'\')" aria-label="Remove photo">&times;</button>':'')+'</div>'; }); if(editable && items.length<MAXPH){ h+='<button class="paddbtn" onclick="pickPhotos(\''+key+'\')">Add photo</button>'; } return h; }
+function fillDayPhotos(key){ var el=$("#dayphotos"); if(!el) return; getDayPhotos(key).then(function(items){ regLb(items); el.innerHTML=thumbsHtml(items,key,true); }).catch(function(){}); }
+function fillEntryPhotos(n,key){ var el=$("#jep_"+n); if(!el) return; getDayPhotos(key).then(function(items){ regLb(items); el.innerHTML=thumbsHtml(items,key,false); }).catch(function(){}); }
+function removePhoto(key,id){ getDayPhotos(key).then(function(items){ return putDayPhotos(key, items.filter(function(x){return x.id!==id;})); }).then(function(){ refreshPhotos(key); }).catch(function(){}); }
+function refreshPhotos(key){ fillDayPhotos(key); }
+function lightbox(id){ var src=_lbmap[id]; if(!src) return; try{ var o=document.createElement('div'); o.className='lightbox'; var im=document.createElement('img'); im.src=src; o.appendChild(im); o.onclick=function(){ o.remove(); }; document.body.appendChild(o); }catch(e){} }
+function fillRelive(){ var el=$("#relivestrip"); if(!el) return; allPhotos().then(function(ph){ regLb(ph); if(!ph.length){ el.className='relive-empty'; el.innerHTML='No photos yet. Add a few favourites each night on the Today page and they\u2019ll gather here.'; return; } el.className='relive'; var h=''; ph.forEach(function(p){ h+='<div class="pthumb"><img src="'+p.src+'" alt="" loading="lazy" onclick="lightbox(\''+p.id+'\')"/></div>'; }); el.innerHTML=h; }).catch(function(){}); }
+function fillCityPhotos(key){ var el=$("#cityphotos"); if(!el) return; var s=TRIP.stays[key]; if(!s){ return; } var keys=[]; for(var n=s.inDay;n<s.outDay;n++){ keys.push(dayISO({n:n})); } Promise.all(keys.map(function(k){return getDayPhotos(k);})).then(function(arrs){ var items=[]; arrs.forEach(function(a){ a.forEach(function(it){ items.push(it); }); }); regLb(items); if(!items.length){ el.className='relive-empty'; el.innerHTML='No photos yet \u2014 add favourites on the Today page during your stay.'; return; } el.className='photos'; el.innerHTML=thumbsHtml(items,null,false); }).catch(function(){}); }
 
 function motif(kind){
   const w='rgba(255,255,255,'; let s='';
@@ -591,9 +623,10 @@ function renderHome(d){
   html+='<div class="card"><h3>The trip in numbers</h3><div class="homestats"><div class="hstat"><div class="hn">35</div><div class="hl">days away</div></div><div class="hstat"><div class="hn">9</div><div class="hl">stops</div></div><div class="hstat"><div class="hn">7</div><div class="hl">train journeys</div></div><div class="hstat"><div class="hn">3</div><div class="hl">countries</div></div></div></div>';
   var jent=TRIP.days.filter(function(x){return JOURNAL[dayISO(x)];}).map(function(x){return '<div class="jentry"><div class="je-date">'+x.dow+' '+x.dm+'</div><div class="je-text">'+escapeHtml(JOURNAL[dayISO(x)])+'</div></div>';});
   html+='<div class="card"><h3>Julie\u2019s journal</h3>'+(jent.length?jent.join(''):'<div class="bed-meta">The entries you write each night gather here — your trip, in your own words.</div>')+(jent.length?'<button class="jsave" style="margin-top:13px" onclick="exportJournal()">Export journal</button>':'')+'</div>';
-  html+='<div class="card"><h3>Relive it</h3><div class="h3sub">Nice to Singapore — tag the photos you took along the way</div>'+photoStrip()+'</div>';
+  html+='<div class="card"><h3>Relive it</h3><div class="h3sub">Nice to Singapore — the photos you saved along the way</div><div class="relive" id="relivestrip"></div></div>';
   html+='<div class="card"><h3>Back to it</h3><div class="bed-meta">Unpack, water the garden, log the spend in the ledger. Then start dreaming up the next one.</div></div>';
   $("#now-body").innerHTML=html;
+  fillRelive();
 }
 
 function renderNow(){
@@ -653,6 +686,7 @@ function renderNow(){
   html+=journalCard(d);
   html+='<div class="wx-credit">Weather by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></div>';
   $("#now-body").innerHTML=html;
+  fillDayPhotos(dayISO(d));
   liveWeather(d);
 }
 function legBand(leg){
@@ -773,8 +807,9 @@ function renderCity(key){
   if(key==="singapore"){ html+='<div class="leg-line"><span class="t">20:35</span><span class="m">Fly</span><span>From London · 21 Oct · 13h</span></div><div class="leg-line"><span class="t">11:00</span><span class="m">Fly</span><span>Home to Melbourne · 25 Oct · 7h</span></div>'; }
   else { if(legIn){const ld=TRIP.days[legIn.day-1]; html+='<div class="leg-line"><span class="t">'+(legIn.dep!=="—"?legIn.dep:"·")+'</span><span class="m">'+legIn.mode+'</span><span>From '+TRIP.cities[legIn.from].name+' · '+ld.dm+' · '+legIn.dur+'</span></div>';} if(legOut){const ld=TRIP.days[legOut.day-1]; html+='<div class="leg-line"><span class="t">'+(legOut.dep!=="—"?legOut.dep:"·")+'</span><span class="m">'+legOut.mode+'</span><span>To '+TRIP.cities[legOut.to].name+' · '+ld.dm+' · '+legOut.dur+'</span></div>';} if(!legIn) html+='<div class="leg-line"><span class="t">&#9992;</span><span class="m">Fly</span><span>From Melbourne via Singapore & Frankfurt</span></div>'; }
 
-  html+='<div class="sec-h">Photos</div><div class="sec-sub">A place for the memories — tag your own shots here</div>'+photoStrip();
+  html+='<div class="sec-h">Photos</div><div class="sec-sub">Your favourites from this stay \u2014 added on the Today page</div><div class="photos" id="cityphotos"></div>';
   $("#city-body").innerHTML=html;
+  fillCityPhotos(key);
 }
 
 /* ---- share ---- */
