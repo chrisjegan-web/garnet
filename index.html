@@ -406,7 +406,35 @@ function setTint(v){ const f=document.querySelector('.frame'); if(v) f.style.set
 function stayForNight(dayN){ const all=TRIP.order.concat(TRIP.tail); for(let i=0;i<all.length;i++){ const s=TRIP.stays[all[i]]; if(dayN>=s.inDay && dayN<s.outDay) return Object.assign({key:all[i]},s); } return null; }
 function todayN(){ if(!TRIP||!TRIP.days) return null; var t=new Date(); t.setHours(0,0,0,0); var tt=t.getTime(); for(var i=0;i<TRIP.days.length;i++){ var d=TRIP.days[i]; if(d.date && new Date(d.date+'T00:00:00').getTime()===tt) return d.n; } return null; }
 function nextLeg(dayN){ return TRIP.legs.find(function(l){return l.day>=dayN;}) || null; }
-function dayISO(d){ const base=Date.UTC(2026,8,21); return new Date(base+(d.n-1)*86400000).toISOString().slice(0,10); }
+function dayISO(d){ if(d&&d.date) return d.date; const base=Date.UTC(2026,8,21); return new Date(base+((d?d.n:1)-1)*86400000).toISOString().slice(0,10); }
+/* One-time: journal/photos/pins used to be keyed by day POSITION off a fixed base date.
+   Re-key them onto each day's real calendar date so nothing drifts if the plan's day-count
+   changes and so different trips can't collide. Runs once; a no-op when there's nothing to move. */
+function migrateDayKeys(){
+  try{
+    if(!TRIP||!TRIP.days) return;
+    if(localStorage.getItem('carnet-daykey-v2')) return;
+    var synth=function(n){ return new Date(Date.UTC(2026,8,21)+(n-1)*86400000).toISOString().slice(0,10); };
+    var map={}; TRIP.days.forEach(function(d){ if(d&&d.date){ var o=synth(d.n); if(o!==d.date) map[o]=d.date; } });
+    var oldKeys=Object.keys(map);
+    if(oldKeys.length){
+      ['carnet-journal-2026','carnet-plan-2026'].forEach(function(store){
+        try{ var raw=localStorage.getItem(store); if(!raw) return; var obj=JSON.parse(raw), changed=false;
+          oldKeys.forEach(function(o){ var nw=map[o]; if(obj[o]!==undefined && obj[nw]===undefined){ obj[nw]=obj[o]; delete obj[o]; changed=true; } });
+          if(changed) localStorage.setItem(store, JSON.stringify(obj));
+        }catch(e){}
+      });
+      try{ photoDB().then(function(db){ if(!db) return;
+        oldKeys.forEach(function(o){ var nw=map[o];
+          try{ var st=db.transaction('photos','readwrite').objectStore('photos'); var g=st.get(o);
+            g.onsuccess=function(){ var rec=g.result; if(rec&&rec.items&&rec.items.length){ var chk=st.get(nw); chk.onsuccess=function(){ if(!chk.result){ st.put({key:nw,items:rec.items}); st.delete(o); } }; } };
+          }catch(e){}
+        });
+      }); }catch(e){}
+    }
+    localStorage.setItem('carnet-daykey-v2','1');
+  }catch(e){}
+}
 function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 const JKEY='carnet-journal-2026';
 function loadJournal(){ try{ return JSON.parse(localStorage.getItem(JKEY)||'{}'); }catch(e){ return (typeof window!=="undefined"&&window.__jmem)||{}; } }
@@ -500,7 +528,7 @@ function removePhoto(key,id){ getDayPhotos(key).then(function(items){ return put
 function refreshPhotos(key){ fillDayPhotos(key); }
 function lightbox(id){ var src=_lbmap[id]; if(!src) return; try{ var o=document.createElement('div'); o.className='lightbox'; var im=document.createElement('img'); im.src=src; o.appendChild(im); o.onclick=function(){ o.remove(); }; document.body.appendChild(o); }catch(e){} }
 function fillRelive(){ var el=$("#relivestrip"); if(!el) return; allPhotos().then(function(ph){ regLb(ph); if(!ph.length){ el.className='relive-empty'; el.innerHTML='No photos yet. Add a few favourites each night on the Today page and they\u2019ll gather here.'; return; } el.className='relive'; var h=''; ph.forEach(function(p){ h+='<div class="pthumb"><img src="'+p.src+'" alt="" loading="lazy" onclick="lightbox(\''+p.id+'\')"/></div>'; }); el.innerHTML=h; }).catch(function(){}); }
-function fillCityPhotos(key){ var el=$("#cityphotos"); if(!el) return; var s=TRIP.stays[key]; if(!s){ return; } var keys=[]; for(var n=s.inDay;n<s.outDay;n++){ keys.push(dayISO({n:n})); } Promise.all(keys.map(function(k){return getDayPhotos(k);})).then(function(arrs){ var items=[]; arrs.forEach(function(a){ a.forEach(function(it){ items.push(it); }); }); regLb(items); if(!items.length){ el.className='relive-empty'; el.innerHTML='No photos yet \u2014 add favourites on the Today page during your stay.'; return; } el.className='photos'; el.innerHTML=thumbsHtml(items,null,false); }).catch(function(){}); }
+function fillCityPhotos(key){ var el=$("#cityphotos"); if(!el) return; var s=TRIP.stays[key]; if(!s){ return; } var keys=[]; for(var n=s.inDay;n<s.outDay;n++){ keys.push(dayISO(TRIP.days[n-1]||{n:n})); } Promise.all(keys.map(function(k){return getDayPhotos(k);})).then(function(arrs){ var items=[]; arrs.forEach(function(a){ a.forEach(function(it){ items.push(it); }); }); regLb(items); if(!items.length){ el.className='relive-empty'; el.innerHTML='No photos yet \u2014 add favourites on the Today page during your stay.'; return; } el.className='photos'; el.innerHTML=thumbsHtml(items,null,false); }).catch(function(){}); }
 
 function motif(kind){
   const w='rgba(255,255,255,'; let s='';
@@ -868,7 +896,7 @@ var DKEY='carnet-trip-2026';
 function saveTripLocal(){ try{ localStorage.setItem(DKEY, JSON.stringify(TRIP)); }catch(e){} }
 function loadTripLocal(){ try{ var s=localStorage.getItem(DKEY); return s?JSON.parse(s):null; }catch(e){ return null; } }
 function repick(){ var el=document.getElementById('filepick'); if(el) el.click(); }
-function start(){ curDay=pickToday(); show('now'); }
+function start(){ migrateDayKeys(); JOURNAL=loadJournal(); PLAN=loadPlan(); curDay=pickToday(); show('now'); }
 function loadFromFile(input){
   var f=input.files&&input.files[0]; if(!f) return;
   var rd=new FileReader();
