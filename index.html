@@ -435,6 +435,23 @@ function migrateDayKeys(){
     localStorage.setItem('carnet-daykey-v2','1');
   }catch(e){}
 }
+/* trip.json contract check. CdP stamps schema "voyage/N"; this app understands up to CDV_SCHEMA.
+   A missing schema is treated as legacy (accepted). A newer schema, or a structurally broken
+   file, is refused with a plain-language reason rather than half-rendering. See CONTRACT.md. */
+var CDV_SCHEMA = 1;
+function tripSchemaVersion(t){ var s=t&&t.schema; if(s==null) return 0; var m=/^voyage\/(\d+)$/.exec(String(s)); if(m) return parseInt(m[1],10); return isNaN(+s)?0:+s; }
+function validateTrip(t){
+  if(!t||typeof t!=='object') return {ok:false, reason:"That file isn't a valid trip.json."};
+  var v=tripSchemaVersion(t);
+  if(v>CDV_SCHEMA) return {ok:false, reason:"This trip was published in a newer format (v"+v+"). Update Carnet de Voyage, then load it again."};
+  if(!Array.isArray(t.days)||!t.days.length) return {ok:false, reason:"This trip.json has no days — re-publish it from the planner."};
+  if(!t.days.every(function(d){ return d&&d.date; })) return {ok:false, reason:"Some days are missing their date — re-publish from the planner."};
+  if(!t.cities||typeof t.cities!=='object') return {ok:false, reason:"This trip.json has no cities — re-publish from the planner."};
+  if(!Array.isArray(t.order)) return {ok:false, reason:"This trip.json is missing its city order — re-publish from the planner."};
+  if(!Array.isArray(t.tail)) return {ok:false, reason:"This trip.json is missing its tail cities — re-publish from the planner."};
+  if(!t.stays||typeof t.stays!=='object') return {ok:false, reason:"This trip.json has no stays — re-publish from the planner."};
+  return {ok:true};
+}
 function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 const JKEY='carnet-journal-2026';
 function loadJournal(){ try{ return JSON.parse(localStorage.getItem(JKEY)||'{}'); }catch(e){ return (typeof window!=="undefined"&&window.__jmem)||{}; } }
@@ -478,7 +495,7 @@ function memoBox(key){
 function journalCard(d){
   const k=dayISO(d), val=(JOURNAL[k]||'');
   return '<div class="card jcard"><h3>Tonight\u2019s journal</h3><div class="h3sub">'+d.dow+' '+d.dm+' — a line or a page, whatever the day deserves</div>'+
-    '<textarea id="jtext" class="jtext" placeholder="How was today? What did you see, eat, love?">'+escapeHtml(val)+'</textarea>'+
+    '<textarea id="jtext" class="jtext" placeholder="'+escapeHtml(journalPrompt(d.n))+'">'+escapeHtml(val)+'</textarea>'+
     '<div class="jrow"><span class="jsaved" id="jsaved">'+(val?'Saved \u2713':'')+'</span><button class="jsave" onclick="saveEntry()">Save entry</button></div>'+
     '<div class="photos" id="dayphotos"></div></div>';
 }
@@ -657,7 +674,67 @@ function renderHome(d){
   fillRelive();
 }
 
+/* ---- State-aware Today: classify the day, then let the prompt / countdown / milestones ride on it.
+   Golden rule #3 (never fabricate) is enforced in journalPrompt: every branch uses only real data,
+   and a booked highlight is pulled from the actual anchor label, never invented. ---- */
+function numWord(n){ var w=['zero','one','two','three','four','five','six','seven','eight','nine']; return (n>=0&&n<w.length)?w[n]:String(n); }
+function distinctCitiesThrough(n){ var seen={}, c=0; for(var i=0;i<n && i<TRIP.days.length;i++){ var b=TRIP.days[i].base; if(b&&b!=='transit'&&b!=='home'&&!seen[b]){ seen[b]=1; c++; } } return c; }
+function dayContext(n){
+  var day=TRIP.days[n-1]; if(!day) return null;
+  var stay=stayForNight(n);
+  var base=(day.base&&day.base!=='transit'&&day.base!=='home')?TRIP.cities[day.base]:null;
+  var anchors=day.anchors||[];
+  var highlight=anchors.length?String(anchors[0].label||'').split(' \u00b7 ')[0].trim():'';
+  return {
+    n:n, day:day, stay:stay, cityName: base?base.name:(stay?stay.place:''),
+    isTransit: day.base==='transit', isHome: day.base==='home',
+    isTravel: !!day.travel || day.base==='transit',
+    isArrival: !!(stay && n===stay.inDay),
+    isLastNight: !!(stay && n===stay.outDay-1),
+    isFirst: n===1, isLast: n===TRIP.days.length,
+    isMidpoint: TRIP.days.length>3 && n===Math.round(TRIP.days.length/2),
+    nightPos: stay?(n-stay.inDay+1):0, nights: stay?stay.nights:0,
+    citiesThrough: distinctCitiesThrough(n), highlight: highlight
+  };
+}
+function journalPrompt(n){
+  var c=dayContext(n), fallback="How was today? What did you see, eat, love?";
+  if(!c) return fallback;
+  if(c.isFirst) return "Night one \u2014 the trip begins. What\u2019s the first thing that struck you?";
+  if(c.isLastNight && !c.isLast && c.cityName) return "Your last night in "+c.cityName+" \u2014 what will you miss?";
+  if(c.isArrival && c.cityName) return "First night in "+c.cityName+". First impressions?";
+  if(c.highlight) return c.highlight+" today \u2014 how was it?";
+  if(c.isMidpoint) return "Halfway. "+numWord(c.citiesThrough)+" cities in \u2014 how\u2019s it feeling?";
+  if(c.isTravel) return "A travel day"+(c.citiesThrough>1?", "+numWord(c.citiesThrough)+" cities in":"")+". How\u2019s the trip feeling"+(c.citiesThrough>1?" so far":"")+"?";
+  if(c.cityName) return "Another day in "+c.cityName+". What did today hold?";
+  return fallback;
+}
+function milestoneBanner(c){
+  if(!c) return ''; var msg='';
+  if(c.isFirst) msg='The trip begins';
+  else if(c.isLast) msg='Last day';
+  else if(c.isMidpoint) msg='Halfway \u00b7 Day '+c.n+' of '+TRIP.days.length;
+  if(!msg) return '';
+  return '<div style="text-align:center;font:700 10px/1.5 var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--hdr);opacity:.7;margin:-2px 0 12px">'+msg+'</div>';
+}
+function sleepsUntilStart(){
+  if(!TRIP.days||!TRIP.days.length||!TRIP.days[0].date) return null;
+  var today=new Date(); today.setHours(0,0,0,0);
+  var start=new Date(TRIP.days[0].date+'T00:00:00');
+  var n=Math.round((start-today)/86400000);
+  return n>0?n:null;
+}
+function renderCountdown(sleeps){
+  var firstSlug=TRIP.order[0], city=TRIP.cities[firstSlug]||{};
+  setTint(city.accent||'#2E7E9E');
+  var stops=(TRIP.order?TRIP.order.length:0)+(TRIP.tail?TRIP.tail.length:0);
+  var word=sleeps===1?'sleep':'sleeps';
+  var html=postcard({ name:sleeps+' '+word, big:52, sub:'until '+(city.name||'your trip')+' \u2600\ufe0f', hero:city.hero, a:city.accent||'#2E7E9E', a2:city.accent2||'#1C8A7E', kind:city.kind, date:'' });
+  html+='<div class="card"><div class="bed-meta" style="text-align:center;line-height:1.6">'+TRIP.days.length+' days \u00b7 '+stops+' stops<br>departs '+fullDate(TRIP.days[0])+'</div></div>';
+  $("#now-body").innerHTML=html;
+}
 function renderNow(){
+  var _pre=sleepsUntilStart(); if(_pre!=null){ renderCountdown(_pre); return; }
   const d=TRIP.days[curDay-1];
   if(d.base==="home"){ renderHome(d); return; }
   const transit=d.base==="transit";
@@ -679,6 +756,7 @@ function renderNow(){
     return 'Night '+pos+' of '+stay.nights+(departTxt?'<div class="pc-depart">'+departTxt+'</div>':''); }
 
   let html='<div class="here-label">Day '+d.n+' of 35'+(todayN()===d.n?'<span class="today-flag">Today</span>':'')+'</div>';
+  html+=milestoneBanner(dayContext(d.n));
 
   if(todayLeg){
     var fromC=TRIP.cities[todayLeg.from], fromStay=TRIP.stays[todayLeg.from];
@@ -897,10 +975,16 @@ function saveTripLocal(){ try{ localStorage.setItem(DKEY, JSON.stringify(TRIP));
 function loadTripLocal(){ try{ var s=localStorage.getItem(DKEY); return s?JSON.parse(s):null; }catch(e){ return null; } }
 function repick(){ var el=document.getElementById('filepick'); if(el) el.click(); }
 function start(){ migrateDayKeys(); JOURNAL=loadJournal(); PLAN=loadPlan(); curDay=pickToday(); show('now'); }
+function applyTrip(t){
+  var v=(typeof validateTrip==='function')?validateTrip(t):{ok:true};
+  if(!v.ok){ showLoader(v.reason); return false; }
+  if(!t.legs) t.legs=[]; if(!t.flights) t.flights={}; if(!t.ideas) t.ideas={};
+  TRIP=t; saveTripLocal(); start(); return true;
+}
 function loadFromFile(input){
   var f=input.files&&input.files[0]; if(!f) return;
   var rd=new FileReader();
-  rd.onload=function(){ try{ TRIP=JSON.parse(rd.result); saveTripLocal(); start(); }catch(e){ showLoader("That file isn't valid trip.json — check it and try again."); } };
+  rd.onload=function(){ var t; try{ t=JSON.parse(rd.result); }catch(e){ showLoader("That file isn't valid trip.json — check it and try again."); return; } applyTrip(t); };
   rd.readAsText(f);
 }
 function showLoader(msg){
@@ -913,9 +997,9 @@ function showLoader(msg){
     '<button onclick="document.getElementById(\'filepick\').click()" style="background:var(--ink);color:var(--paper);border:0;border-radius:12px;padding:13px 18px;font:600 13px/1 var(--mono);letter-spacing:.5px;cursor:pointer">Choose trip.json</button></div>';
 }
 async function boot(){
-  try{ var r=await fetch('trip.json',{cache:'no-store'}); if(r.ok){ TRIP=await r.json(); saveTripLocal(); start(); return; } }catch(e){}
+  try{ var r=await fetch('trip.json',{cache:'no-store'}); if(r.ok){ applyTrip(await r.json()); return; } }catch(e){}
   var local=loadTripLocal();
-  if(local){ TRIP=local; start(); return; }
+  if(local && applyTrip(local)) return;
   showLoader();
 }
 if('serviceWorker' in navigator){ try{ navigator.serviceWorker.register('sw.js'); }catch(e){} }
