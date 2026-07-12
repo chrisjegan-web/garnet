@@ -348,6 +348,12 @@
   .fsctl{display:flex;align-items:center;gap:2px;background:color-mix(in srgb,var(--ink) 8%,transparent);border-radius:17px;padding:3px}
   .fs-btn{min-width:32px;height:32px;border:0;border-radius:50%;background:transparent;color:var(--ink);line-height:1;cursor:pointer;font-family:var(--mono);font-weight:700;opacity:.55;padding:0 3px}
   .fs-btn.on{background:var(--ink);color:var(--paper);opacity:1}
+  .pc-nrow{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+  .pc-badge{flex:0 0 auto;text-align:right;line-height:1}
+  .pc-daynum{display:block;font:700 2rem/1 var(--mono);color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+  .pc-dayof{display:block;font:600 0.6875rem/1 var(--mono);color:rgba(255,255,255,.85);margin-top:4px;letter-spacing:.5px;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+  .ctdn-preview{width:100%;margin-top:14px;background:var(--ink);color:var(--paper);border:0;border-radius:12px;padding:13px;font:600 0.8125rem/1 var(--mono);letter-spacing:.5px;cursor:pointer}
+  .ctdn-back{background:none;border:0;color:var(--ink-soft);font:600 0.75rem/1 var(--mono);letter-spacing:.5px;cursor:pointer;padding:4px 2px;margin-top:2px}
 </style>
 </head>
 <body>
@@ -410,7 +416,7 @@
 <script>
 let TRIP = null;
 
-let curDay = 6, curView='now';
+let curDay = 6, curView='now', preview=false;
 let JOURNAL = loadJournal();
 const $ = s => document.querySelector(s);
 function mapUrl(q){ return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q); }
@@ -607,7 +613,7 @@ function postcard(o){
   var bg = o.hero
     ? "background-image:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.58) 40%,rgba(0,0,0,.18) 72%,rgba(0,0,0,0)),url('"+o.hero+"');background-size:cover;background-position:center"
     : "background:linear-gradient(135deg,"+o.a+","+o.a2+")";
-  return '<div class="postcard'+(o.hero?' photo':'')+(o.slim?' slim':'')+(o.temp?' has-temp':'')+'" style="'+bg+'">'+(o.hero?'':motif(o.kind))+(o.temp?'<div class="pc-temp">'+o.temp+'°</div>':'')+'<div class="pc-text">'+(o.date?'<div class="pc-date">'+o.date+'</div>':'')+'<div class="pc-name"'+(o.big?' style="font-size:'+o.big+'px"':'')+'>'+o.name+'</div><div class="pc-sub">'+o.sub+'</div></div>'+(o.extra||'')+'</div>';
+  return '<div class="postcard'+(o.hero?' photo':'')+(o.slim?' slim':'')+(o.temp?' has-temp':'')+'" style="'+bg+'">'+(o.hero?'':motif(o.kind))+(o.temp?'<div class="pc-temp">'+o.temp+'°</div>':'')+'<div class="pc-text">'+(o.date?'<div class="pc-date">'+o.date+'</div>':'')+'<div class="pc-nrow"><div class="pc-name"'+(o.big?' style="font-size:'+o.big+'px"':'')+'>'+o.name+'</div>'+(o.badge||'')+'</div><div class="pc-sub">'+o.sub+'</div></div>'+(o.extra||'')+'</div>';
 }
 function lockIcon(k){
   if(k==='plane') return '<svg viewBox="0 0 24 24" class="lk-ic"><path d="M21 16v-1.7l-7.5-4.5V4.8a1.5 1.5 0 0 0-3 0v5L3 14.3V16l7.5-2.2V18l-2 1.4V21l3.5-1 3.5 1v-1.6L13.5 18v-4.2z"/></svg>';
@@ -702,8 +708,8 @@ function renderFlights(){
 
 function renderHome(d){
   setTint('#E08A3A');
-  let html='<div class="here-label">Day 35 of 35'+(todayN()===d.n?'<span class="today-flag">Today</span>':'')+'</div>';
-  html+='<div class="postcard" style="min-height:160px;background:linear-gradient(135deg,#F2AD3E,#E2683C 52%,#1C8A7E)">'+motif('home')+'<div class="pc-text"><div class="pc-date">'+fullDate(d)+'</div><div class="pc-name" style="font-size:46px">You\u2019re home</div><div class="pc-sub">Touched down in Melbourne, 21:25. What a trip.</div></div></div>';
+  let html=(preview && sleepsUntilStart()!=null ? '<button class="ctdn-back" onclick="show(\'now\')">\u2039 Countdown</button>' : '')+(todayN()===d.n?'<div class="here-label"><span class="today-flag">Today</span></div>':'');
+  html+='<div class="postcard" style="min-height:160px;background:linear-gradient(135deg,#F2AD3E,#E2683C 52%,#1C8A7E)">'+motif('home')+'<div class="pc-text"><div class="pc-date">'+fullDate(d)+'</div><div class="pc-nrow"><div class="pc-name" style="font-size:46px">You\u2019re home</div>'+dayBadge(d)+'</div><div class="pc-sub">Touched down in Melbourne, 21:25. What a trip.</div></div></div>';
   html+='<div class="card"><h3>The trip in numbers</h3><div class="homestats"><div class="hstat"><div class="hn">35</div><div class="hl">days away</div></div><div class="hstat"><div class="hn">9</div><div class="hl">stops</div></div><div class="hstat"><div class="hn">7</div><div class="hl">train journeys</div></div><div class="hstat"><div class="hn">3</div><div class="hl">countries</div></div></div></div>';
   var jent=TRIP.days.filter(function(x){return JOURNAL[dayISO(x)];}).map(function(x){return '<div class="jentry"><div class="je-date">'+x.dow+' '+x.dm+'</div><div class="je-text">'+escapeHtml(JOURNAL[dayISO(x)])+'</div></div>';});
   html+='<div class="card"><h3>Julie\u2019s journal</h3>'+(jent.length?jent.join(''):'<div class="bed-meta">The entries you write each night gather here — your trip, in your own words.</div>')+(jent.length?'<button class="jsave" style="margin-top:13px" onclick="exportJournal()">Export journal</button>':'')+'</div>';
@@ -769,11 +775,12 @@ function renderCountdown(sleeps){
   var stops=(TRIP.order?TRIP.order.length:0)+(TRIP.tail?TRIP.tail.length:0);
   var word=sleeps===1?'sleep':'sleeps';
   var html=postcard({ name:sleeps+' '+word, big:52, sub:'until '+(city.name||'your trip')+' \u2600\ufe0f', hero:city.hero, a:city.accent||'#2E7E9E', a2:city.accent2||'#1C8A7E', kind:city.kind, date:'' });
-  html+='<div class="card"><div class="bed-meta" style="text-align:center;line-height:1.6">'+TRIP.days.length+' days \u00b7 '+stops+' stops<br>departs '+fullDate(TRIP.days[0])+'</div></div>';
+  html+='<div class="card"><div class="bed-meta" style="text-align:center;line-height:1.6">'+TRIP.days.length+' days \u00b7 '+stops+' stops<br>departs '+fullDate(TRIP.days[0])+'</div><button class="ctdn-preview" onclick="previewTrip()">Preview the trip \u2192</button></div>';
   $("#now-body").innerHTML=html;
 }
+function dayBadge(d){ return '<div class="pc-badge"><span class="pc-daynum">'+d.n+'</span><span class="pc-dayof">of '+TRIP.days.length+'</span></div>'; }
 function renderNow(){
-  var _pre=sleepsUntilStart(); if(_pre!=null){ renderCountdown(_pre); return; }
+  if(!preview){ var _pre=sleepsUntilStart(); if(_pre!=null){ renderCountdown(_pre); return; } }
   const d=TRIP.days[curDay-1];
   if(d.base==="home"){ renderHome(d); return; }
   const transit=d.base==="transit";
@@ -794,7 +801,8 @@ function renderNow(){
     var departTxt = tLeg?'Departing tomorrow by train' : tFlt?'Departing tomorrow by plane' : dep?'Departing '+fullDate(dep) : '';
     return 'Night '+pos+' of '+stay.nights+(departTxt?'<div class="pc-depart">'+departTxt+'</div>':''); }
 
-  let html='<div class="here-label">Day '+d.n+' of 35'+(todayN()===d.n?'<span class="today-flag">Today</span>':'')+'</div>';
+  let html=(preview && sleepsUntilStart()!=null ? '<button class="ctdn-back" onclick="show(\'now\')">\u2039 Countdown</button>' : '');
+  html+=(todayN()===d.n?'<div class="here-label"><span class="today-flag">Today</span></div>':'');
   html+=milestoneBanner(dayContext(d.n));
 
   if(todayLeg){
@@ -802,12 +810,12 @@ function renderNow(){
     html+=postcard({name:fromC.name,sub:'Checking out'+(fromStay&&fromStay.co&&fromStay.co!==DASH?' \u00b7 '+fromStay.co:''),hero:fromC.hero,a:fromC.accent,a2:fromC.accent2,kind:fromC.kind,slim:true});
     html+=legBand(todayLeg);
     var anchChips=(d.anchors||[]).map(function(a){return {k:'star',t:a.label.split(' \u00b7 ')[0],tm:a.time||''};});
-    html+=postcard({name:base.name,date:fullDate(d),temp:base.temp,sub:'<span class="pulse w"></span>'+arrSub(),hero:base.hero,a:base.accent,a2:base.accent2,kind:base.kind,extra:(anchChips.length||plannedForDay(d).length)?chips(anchChips):''});
+    html+=postcard({name:base.name,date:fullDate(d),temp:base.temp,sub:'<span class="pulse w"></span>'+arrSub(),hero:base.hero,a:base.accent,a2:base.accent2,kind:base.kind,badge:dayBadge(d),extra:(anchChips.length||plannedForDay(d).length)?chips(anchChips):''});
   } else if(transit){
-    html+=postcard({a:"#2A3A52",a2:"#455A78",kind:"plane",temp:null,name:"In transit",date:fullDate(d),sub:'<span class="pulse w"></span>Travel day',extra:chips(lockedToday(d))});
+    html+=postcard({a:"#2A3A52",a2:"#455A78",kind:"plane",temp:null,name:"In transit",date:fullDate(d),badge:dayBadge(d),sub:'<span class="pulse w"></span>Travel day',extra:chips(lockedToday(d))});
   } else {
     var dsub = stay?arrSub():(d.travel?"Arriving in "+base.name:"Based in "+base.name);
-    html+=postcard({a:base.accent,a2:base.accent2,kind:base.kind,temp:base.temp,name:base.name,date:fullDate(d),sub:'<span class="pulse w"></span>'+dsub,hero:base.hero,extra:chips(lockedToday(d))});
+    html+=postcard({a:base.accent,a2:base.accent2,kind:base.kind,temp:base.temp,name:base.name,date:fullDate(d),badge:dayBadge(d),sub:'<span class="pulse w"></span>'+dsub,hero:base.hero,extra:chips(lockedToday(d))});
   }
 
   if(stay){ html+='<div class="acc-link" onclick="openCity(\''+stay.key+'\')"><div class="acc-row"><span>Accommodation: <b>'+stay.place+'</b></span><span class="acc-go">&rsaquo;</span></div>'+amenities(stay)+'</div>'; }
@@ -843,7 +851,8 @@ function legBand(leg){
       : '<div class="lb-route lb-tbc">'+TRIP.cities[leg.from].name+' &rarr; '+TRIP.cities[leg.to].name+' \u00b7 times to be booked</div>')+
     '</div></div>';
 }
-function stepDay(n){ curDay=Math.min(35,Math.max(1,curDay+n)); renderNow(); }
+function stepDay(n){ if(!preview && sleepsUntilStart()!=null){ preview=true; curDay=1; renderNow(); return; } curDay=Math.min(TRIP.days.length,Math.max(1,curDay+n)); renderNow(); }
+function previewTrip(){ preview=true; curDay=1; renderNow(); }
 function amIcon(k){
   if(k==='wash') return '<svg viewBox="0 0 24 24" class="am-ic"><rect x="4" y="3.5" width="16" height="17" rx="2"/><circle cx="12" cy="13" r="4.3"/><path d="M7 7h.4"/></svg>';
   if(k==='coffee') return '<svg viewBox="0 0 24 24" class="am-ic"><path d="M5 8h12v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/><path d="M17 9h2a2.4 2.4 0 0 1 0 5h-2"/><path d="M8 3.5v1.6M11.5 3.5v1.6"/></svg>';
@@ -995,7 +1004,7 @@ function show(which){
   if(!TRIP){ showLoader(); return; }
   document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
   $("#t-now").classList.remove('on'); $("#t-flights").classList.remove('on'); $("#t-trip").classList.remove('on'); $("#t-journal").classList.remove('on');
-  if(which==='now'){ $("#v-now").classList.add('active'); $("#t-now").classList.add('on'); renderNow(); }
+  if(which==='now'){ preview=false; $("#v-now").classList.add('active'); $("#t-now").classList.add('on'); renderNow(); }
   else if(which==='flights'){ $("#v-flights").classList.add('active'); $("#t-flights").classList.add('on'); renderFlights(); }
   else if(which==='trip'){ $("#v-map").classList.add('active'); $("#t-trip").classList.add('on'); renderMap(); }
   else if(which==='journal'){ $("#v-journal").classList.add('active'); $("#t-journal").classList.add('on'); renderJournal(); }
