@@ -1,0 +1,1145 @@
+{
+  "schema": "voyage/1",
+  "publishedAt": "2026-09-05T11:39:41.515Z",
+  "meta": {
+    "title": "France/London/Singapore 2026",
+    "travellers": "Chris and Julie",
+    "year": 2026,
+    "currency": "AUD",
+    "startDate": "2026-09-21",
+    "endDate": "2026-10-25",
+    "bookingRef": "",
+    "tripId": "701b63d1-b066-43a0-bba4-435a8c8a695a"
+  },
+  "cities": {
+    "melbourne": {
+      "name": "Melbourne",
+      "x": 255,
+      "y": 260,
+      "temp": "",
+      "lat": -37.8142454,
+      "lon": 144.9631732,
+      "accent": "#3E5068",
+      "accent2": "#5E7390",
+      "kind": "city",
+      "hero": ""
+    },
+    "nice": {
+      "name": "Nice",
+      "x": 103.2,
+      "y": 72.9,
+      "temp": "",
+      "lat": 43.7009358,
+      "lon": 7.2683912,
+      "accent": "#2E7E9E",
+      "accent2": "#4FA8C4",
+      "kind": "coast",
+      "hero": ""
+    },
+    "avignon": {
+      "name": "Avignon",
+      "x": 100.4,
+      "y": 72.3,
+      "temp": "",
+      "lat": 43.9492493,
+      "lon": 4.8059012,
+      "accent": "#3E5068",
+      "accent2": "#5E7390",
+      "kind": "city",
+      "hero": ""
+    },
+    "lyon": {
+      "name": "Lyon",
+      "x": 100.5,
+      "y": 68.2,
+      "temp": "",
+      "lat": 45.7578137,
+      "lon": 4.8320114,
+      "accent": "#3E5068",
+      "accent2": "#5E7390",
+      "kind": "city",
+      "hero": ""
+    },
+    "dijon": {
+      "name": "Dijon",
+      "x": 100.7,
+      "y": 64.6,
+      "temp": "",
+      "lat": 47.3215806,
+      "lon": 5.0414701,
+      "accent": "#3E5068",
+      "accent2": "#5E7390",
+      "kind": "city",
+      "hero": ""
+    },
+    "strasbourg": {
+      "name": "Strasbourg",
+      "x": 103.7,
+      "y": 61.7,
+      "temp": "",
+      "lat": 48.584614,
+      "lon": 7.7507127,
+      "accent": "#3E5068",
+      "accent2": "#5E7390",
+      "kind": "city",
+      "hero": ""
+    },
+    "reims": {
+      "name": "Reims",
+      "x": 99.6,
+      "y": 60.2,
+      "temp": "",
+      "lat": 49.2577886,
+      "lon": 4.031926,
+      "accent": "#3E5068",
+      "accent2": "#5E7390",
+      "kind": "city",
+      "hero": ""
+    },
+    "paris": {
+      "name": "Paris",
+      "x": 97.7,
+      "y": 61.1,
+      "temp": "",
+      "lat": 48.8534951,
+      "lon": 2.3483915,
+      "accent": "#3E5068",
+      "accent2": "#5E7390",
+      "kind": "city",
+      "hero": ""
+    },
+    "london": {
+      "name": "London",
+      "x": 95,
+      "y": 55,
+      "temp": "",
+      "lat": 51.5074456,
+      "lon": -0.1277653,
+      "accent": "#3E5068",
+      "accent2": "#5E7390",
+      "kind": "city",
+      "hero": ""
+    },
+    "singapore": {
+      "name": "Singapore",
+      "x": 209.6,
+      "y": 170.1,
+      "temp": "",
+      "lat": 1.357107,
+      "lon": 103.8194992,
+      "accent": "#3E5068",
+      "accent2": "#5E7390",
+      "kind": "city",
+      "hero": ""
+    },
+    "melbourne-2": {
+      "name": "Melbourne",
+      "x": 255,
+      "y": 260,
+      "temp": "",
+      "lat": -37.8142454,
+      "lon": 144.9631732,
+      "accent": "#3E5068",
+      "accent2": "#5E7390",
+      "kind": "city",
+      "hero": ""
+    }
+  },
+  "order": [
+    "melbourne",
+    "nice",
+    "avignon",
+    "lyon",
+    "dijon",
+    "strasbourg",
+    "reims",
+    "paris",
+    "london",
+    "singapore",
+    "melbourne-2"
+  ],
+  "tail": [],
+  "stays": {
+    "melbourne": {
+      "place": "",
+      "type": "",
+      "room": "",
+      "inDay": 1,
+      "outDay": 1,
+      "nights": 0,
+      "ci": "",
+      "co": "",
+      "bfast": false,
+      "paid": "",
+      "host": null,
+      "phone": "",
+      "address": "",
+      "conf": "",
+      "photo": "",
+      "link": "",
+      "cancelBy": "",
+      "due": "",
+      "entry": "",
+      "note": "",
+      "facilities": []
+    },
+    "nice": {
+      "place": "Home in Nice",
+      "type": "",
+      "room": "Apartment",
+      "inDay": 1,
+      "outDay": 7,
+      "nights": 6,
+      "ci": "",
+      "co": "",
+      "bfast": false,
+      "paid": "",
+      "host": null,
+      "phone": "",
+      "address": "7, Rue Saint-François de Paule, Nice, Provence-Alpes-Côte d'Azur 06300, France",
+      "conf": "HMTFCE93F3",
+      "photo": "",
+      "link": "https://www.airbnb.com.au/rooms/13070434?c=3D.pi80.pkTUVTU0FHSU5HX05FV19NRV=",
+      "cancelBy": "2026-09-20",
+      "due": "",
+      "entry": "",
+      "note": "",
+      "facilities": []
+    },
+    "avignon": {
+      "place": "Home in Avignon",
+      "type": "",
+      "room": "2 bedroom",
+      "inDay": 7,
+      "outDay": 10,
+      "nights": 3,
+      "ci": "",
+      "co": "",
+      "bfast": false,
+      "paid": "",
+      "host": null,
+      "phone": "",
+      "address": "24 Rue des Fourbisseurs, Avignon, Provence-Alpes-Côte d'Azur 84000, France",
+      "conf": "HMBHZN2YXQ",
+      "photo": "",
+      "link": "https://www.airbnb.com.au/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMBHZN2YXQ",
+      "cancelBy": "2026-08-28",
+      "due": "",
+      "entry": "",
+      "note": "",
+      "facilities": []
+    },
+    "lyon": {
+      "place": "Home in Lyon",
+      "type": "",
+      "room": "Apartment",
+      "inDay": 10,
+      "outDay": 14,
+      "nights": 4,
+      "ci": "",
+      "co": "",
+      "bfast": false,
+      "paid": "",
+      "host": null,
+      "phone": "",
+      "address": "10 Rue de la Bombarde, Lyon, Auvergne-Rhône-Alpes 69005, France",
+      "conf": "HM2ZHMHF4A",
+      "photo": "",
+      "link": "https://www.airbnb.com.au/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HM2ZHMHF4A",
+      "cancelBy": "2026-08-31",
+      "due": "",
+      "entry": "",
+      "note": "",
+      "facilities": []
+    },
+    "dijon": {
+      "place": "Hôtel des Ducs",
+      "type": "",
+      "room": "Double Room",
+      "inDay": 14,
+      "outDay": 17,
+      "nights": 3,
+      "ci": "",
+      "co": "",
+      "bfast": false,
+      "paid": "",
+      "host": null,
+      "phone": "+33 3 80 67 31 31",
+      "address": "5, rue Lamonnoye, Dijon Centre Ville, Dijon, 21000, France",
+      "conf": "5672196414",
+      "photo": "",
+      "link": "https://secure.booking.com/confirmation.en-gb.html?label=postbooking_modemail&sid=bcd62512731074c78d6fa1f592184bc9&aid=2097750&auth_key=2gdUkiM7ibbfWLKo&source=mytrips",
+      "cancelBy": "2026-10-03",
+      "due": "",
+      "entry": "",
+      "note": "",
+      "facilities": []
+    },
+    "strasbourg": {
+      "place": "Hotel Tandem",
+      "type": "",
+      "room": "Standard Double Room",
+      "inDay": 17,
+      "outDay": 20,
+      "nights": 3,
+      "ci": "",
+      "co": "",
+      "bfast": false,
+      "paid": "",
+      "host": null,
+      "phone": "+33 3 88 22 30 30",
+      "address": "2 place de la Gare, Strasbourg, 67000, France",
+      "conf": "6399001364",
+      "photo": "",
+      "link": "https://secure.booking.com/confirmation.en-gb.html?label=postbooking_modemail&sid=bcd62512731074c78d6fa1f592184bc9&aid=2097750&auth_key=ATugBXv081xPULBS&source=mytrips",
+      "cancelBy": "2026-10-02",
+      "due": "",
+      "entry": "",
+      "note": "",
+      "facilities": []
+    },
+    "reims": {
+      "place": "Home in Reims",
+      "type": "",
+      "room": "Apartment",
+      "inDay": 20,
+      "outDay": 22,
+      "nights": 2,
+      "ci": "",
+      "co": "",
+      "bfast": false,
+      "paid": "",
+      "host": null,
+      "phone": "",
+      "address": "8 Rue du Général Sarrail, Reims, Grand Est 51100, France",
+      "conf": "HM3W4YNA2Q",
+      "photo": "",
+      "link": "https://www.airbnb.com.au/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HM3W4YNA2Q",
+      "cancelBy": "2026-10-05",
+      "due": "",
+      "entry": "",
+      "note": "",
+      "facilities": []
+    },
+    "paris": {
+      "place": "Home in Paris",
+      "type": "",
+      "room": "Île-de-France, France",
+      "inDay": 22,
+      "outDay": 26,
+      "nights": 4,
+      "ci": "",
+      "co": "",
+      "bfast": false,
+      "paid": "",
+      "host": null,
+      "phone": "",
+      "address": "5 Rue des Ecouffes, Paris, Île-de-France 75004, France",
+      "conf": "HMAW9REBJ3",
+      "photo": "",
+      "link": "https://www.airbnb.com.au/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMAW9REBJ3",
+      "cancelBy": "2026-10-11",
+      "due": "",
+      "entry": "",
+      "note": "",
+      "facilities": []
+    },
+    "london": {
+      "place": "The Clermont London, Charing Cross",
+      "type": "",
+      "room": "Deluxe King Room",
+      "inDay": 26,
+      "outDay": 31,
+      "nights": 5,
+      "ci": "",
+      "co": "",
+      "bfast": false,
+      "paid": "",
+      "host": null,
+      "phone": "+442075235052",
+      "address": "Strand, Charing Cross, London WC2N 5HX, United Kingdom",
+      "conf": "603465140",
+      "photo": "",
+      "link": "https://luxuryescapes.com/au/account/my-escapes/order/93d150d2-8f65-4679-8a14-83697df9c9a3",
+      "cancelBy": "",
+      "due": "",
+      "entry": "",
+      "note": "",
+      "facilities": []
+    },
+    "singapore": {
+      "place": "The Westin Singapore",
+      "type": "",
+      "room": "King Bed, Club Lounge access High floor",
+      "inDay": 32,
+      "outDay": 35,
+      "nights": 3,
+      "ci": "",
+      "co": "",
+      "bfast": false,
+      "paid": "",
+      "host": null,
+      "phone": "",
+      "address": "12 Marina View Singapore SG",
+      "conf": "258462134",
+      "photo": "",
+      "link": "https://luxuryescapes.com/au/account/my-escapes/order/6f686a96-9767-4277-a092-1c129a45fa45",
+      "cancelBy": "2026-10-09",
+      "due": "",
+      "entry": "",
+      "note": "",
+      "facilities": []
+    },
+    "melbourne-2": {
+      "place": "",
+      "type": "",
+      "room": "",
+      "inDay": 35,
+      "outDay": 35,
+      "nights": 0,
+      "ci": "",
+      "co": "",
+      "bfast": false,
+      "paid": "",
+      "host": null,
+      "phone": "",
+      "address": "",
+      "conf": "",
+      "photo": "",
+      "link": "",
+      "cancelBy": "",
+      "due": "",
+      "entry": "",
+      "note": "",
+      "facilities": []
+    }
+  },
+  "legs": [
+    {
+      "day": 7,
+      "from": "nice",
+      "to": "avignon",
+      "mode": "Train",
+      "dep": "09:56",
+      "arr": "14:07",
+      "dur": "4h11",
+      "via": [
+        "Marseille St-Charles"
+      ]
+    },
+    {
+      "day": 10,
+      "from": "avignon",
+      "to": "lyon",
+      "mode": "Train",
+      "dep": "12:15",
+      "arr": "13:53",
+      "dur": "1h38",
+      "via": [
+        "Avignon TGV"
+      ]
+    },
+    {
+      "day": 14,
+      "from": "lyon",
+      "to": "dijon",
+      "mode": "Train",
+      "dep": "11:16",
+      "arr": "13:11",
+      "dur": "1h55",
+      "via": []
+    },
+    {
+      "day": 17,
+      "from": "dijon",
+      "to": "strasbourg",
+      "mode": "Train",
+      "dep": "10:07",
+      "arr": "12:24",
+      "dur": "2h17",
+      "via": []
+    },
+    {
+      "day": 20,
+      "from": "strasbourg",
+      "to": "reims",
+      "mode": "Train",
+      "dep": "17:03",
+      "arr": "18:31",
+      "dur": "1h28",
+      "via": []
+    },
+    {
+      "day": 22,
+      "from": "reims",
+      "to": "paris",
+      "mode": "Train",
+      "dep": "11:56",
+      "arr": "12:42",
+      "dur": "0h46",
+      "via": []
+    },
+    {
+      "day": 26,
+      "from": "paris",
+      "to": "london",
+      "mode": "Train",
+      "dep": "12:02",
+      "arr": "13:30",
+      "dur": "1h28",
+      "via": []
+    }
+  ],
+  "flights": {
+    "1": {
+      "carrier": "Singapore Airlines",
+      "ref": "EYFY23",
+      "total": "",
+      "bag": "30kg",
+      "legs": [
+        {
+          "f": "MEL",
+          "t": "SIN",
+          "dep": "05:55",
+          "arr": "11:45",
+          "dur": "",
+          "flightNo": "SQ248",
+          "aircraft": "A350-900",
+          "depTerm": "T2",
+          "arrTerm": "",
+          "seats": [
+            {
+              "who": "Christopher",
+              "seat": "56K"
+            },
+            {
+              "who": "Julie",
+              "seat": "56J"
+            }
+          ]
+        },
+        {
+          "stop": "SIN",
+          "layover": "50m"
+        },
+        {
+          "f": "SIN",
+          "t": "FRA",
+          "dep": "12:35",
+          "arr": "19:40",
+          "dur": "",
+          "flightNo": "SQ326",
+          "aircraft": "A380-800",
+          "depTerm": "T3",
+          "arrTerm": "T1",
+          "seats": [
+            {
+              "who": "Christopher",
+              "seat": "42A"
+            },
+            {
+              "who": "Julie",
+              "seat": "42B"
+            }
+          ]
+        },
+        {
+          "stop": "FRA",
+          "layover": "1h 55m"
+        },
+        {
+          "f": "FRA",
+          "t": "NCE",
+          "dep": "21:35",
+          "arr": "23:10",
+          "dur": "",
+          "flightNo": "SQ2072",
+          "aircraft": "A320neo",
+          "depTerm": "T1",
+          "arrTerm": "T1",
+          "seats": [
+            {
+              "who": "Christopher",
+              "seat": "10B"
+            },
+            {
+              "who": "Julie",
+              "seat": "10A"
+            }
+          ]
+        }
+      ]
+    },
+    "31": {
+      "carrier": "Singapore Airlines",
+      "ref": "EYFY23",
+      "total": "",
+      "bag": "30kg",
+      "legs": [
+        {
+          "f": "LHR",
+          "t": "SIN",
+          "dep": "20:35",
+          "arr": "16:45",
+          "dur": "",
+          "flightNo": "SQ319",
+          "aircraft": "A380-800",
+          "depTerm": "T2",
+          "arrTerm": "",
+          "seats": [
+            {
+              "who": "Christopher",
+              "seat": "42J"
+            },
+            {
+              "who": "Julie",
+              "seat": "42K"
+            }
+          ],
+          "arrNext": true
+        }
+      ]
+    },
+    "35": {
+      "carrier": "Singapore Airlines",
+      "ref": "EYFY23",
+      "total": "",
+      "bag": "30kg",
+      "legs": [
+        {
+          "f": "SIN",
+          "t": "MEL",
+          "dep": "11:00",
+          "arr": "21:25",
+          "dur": "",
+          "flightNo": "SQ217",
+          "aircraft": "A350-900",
+          "depTerm": "T3",
+          "arrTerm": "T2",
+          "seats": [
+            {
+              "who": "Christopher",
+              "seat": "56K"
+            },
+            {
+              "who": "Julie",
+              "seat": "56J"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "ideas": {
+    "melbourne": [],
+    "nice": [],
+    "avignon": [],
+    "lyon": [],
+    "dijon": [],
+    "strasbourg": [],
+    "reims": [],
+    "paris": [],
+    "london": [],
+    "singapore": [],
+    "melbourne-2": []
+  },
+  "days": [
+    {
+      "n": 1,
+      "date": "2026-09-21",
+      "dow": "Mon",
+      "dm": "21 Sep",
+      "base": "nice",
+      "travel": true,
+      "note": "Sleep",
+      "anchors": []
+    },
+    {
+      "n": 2,
+      "date": "2026-09-22",
+      "dow": "Tue",
+      "dm": "22 Sep",
+      "base": "nice",
+      "travel": false,
+      "note": "",
+      "anchors": [
+        {
+          "time": "10",
+          "label": "Explore Nice, Old Town Market",
+          "sub": ""
+        },
+        {
+          "time": "13:00",
+          "label": "Cycle the Promenade",
+          "sub": ""
+        },
+        {
+          "time": "19:30",
+          "label": "Sunset at Colline du Chateau (Castle Hill view)",
+          "sub": ""
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "date": "2026-09-23",
+      "dow": "Wed",
+      "dm": "23 Sep",
+      "base": "nice",
+      "travel": false,
+      "note": "",
+      "anchors": [
+        {
+          "time": "08:30",
+          "label": "Eze",
+          "sub": ""
+        },
+        {
+          "time": "09:30",
+          "label": "The Jardin exotique",
+          "sub": ""
+        },
+        {
+          "time": "10:00",
+          "label": "Nietzsche path to Eze sur mer",
+          "sub": ""
+        },
+        {
+          "time": "11:46",
+          "label": "Promenade Maurice Rouvier",
+          "sub": ""
+        },
+        {
+          "time": "12:30",
+          "label": "Saint Jean Cap Ferrat",
+          "sub": ""
+        },
+        {
+          "time": "13:30",
+          "label": "Walk around Pointe Saint Hospice (1 hour)",
+          "sub": ""
+        },
+        {
+          "time": "15:30",
+          "label": "Ville Franche Sur Mer",
+          "sub": ""
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "date": "2026-09-24",
+      "dow": "Thu",
+      "dm": "24 Sep",
+      "base": "nice",
+      "travel": false,
+      "note": "",
+      "anchors": [
+        {
+          "time": "08:00",
+          "label": "Train to Menton (38min) Walk back to Monaco (2hrs 10km)",
+          "sub": ""
+        },
+        {
+          "time": "09:34",
+          "label": "Explore Menton",
+          "sub": ""
+        },
+        {
+          "time": "12:01",
+          "label": "Train to Roquebrune Cap Martin",
+          "sub": ""
+        },
+        {
+          "time": "13:00",
+          "label": "The promenade Le Coubusier",
+          "sub": ""
+        },
+        {
+          "time": "15:00",
+          "label": "Monaco",
+          "sub": ""
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "date": "2026-09-25",
+      "dow": "Fri",
+      "dm": "25 Sep",
+      "base": "nice",
+      "travel": false,
+      "note": "",
+      "anchors": [
+        {
+          "time": "09:00",
+          "label": "Explore Nice more including Matisse museum",
+          "sub": ""
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "date": "2026-09-26",
+      "dow": "Sat",
+      "dm": "26 Sep",
+      "base": "nice",
+      "travel": false,
+      "note": "",
+      "anchors": [
+        {
+          "time": "09:00",
+          "label": "Train trip, Antibes, return",
+          "sub": ""
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "date": "2026-09-27",
+      "dow": "Sun",
+      "dm": "27 Sep",
+      "base": "avignon",
+      "travel": true,
+      "note": "Explore Avignon",
+      "anchors": []
+    },
+    {
+      "n": 8,
+      "date": "2026-09-28",
+      "dow": "Mon",
+      "dm": "28 Sep",
+      "base": "avignon",
+      "travel": false,
+      "note": "",
+      "anchors": [
+        {
+          "time": "09:00",
+          "label": "Chateauneuf du Pape Ride (40km Round trip)",
+          "sub": ""
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "date": "2026-09-29",
+      "dow": "Tue",
+      "dm": "29 Sep",
+      "base": "avignon",
+      "travel": false,
+      "note": "",
+      "anchors": [
+        {
+          "time": "08:00",
+          "label": "Car  to Gordes and Roussillon (110km Round trip)",
+          "sub": ""
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "date": "2026-09-30",
+      "dow": "Wed",
+      "dm": "30 Sep",
+      "base": "lyon",
+      "travel": true,
+      "note": "Explore Lyon",
+      "anchors": []
+    },
+    {
+      "n": 11,
+      "date": "2026-10-01",
+      "dow": "Thu",
+      "dm": "1 Oct",
+      "base": "lyon",
+      "travel": false,
+      "note": "Explore Lyon",
+      "anchors": []
+    },
+    {
+      "n": 12,
+      "date": "2026-10-02",
+      "dow": "Fri",
+      "dm": "2 Oct",
+      "base": "lyon",
+      "travel": false,
+      "note": "",
+      "anchors": [
+        {
+          "time": "11:00",
+          "label": "Lyon Cooking class (Get Your Guide)",
+          "sub": ""
+        }
+      ]
+    },
+    {
+      "n": 13,
+      "date": "2026-10-03",
+      "dow": "Sat",
+      "dm": "3 Oct",
+      "base": "lyon",
+      "travel": false,
+      "note": "",
+      "anchors": [
+        {
+          "time": "08:00",
+          "label": "Annecy",
+          "sub": ""
+        },
+        {
+          "time": "11:00",
+          "label": "West side of lake Annecy",
+          "sub": ""
+        }
+      ]
+    },
+    {
+      "n": 14,
+      "date": "2026-10-04",
+      "dow": "Sun",
+      "dm": "4 Oct",
+      "base": "dijon",
+      "travel": true,
+      "note": "Explore Dijon",
+      "anchors": []
+    },
+    {
+      "n": 15,
+      "date": "2026-10-05",
+      "dow": "Mon",
+      "dm": "5 Oct",
+      "base": "dijon",
+      "travel": false,
+      "note": "Explore Dijon",
+      "anchors": []
+    },
+    {
+      "n": 16,
+      "date": "2026-10-06",
+      "dow": "Tue",
+      "dm": "6 Oct",
+      "base": "dijon",
+      "travel": false,
+      "note": "",
+      "anchors": [
+        {
+          "time": "09:00",
+          "label": "Cycle Dijon to Beaune (45km 2:30hr)",
+          "sub": ""
+        },
+        {
+          "time": "12:06",
+          "label": "Beune",
+          "sub": ""
+        },
+        {
+          "time": "17:59",
+          "label": "Train back to Dijon",
+          "sub": ""
+        }
+      ]
+    },
+    {
+      "n": 17,
+      "date": "2026-10-07",
+      "dow": "Wed",
+      "dm": "7 Oct",
+      "base": "strasbourg",
+      "travel": true,
+      "note": "Explore Strasbourg. Meet Chris and Dave",
+      "anchors": []
+    },
+    {
+      "n": 18,
+      "date": "2026-10-08",
+      "dow": "Thu",
+      "dm": "8 Oct",
+      "base": "strasbourg",
+      "travel": false,
+      "note": "",
+      "anchors": [
+        {
+          "time": "09:43",
+          "label": "Visit Colmar",
+          "sub": ""
+        }
+      ]
+    },
+    {
+      "n": 19,
+      "date": "2026-10-09",
+      "dow": "Fri",
+      "dm": "9 Oct",
+      "base": "strasbourg",
+      "travel": false,
+      "note": "Explore Strasbourg",
+      "anchors": []
+    },
+    {
+      "n": 20,
+      "date": "2026-10-10",
+      "dow": "Sat",
+      "dm": "10 Oct",
+      "base": "reims",
+      "travel": true,
+      "note": "Explore Reims",
+      "anchors": []
+    },
+    {
+      "n": 21,
+      "date": "2026-10-11",
+      "dow": "Sun",
+      "dm": "11 Oct",
+      "base": "reims",
+      "travel": false,
+      "note": "",
+      "anchors": [
+        {
+          "time": "11:40",
+          "label": "Champagne Experience - Veuve Cliequot",
+          "sub": ""
+        }
+      ]
+    },
+    {
+      "n": 22,
+      "date": "2026-10-12",
+      "dow": "Mon",
+      "dm": "12 Oct",
+      "base": "paris",
+      "travel": true,
+      "note": "Explore Le Marais",
+      "anchors": []
+    },
+    {
+      "n": 23,
+      "date": "2026-10-13",
+      "dow": "Tue",
+      "dm": "13 Oct",
+      "base": "paris",
+      "travel": false,
+      "note": "Notre Dame",
+      "anchors": []
+    },
+    {
+      "n": 24,
+      "date": "2026-10-14",
+      "dow": "Wed",
+      "dm": "14 Oct",
+      "base": "paris",
+      "travel": false,
+      "note": "",
+      "anchors": []
+    },
+    {
+      "n": 25,
+      "date": "2026-10-15",
+      "dow": "Thu",
+      "dm": "15 Oct",
+      "base": "paris",
+      "travel": false,
+      "note": "",
+      "anchors": []
+    },
+    {
+      "n": 26,
+      "date": "2026-10-16",
+      "dow": "Fri",
+      "dm": "16 Oct",
+      "base": "london",
+      "travel": true,
+      "note": "London, Covent garden, Soho",
+      "anchors": []
+    },
+    {
+      "n": 27,
+      "date": "2026-10-17",
+      "dow": "Sat",
+      "dm": "17 Oct",
+      "base": "london",
+      "travel": false,
+      "note": "Notting Hill/Portobello Market",
+      "anchors": []
+    },
+    {
+      "n": 28,
+      "date": "2026-10-18",
+      "dow": "Sun",
+      "dm": "18 Oct",
+      "base": "london",
+      "travel": false,
+      "note": "Tate Modern/British Museum/Natural History",
+      "anchors": []
+    },
+    {
+      "n": 29,
+      "date": "2026-10-19",
+      "dow": "Mon",
+      "dm": "19 Oct",
+      "base": "london",
+      "travel": false,
+      "note": "Mousetrap?",
+      "anchors": []
+    },
+    {
+      "n": 30,
+      "date": "2026-10-20",
+      "dow": "Tue",
+      "dm": "20 Oct",
+      "base": "london",
+      "travel": false,
+      "note": "Shakespeare at The Globe",
+      "anchors": []
+    },
+    {
+      "n": 31,
+      "date": "2026-10-21",
+      "dow": "Wed",
+      "dm": "21 Oct",
+      "base": "transit",
+      "travel": true,
+      "note": "Explore London",
+      "anchors": []
+    },
+    {
+      "n": 32,
+      "date": "2026-10-22",
+      "dow": "Thu",
+      "dm": "22 Oct",
+      "base": "singapore",
+      "travel": false,
+      "note": "Pool",
+      "anchors": []
+    },
+    {
+      "n": 33,
+      "date": "2026-10-23",
+      "dow": "Fri",
+      "dm": "23 Oct",
+      "base": "singapore",
+      "travel": false,
+      "note": "Hawkers market",
+      "anchors": []
+    },
+    {
+      "n": 34,
+      "date": "2026-10-24",
+      "dow": "Sat",
+      "dm": "24 Oct",
+      "base": "singapore",
+      "travel": false,
+      "note": "Gardens",
+      "anchors": []
+    },
+    {
+      "n": 35,
+      "date": "2026-10-25",
+      "dow": "Sun",
+      "dm": "25 Oct",
+      "base": "melbourne-2",
+      "travel": false,
+      "note": "",
+      "anchors": []
+    }
+  ]
+}
