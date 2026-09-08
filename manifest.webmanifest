@@ -1,0 +1,14 @@
+{
+  "name": "Carnet de Voyage",
+  "short_name": "Carnet",
+  "description": "Our travel journal — France, London & Singapore 2026",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ECE9E1",
+  "theme_color": "#ECE9E1",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
